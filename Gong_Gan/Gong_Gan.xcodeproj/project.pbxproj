@@ -10,11 +10,11 @@
 		3283A5B72A95F264001ECC9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3283A5B62A95F264001ECC9A /* AppDelegate.swift */; };
 		3283A5B92A95F264001ECC9A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3283A5B82A95F264001ECC9A /* SceneDelegate.swift */; };
 		3283A5BB2A95F264001ECC9A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3283A5BA2A95F264001ECC9A /* MainViewController.swift */; };
-		3283A5BE2A95F264001ECC9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3283A5BC2A95F264001ECC9A /* Main.storyboard */; };
 		3283A5C12A95F264001ECC9A /* Gong_Gan.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3283A5BF2A95F264001ECC9A /* Gong_Gan.xcdatamodeld */; };
 		3283A5C32A95F265001ECC9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3283A5C22A95F265001ECC9A /* Assets.xcassets */; };
-		3283A5C62A95F265001ECC9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3283A5C42A95F265001ECC9A /* LaunchScreen.storyboard */; };
 		3283A5D12A96FD06001ECC9A /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3283A5D02A96FD06001ECC9A /* MainView.swift */; };
+		32D8E1BC2AB1FB08001D9AF3 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1BB2AB1FB08001D9AF3 /* UIColor.swift */; };
+		32D8E1C02AB1FD69001D9AF3 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1BF2AB1FD69001D9AF3 /* UIButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,12 +22,12 @@
 		3283A5B62A95F264001ECC9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3283A5B82A95F264001ECC9A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		3283A5BA2A95F264001ECC9A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		3283A5BD2A95F264001ECC9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3283A5C02A95F264001ECC9A /* Gong_Gan.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Gong_Gan.xcdatamodel; sourceTree = "<group>"; };
 		3283A5C22A95F265001ECC9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3283A5C52A95F265001ECC9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3283A5C72A95F265001ECC9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3283A5D02A96FD06001ECC9A /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		32D8E1BB2AB1FB08001D9AF3 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		32D8E1BF2AB1FD69001D9AF3 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +62,7 @@
 			children = (
 				3283A5B62A95F264001ECC9A /* AppDelegate.swift */,
 				3283A5B82A95F264001ECC9A /* SceneDelegate.swift */,
+				32D8E1BA2AB1FAFA001D9AF3 /* Helpers */,
 				3283A5CE2A95F279001ECC9A /* Models */,
 				3283A5CD2A95F273001ECC9A /* Views */,
 				3283A5CF2A95F27F001ECC9A /* Controllers */,
@@ -74,8 +75,6 @@
 		3283A5CD2A95F273001ECC9A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3283A5C42A95F265001ECC9A /* LaunchScreen.storyboard */,
-				3283A5BC2A95F264001ECC9A /* Main.storyboard */,
 				3283A5D02A96FD06001ECC9A /* MainView.swift */,
 			);
 			path = Views;
@@ -95,6 +94,15 @@
 				3283A5BA2A95F264001ECC9A /* MainViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		32D8E1BA2AB1FAFA001D9AF3 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				32D8E1BB2AB1FB08001D9AF3 /* UIColor.swift */,
+				32D8E1BF2AB1FD69001D9AF3 /* UIButton.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,9 +163,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3283A5C62A95F265001ECC9A /* LaunchScreen.storyboard in Resources */,
 				3283A5C32A95F265001ECC9A /* Assets.xcassets in Resources */,
-				3283A5BE2A95F264001ECC9A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,33 +175,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				3283A5BB2A95F264001ECC9A /* MainViewController.swift in Sources */,
+				32D8E1BC2AB1FB08001D9AF3 /* UIColor.swift in Sources */,
 				3283A5C12A95F264001ECC9A /* Gong_Gan.xcdatamodeld in Sources */,
 				3283A5B72A95F264001ECC9A /* AppDelegate.swift in Sources */,
+				32D8E1C02AB1FD69001D9AF3 /* UIButton.swift in Sources */,
 				3283A5D12A96FD06001ECC9A /* MainView.swift in Sources */,
 				3283A5B92A95F264001ECC9A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		3283A5BC2A95F264001ECC9A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3283A5BD2A95F264001ECC9A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		3283A5C42A95F265001ECC9A /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3283A5C52A95F265001ECC9A /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		3283A5C82A95F265001ECC9A /* Debug */ = {
@@ -324,7 +313,6 @@
 				INFOPLIST_FILE = Gong_Gan/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -356,7 +344,6 @@
 				INFOPLIST_FILE = Gong_Gan/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
