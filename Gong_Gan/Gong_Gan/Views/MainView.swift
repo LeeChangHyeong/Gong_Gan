@@ -8,11 +8,20 @@
 import UIKit
 
 class MainView: UIView {
-    let backGroundView: UIImageView = {
+    
+    // 백그라운드 터치 여부 확인
+    var backGroundTap = false{
+        didSet {
+            topBarView.reloadInputViews()
+        }
+    }
+    lazy var backGroundView: UIImageView = {
         let view = UIImageView(frame: UIScreen.main.bounds)
         view.image = UIImage(named: "1")!
         view.contentMode =  UIView.ContentMode.scaleAspectFill
-        
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backGroundViewTapped)))
+        view.isUserInteractionEnabled = true
+
         return view
     }()
     
@@ -47,6 +56,7 @@ class MainView: UIView {
         addSubview(backGroundView)
         backGroundView.addSubview(topBarView)
         backGroundView.addSubview(bottomBarView)
+        
     }
     
     
@@ -77,5 +87,23 @@ class MainView: UIView {
         ])
     }
     
-    
+    // 백그라운드 터치시 topBar, bottomBar 사라지면서 backGround가 전체화면으로 보임
+    @objc private func backGroundViewTapped(_ recognizer: UITapGestureRecognizer) {
+        backGroundTap.toggle()
+
+        if backGroundTap == true {
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut) {
+                self.topBarView.alpha = 0.0
+                self.bottomBarView.alpha = 0.0
+            }
+            
+        } else if backGroundTap == false {
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut) {
+                self.topBarView.alpha = 1.0
+                self.bottomBarView.alpha = 1.0
+            }
+        }
+    }
 }
+
+
