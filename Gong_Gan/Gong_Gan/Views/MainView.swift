@@ -11,7 +11,7 @@ class MainView: UIView {
     
     lazy var backGroundView: UIImageView = {
         let view = UIImageView(frame: UIScreen.main.bounds)
-        view.image = UIImage(named: "1")!
+        view.image = UIImage(named: "도시")!
         view.contentMode = UIView.ContentMode.scaleAspectFill
         view.isUserInteractionEnabled = true
 
@@ -31,7 +31,6 @@ class MainView: UIView {
     
     func addViews() {
         addSubview(backGroundView)
-        
     }
 }
 
