@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import CoreLocation
 
 class TopBarView: UIView {
+    var locationManager = CLLocationManager()
 
     
     override init(frame: CGRect) {
@@ -29,5 +31,13 @@ class TopBarView: UIView {
     private func setConstraints() {
     
     }
+    
+    private func setLocationManager() {
+        
+    }
+    
+}
+
+extension TopBarView: CLLocationManagerDelegate {
     
 }

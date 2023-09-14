@@ -17,6 +17,7 @@
 		32D8E1C02AB1FD69001D9AF3 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1BF2AB1FD69001D9AF3 /* UIButton.swift */; };
 		32D8E1C22AB20F71001D9AF3 /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1C12AB20F71001D9AF3 /* TopBarView.swift */; };
 		32D8E1C42AB20F84001D9AF3 /* BottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1C32AB20F84001D9AF3 /* BottomBarView.swift */; };
+		32D8E1C62AB2D7F4001D9AF3 /* CameraModePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1C52AB2D7F4001D9AF3 /* CameraModePickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		32D8E1BF2AB1FD69001D9AF3 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		32D8E1C12AB20F71001D9AF3 /* TopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
 		32D8E1C32AB20F84001D9AF3 /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };
+		32D8E1C52AB2D7F4001D9AF3 /* CameraModePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModePickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				3283A5D02A96FD06001ECC9A /* MainView.swift */,
 				32D8E1C12AB20F71001D9AF3 /* TopBarView.swift */,
 				32D8E1C32AB20F84001D9AF3 /* BottomBarView.swift */,
+				32D8E1C52AB2D7F4001D9AF3 /* CameraModePickerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 			files = (
 				32D8E1C42AB20F84001D9AF3 /* BottomBarView.swift in Sources */,
 				3283A5BB2A95F264001ECC9A /* MainViewController.swift in Sources */,
+				32D8E1C62AB2D7F4001D9AF3 /* CameraModePickerView.swift in Sources */,
 				32D8E1BC2AB1FB08001D9AF3 /* UIColor.swift in Sources */,
 				3283A5C12A95F264001ECC9A /* Gong_Gan.xcdatamodeld in Sources */,
 				3283A5B72A95F264001ECC9A /* AppDelegate.swift in Sources */,
