@@ -27,7 +27,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backGroundViewTapped)))
-        
+        self.navigationController?.isNavigationBarHidden = true
         setCameraModePicker()
         addSubView()
         setConstraints()

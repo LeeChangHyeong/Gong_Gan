@@ -24,7 +24,6 @@ class BottomBarView: UIView {
         button.backgroundColor = .buttonColor
         button.tintColor = .white
         button.setImage(UIImage(systemName: "plus"), for: .normal)
-        button.tintColor = .white
         button.layer.cornerRadius = 30
         
         return button
