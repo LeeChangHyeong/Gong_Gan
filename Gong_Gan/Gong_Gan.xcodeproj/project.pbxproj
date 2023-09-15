@@ -14,7 +14,6 @@
 		3283A5C32A95F265001ECC9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3283A5C22A95F265001ECC9A /* Assets.xcassets */; };
 		3283A5D12A96FD06001ECC9A /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3283A5D02A96FD06001ECC9A /* MainView.swift */; };
 		32D8E1BC2AB1FB08001D9AF3 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1BB2AB1FB08001D9AF3 /* UIColor.swift */; };
-		32D8E1C02AB1FD69001D9AF3 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1BF2AB1FD69001D9AF3 /* UIButton.swift */; };
 		32D8E1C22AB20F71001D9AF3 /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1C12AB20F71001D9AF3 /* TopBarView.swift */; };
 		32D8E1C42AB20F84001D9AF3 /* BottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1C32AB20F84001D9AF3 /* BottomBarView.swift */; };
 /* End PBXBuildFile section */
@@ -29,7 +28,6 @@
 		3283A5C72A95F265001ECC9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3283A5D02A96FD06001ECC9A /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		32D8E1BB2AB1FB08001D9AF3 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
-		32D8E1BF2AB1FD69001D9AF3 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		32D8E1C12AB20F71001D9AF3 /* TopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
 		32D8E1C32AB20F84001D9AF3 /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,7 +104,6 @@
 			isa = PBXGroup;
 			children = (
 				32D8E1BB2AB1FB08001D9AF3 /* UIColor.swift */,
-				32D8E1BF2AB1FD69001D9AF3 /* UIButton.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -185,7 +182,6 @@
 				32D8E1BC2AB1FB08001D9AF3 /* UIColor.swift in Sources */,
 				3283A5C12A95F264001ECC9A /* Gong_Gan.xcdatamodeld in Sources */,
 				3283A5B72A95F264001ECC9A /* AppDelegate.swift in Sources */,
-				32D8E1C02AB1FD69001D9AF3 /* UIButton.swift in Sources */,
 				3283A5D12A96FD06001ECC9A /* MainView.swift in Sources */,
 				32D8E1C22AB20F71001D9AF3 /* TopBarView.swift in Sources */,
 				3283A5B92A95F264001ECC9A /* SceneDelegate.swift in Sources */,

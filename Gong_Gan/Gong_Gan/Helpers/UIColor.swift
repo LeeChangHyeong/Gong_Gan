@@ -27,5 +27,6 @@ extension UIColor {
         }
     
     static let buttonColor = UIColor(hexCode: "C2C2C2")
+    static let locationColor = UIColor(hexCode: "FFFFFF", alpha: 0.2)
 }
 
