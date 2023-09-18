@@ -10,7 +10,6 @@ import CoreLocation
 
 class TopBarView: UIView {
     var locationManager = CLLocationManager()
-//    speaker.slash.fill
     var musicButtonTap = false
     
     let musicButton: UIButton = {
@@ -29,7 +28,7 @@ class TopBarView: UIView {
         let label = UILabel()
         let attributedString = NSMutableAttributedString(string: "")
         let imageAttachment = NSTextAttachment()
-        
+
         let locationImage = UIImage(systemName: "location.circle.fill")?.withTintColor(.white)
         imageAttachment.image = locationImage
         attributedString.append(NSAttributedString(attachment: imageAttachment))
@@ -45,6 +44,10 @@ class TopBarView: UIView {
     let locationButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .locationColor
+//        button.setImage(UIImage(systemName: "location.circle.fill"), for: .normal)
+//        button.setTitle("  울산 남구", for: .normal)
+//        button.tintColor = .white
+//        button.titleLabel?.font = .boldSystemFont(ofSize: 13)
         button.layer.cornerRadius = 3
         return button
     }()
@@ -91,10 +94,10 @@ class TopBarView: UIView {
     
     private func locationButtonConstraints() {
         locationButton.translatesAutoresizingMaskIntoConstraints = false
-        
+
         NSLayoutConstraint.activate([
             locationButton.heightAnchor.constraint(equalToConstant: 32),
-            locationButton.widthAnchor.constraint(equalToConstant: locationLabel.frame.width + 24),
+            locationButton.widthAnchor.constraint(equalTo: locationLabel.widthAnchor, constant: 24),
             locationButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30),
             locationButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16)
         ])
@@ -102,10 +105,9 @@ class TopBarView: UIView {
     
     private func locationLabelConstraints() {
         locationLabel.translatesAutoresizingMaskIntoConstraints = false
-        
+
         NSLayoutConstraint.activate([
             locationLabel.leadingAnchor.constraint(equalTo: locationButton.leadingAnchor, constant: 12),
-            locationLabel.trailingAnchor.constraint(equalTo: locationButton.trailingAnchor, constant: 12),
             locationLabel.centerYAnchor.constraint(equalTo: locationButton.centerYAnchor)
         ])
     }
@@ -115,6 +117,27 @@ class TopBarView: UIView {
         
         musicButton.setImage(UIImage(systemName: musicButtonTap ? "speaker.slash.fill" : "music.note"), for: .normal)
      
+        if musicButtonTap {
+            let attributedString = NSMutableAttributedString(string: "")
+            let imageAttachment = NSTextAttachment()
+
+            let locationImage = UIImage(systemName: "location.circle.fill")?.withTintColor(.white)
+            imageAttachment.image = locationImage
+            attributedString.append(NSAttributedString(attachment: imageAttachment))
+            attributedString.append(NSAttributedString(string: " 데이터데이터데이터"))
+            
+            locationLabel.attributedText = attributedString
+        } else {
+            let attributedString = NSMutableAttributedString(string: "")
+            let imageAttachment = NSTextAttachment()
+
+            let locationImage = UIImage(systemName: "location.circle.fill")?.withTintColor(.white)
+            imageAttachment.image = locationImage
+            attributedString.append(NSAttributedString(attachment: imageAttachment))
+            attributedString.append(NSAttributedString(string: " 서울시 강남구"))
+            
+            locationLabel.attributedText = attributedString
+        }
         
     }
 }
@@ -122,3 +145,4 @@ class TopBarView: UIView {
 extension TopBarView: CLLocationManagerDelegate {
     
 }
+
