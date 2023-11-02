@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreLocation
+import SnapKit
 
 class TopBarView: UIView {
     var locationManager = CLLocationManager()
@@ -82,34 +83,30 @@ class TopBarView: UIView {
     }
     
     private func musicButtonConstraints() {
-        musicButton.translatesAutoresizingMaskIntoConstraints = false
+        musicButton.snp.makeConstraints({
+            $0.height.equalTo(36)
+            $0.width.equalTo(36)
+            $0.bottom.equalToSuperview().offset(-28)
+            $0.trailing.equalToSuperview().offset(-28)
+        })
         
-        NSLayoutConstraint.activate([
-            musicButton.heightAnchor.constraint(equalToConstant: 36),
-            musicButton.widthAnchor.constraint(equalToConstant: 36),
-            musicButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -28),
-            musicButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
-        ])
+        
     }
     
     private func locationButtonConstraints() {
-        locationButton.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            locationButton.heightAnchor.constraint(equalToConstant: 32),
-            locationButton.widthAnchor.constraint(equalTo: locationLabel.widthAnchor, constant: 24),
-            locationButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30),
-            locationButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16)
-        ])
+        locationButton.snp.makeConstraints({
+            $0.height.equalTo(32)
+            $0.width.equalTo(locationLabel.snp.width).offset(24)
+            $0.bottom.equalToSuperview().offset(-30)
+            $0.leading.equalToSuperview().offset(16)
+        })
     }
     
     private func locationLabelConstraints() {
-        locationLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            locationLabel.leadingAnchor.constraint(equalTo: locationButton.leadingAnchor, constant: 12),
-            locationLabel.centerYAnchor.constraint(equalTo: locationButton.centerYAnchor)
-        ])
+        locationLabel.snp.makeConstraints({
+            $0.leading.equalTo(locationButton.snp.leading).offset(12)
+            $0.centerY.equalTo(locationButton.snp.centerY)
+        })
     }
     
     @objc func musicButtonTapped() {
