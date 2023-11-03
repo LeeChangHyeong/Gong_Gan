@@ -10,6 +10,7 @@ target 'Gong_Gan' do
   pod 'SnapKit'
   pod 'RxSwift'
   pod 'IQKeyboardManagerSwift'
+  Pod 'RxCocoa'
 
 
 end

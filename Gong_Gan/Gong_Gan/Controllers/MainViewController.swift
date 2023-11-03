@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class MainViewController: UIViewController {
     
@@ -28,6 +29,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backGroundViewTapped)))
         self.navigationController?.isNavigationBarHidden = true
+        
         setCameraModePicker()
         addSubView()
         setConstraints()
@@ -53,36 +55,30 @@ class MainViewController: UIViewController {
     }
     
     private func topBarViewConstraints() {
-        topBarView.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint.activate([
-            topBarView.topAnchor.constraint(equalTo: view.topAnchor),
-            topBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            topBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            topBarView.heightAnchor.constraint(equalToConstant: 127)
-        ])
+        topBarView.snp.makeConstraints({
+            $0.top.equalToSuperview()
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
+            $0.height.equalTo(127)
+        })
     }
     
     private func bottomBarViewConstraints() {
-        bottomBarView.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint.activate([
-            bottomBarView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            bottomBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bottomBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomBarView.heightAnchor.constraint(equalToConstant: 166)
-        ])
+        bottomBarView.snp.makeConstraints({
+            $0.bottom.leading.trailing.equalToSuperview()
+            $0.height.equalTo(166)
+        })
     }
     
     private func cameraModePickerViewConstraints() {
-        cameraModePicker.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint.activate([
-            cameraModePicker.widthAnchor.constraint(equalToConstant: 100),
-            cameraModePicker.heightAnchor.constraint(equalToConstant: 500),
-            cameraModePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            cameraModePicker.centerYAnchor.constraint(equalTo: bottomBarView.topAnchor, constant: 16)
-        ])
+        cameraModePicker.snp.makeConstraints({
+            $0.width.equalTo(40)
+            $0.height.equalTo(300)
+            $0.centerX.equalTo(view.snp.centerX)
+        })
         
     }
     
@@ -117,18 +113,17 @@ extension MainViewController: UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        let modeView = UIView()
-        modeView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-        let modeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        modeLabel.textColor = .white
-        modeLabel.text = captureModesList[row]
-        modeLabel.textAlignment = .center
-        modeView.addSubview(modeLabel)
+        let label = UILabel()
+            label.textColor = .white
+            label.text = captureModesList[row]
+            label.textAlignment = .center
+            label.transform = CGAffineTransform(rotationAngle: 90 * (.pi / 180))
         
-        // 피커 셀 회전
-        modeView.transform = CGAffineTransform(rotationAngle: 90 * (.pi/180))
-
-        return modeView
+        pickerView.subviews.forEach {
+               $0.backgroundColor = UIColor.clear
+           }
+            
+            return label
     }
     
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
