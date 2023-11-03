@@ -78,6 +78,7 @@ class MainViewController: UIViewController {
             $0.width.equalTo(40)
             $0.height.equalTo(300)
             $0.centerX.equalTo(view.snp.centerX)
+            $0.centerY.equalTo(bottomBarView.snp.topMargin).offset(16)
         })
         
     }
