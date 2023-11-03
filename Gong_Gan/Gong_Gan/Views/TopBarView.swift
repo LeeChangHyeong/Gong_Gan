@@ -13,6 +13,7 @@ class TopBarView: UIView {
     var locationManager = CLLocationManager()
     var musicButtonTap = false
     
+    
     let musicButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .buttonColor
@@ -66,7 +67,7 @@ class TopBarView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func addViews() {
+    private func addViews() {
        addSubview(musicButton)
        addSubview(locationButton)
        locationButton.addSubview(locationLabel)
@@ -89,8 +90,6 @@ class TopBarView: UIView {
             $0.bottom.equalToSuperview().offset(-28)
             $0.trailing.equalToSuperview().offset(-28)
         })
-        
-        
     }
     
     private func locationButtonConstraints() {
@@ -121,7 +120,7 @@ class TopBarView: UIView {
             let locationImage = UIImage(systemName: "location.circle.fill")?.withTintColor(.white)
             imageAttachment.image = locationImage
             attributedString.append(NSAttributedString(attachment: imageAttachment))
-            attributedString.append(NSAttributedString(string: " 데이터데이터데이터"))
+            attributedString.append(NSAttributedString(string: " 반급습니다아다아다아당다아다ㅁ"))
             
             locationLabel.attributedText = attributedString
         } else {
