@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -16,12 +17,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // 네비게이션 컨트롤러 코드로 셋팅하기 ⭐️
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: windowScene)
-
-        let naviVC = UINavigationController(rootViewController: MainViewController())
-
-        window?.rootViewController = naviVC
-        window?.makeKeyAndVisible()
+//        window = UIWindow(windowScene: windowScene)
+//
+//        let naviVC = UINavigationController(rootViewController: MainViewController())
+//
+//        window?.rootViewController = naviVC
+//        window?.makeKeyAndVisible()
+        let window = UIWindow(windowScene: windowScene)
+        self.window = window
+        AppController.shared.show(in: window)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
