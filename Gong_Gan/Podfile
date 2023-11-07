@@ -10,7 +10,9 @@ target 'Gong_Gan' do
   pod 'SnapKit'
   pod 'RxSwift'
   pod 'IQKeyboardManagerSwift'
-  Pod 'RxCocoa'
+  pod 'RxCocoa'
+  pod 'FirebaseAuth'
+  pod 'FirebaseFirestore'
 
 
 end
