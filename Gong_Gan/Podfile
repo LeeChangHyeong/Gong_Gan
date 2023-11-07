@@ -13,6 +13,6 @@ target 'Gong_Gan' do
   pod 'RxCocoa'
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
-
+  pod 'Firebase'
 
 end
