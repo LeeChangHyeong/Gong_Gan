@@ -7,14 +7,17 @@
 
 import UIKit
 import CoreData
+import FirebaseCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // 앱이 시작될 때 Firebase에 연결하기 위해 초기화 코드 추가
+        FirebaseApp.configure()
+        
         return true
     }
 
