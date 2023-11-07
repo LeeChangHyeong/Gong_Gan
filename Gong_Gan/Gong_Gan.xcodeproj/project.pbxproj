@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3231257D2AFA603A002B9A25 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3231257C2AFA603A002B9A25 /* LoginViewController.swift */; };
 		3231257F2AFA6318002B9A25 /* GoogleService-Info-3.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3231257E2AFA6318002B9A25 /* GoogleService-Info-3.plist */; };
+		323125812AFA64CB002B9A25 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323125802AFA64CB002B9A25 /* JoinViewController.swift */; };
 		3283A5B72A95F264001ECC9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3283A5B62A95F264001ECC9A /* AppDelegate.swift */; };
 		3283A5B92A95F264001ECC9A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3283A5B82A95F264001ECC9A /* SceneDelegate.swift */; };
 		3283A5BB2A95F264001ECC9A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3283A5BA2A95F264001ECC9A /* MainViewController.swift */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		3231257C2AFA603A002B9A25 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3231257E2AFA6318002B9A25 /* GoogleService-Info-3.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-3.plist"; sourceTree = "<group>"; };
+		323125802AFA64CB002B9A25 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
 		3283A5B32A95F264001ECC9A /* Gong_Gan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gong_Gan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3283A5B62A95F264001ECC9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3283A5B82A95F264001ECC9A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			children = (
 				3283A5BA2A95F264001ECC9A /* MainViewController.swift */,
 				3231257C2AFA603A002B9A25 /* LoginViewController.swift */,
+				323125802AFA64CB002B9A25 /* JoinViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				3283A5B72A95F264001ECC9A /* AppDelegate.swift in Sources */,
 				3283A5D12A96FD06001ECC9A /* MainView.swift in Sources */,
 				32D8E1C22AB20F71001D9AF3 /* TopBarView.swift in Sources */,
+				323125812AFA64CB002B9A25 /* JoinViewController.swift in Sources */,
 				3283A5B92A95F264001ECC9A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
