@@ -14,7 +14,9 @@ import RxCocoa
 class TopBarView: UIView {
     private var locationManager = CLLocationManager()
     private var musicButtonTap = false
-    private let diposeBag = DisposeBag()
+    
+    private let disposeBag = DisposeBag()
+    private let locationSubject = PublishSubject<CLLocation>()
     
     
     private let musicButton: UIButton = {
@@ -25,7 +27,7 @@ class TopBarView: UIView {
         button.layer.cornerRadius = 18
         button.addTarget(self, action: #selector(musicButtonTapped), for: .touchUpInside)
         button.invalidateIntrinsicContentSize()
-
+        
         return button
     }()
     
@@ -33,30 +35,26 @@ class TopBarView: UIView {
         let label = UILabel()
         let attributedString = NSMutableAttributedString(string: "")
         let imageAttachment = NSTextAttachment()
-
+        
         let locationImage = UIImage(systemName: "location.circle.fill")?.withTintColor(.white)
         imageAttachment.image = locationImage
         attributedString.append(NSAttributedString(attachment: imageAttachment))
         attributedString.append(NSAttributedString(string: " 서울시 강남구"))
-
+        
         label.attributedText = attributedString
         label.textColor = .white
         label.sizeToFit()
-
+        
         return label
     }()
     
     private let locationButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .locationColor
-//        button.setImage(UIImage(systemName: "location.circle.fill"), for: .normal)
-//        button.setTitle("  울산 남구", for: .normal)
-//        button.tintColor = .white
-//        button.titleLabel?.font = .boldSystemFont(ofSize: 13)
         button.layer.cornerRadius = 3
         return button
     }()
-
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -64,6 +62,8 @@ class TopBarView: UIView {
         backgroundColor = .black
         addViews()
         setConstraints()
+        setLocationManager()
+        bindToLocationUpdate()
     }
     
     required init?(coder: NSCoder) {
@@ -71,9 +71,9 @@ class TopBarView: UIView {
     }
     
     private func addViews() {
-       addSubview(musicButton)
-       addSubview(locationButton)
-       locationButton.addSubview(locationLabel)
+        addSubview(musicButton)
+        addSubview(locationButton)
+        locationButton.addSubview(locationLabel)
     }
     
     private func setConstraints() {
@@ -112,35 +112,45 @@ class TopBarView: UIView {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
-        locationManager.stopUpdatingLocation()
+    }
+    
+    private func bindToLocationUpdate() {
+        locationSubject
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self ] location in
+                CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
+                    if let place = placemarks?.first {
+                        let attributedString = NSMutableAttributedString(string: "")
+                        let imageAttachment = NSTextAttachment()
+                        
+                        let locationImage = UIImage(systemName: "location.circle.fill")?.withTintColor(.white)
+                        imageAttachment.image = locationImage
+                        attributedString.append(NSAttributedString(attachment: imageAttachment))
+                        attributedString.append(NSAttributedString(string: " \(place.locality ?? "") \(place.subLocality ?? "")"))
+                        
+                        self?.locationLabel.attributedText = attributedString
+                    }
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     @objc func musicButtonTapped() {
         musicButtonTap.toggle()
         
         musicButton.setImage(UIImage(systemName: musicButtonTap ? "speaker.slash.fill" : "music.note"), for: .normal)
-     
+        
     }
 }
 
 extension TopBarView: CLLocationManagerDelegate {
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
-            // 위치 정보를 가져와서 label에 적용
-            CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
-                if let place = placemarks?.first {
-                    let attributedString = NSMutableAttributedString(string: "")
-                    let imageAttachment = NSTextAttachment()
-                    
-                    let locationImage = UIImage(named: "location.circle.fill")?.withTintColor(.white)
-                    imageAttachment.image = locationImage
-                    attributedString.append(NSAttributedString(attachment: imageAttachment))
-                    attributedString.append(NSAttributedString(string: " \(place.locality ?? "") \(place.subLocality ?? "")"))
-                    
-                    self.locationLabel.attributedText = attributedString
-                }
-            }
+            // 위치 업데이트를 subject에 전달하여 구독자들에게 알림
+            locationSubject.onNext(location)
         }
     }
+    
 }
 
