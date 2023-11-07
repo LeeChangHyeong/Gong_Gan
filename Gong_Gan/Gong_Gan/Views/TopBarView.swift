@@ -8,13 +8,16 @@
 import UIKit
 import CoreLocation
 import SnapKit
+import RxSwift
+import RxCocoa
 
 class TopBarView: UIView {
-    var locationManager = CLLocationManager()
-    var musicButtonTap = false
+    private var locationManager = CLLocationManager()
+    private var musicButtonTap = false
+    private let diposeBag = DisposeBag()
     
     
-    let musicButton: UIButton = {
+    private let musicButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .buttonColor
         button.tintColor = .white
@@ -26,7 +29,7 @@ class TopBarView: UIView {
         return button
     }()
     
-    let locationLabel: UILabel = {
+    private let locationLabel: UILabel = {
         let label = UILabel()
         let attributedString = NSMutableAttributedString(string: "")
         let imageAttachment = NSTextAttachment()
@@ -43,7 +46,7 @@ class TopBarView: UIView {
         return label
     }()
     
-    let locationButton: UIButton = {
+    private let locationButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .locationColor
 //        button.setImage(UIImage(systemName: "location.circle.fill"), for: .normal)
@@ -77,10 +80,7 @@ class TopBarView: UIView {
         musicButtonConstraints()
         locationButtonConstraints()
         locationLabelConstraints()
-    }
-    
-    private func setLocationManager() {
-        
+        setLocationManager()
     }
     
     private func musicButtonConstraints() {
@@ -108,37 +108,39 @@ class TopBarView: UIView {
         })
     }
     
+    private func setLocationManager() {
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        locationManager.stopUpdatingLocation()
+    }
+    
     @objc func musicButtonTapped() {
         musicButtonTap.toggle()
         
         musicButton.setImage(UIImage(systemName: musicButtonTap ? "speaker.slash.fill" : "music.note"), for: .normal)
      
-        if musicButtonTap {
-            let attributedString = NSMutableAttributedString(string: "")
-            let imageAttachment = NSTextAttachment()
-
-            let locationImage = UIImage(systemName: "location.circle.fill")?.withTintColor(.white)
-            imageAttachment.image = locationImage
-            attributedString.append(NSAttributedString(attachment: imageAttachment))
-            attributedString.append(NSAttributedString(string: " 반급습니다아다아다아당다아다ㅁ"))
-            
-            locationLabel.attributedText = attributedString
-        } else {
-            let attributedString = NSMutableAttributedString(string: "")
-            let imageAttachment = NSTextAttachment()
-
-            let locationImage = UIImage(systemName: "location.circle.fill")?.withTintColor(.white)
-            imageAttachment.image = locationImage
-            attributedString.append(NSAttributedString(attachment: imageAttachment))
-            attributedString.append(NSAttributedString(string: " 서울시 강남구"))
-            
-            locationLabel.attributedText = attributedString
-        }
-        
     }
 }
 
 extension TopBarView: CLLocationManagerDelegate {
-    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            // 위치 정보를 가져와서 label에 적용
+            CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
+                if let place = placemarks?.first {
+                    let attributedString = NSMutableAttributedString(string: "")
+                    let imageAttachment = NSTextAttachment()
+                    
+                    let locationImage = UIImage(named: "location.circle.fill")?.withTintColor(.white)
+                    imageAttachment.image = locationImage
+                    attributedString.append(NSAttributedString(attachment: imageAttachment))
+                    attributedString.append(NSAttributedString(string: " \(place.locality ?? "") \(place.subLocality ?? "")"))
+                    
+                    self.locationLabel.attributedText = attributedString
+                }
+            }
+        }
+    }
 }
 
