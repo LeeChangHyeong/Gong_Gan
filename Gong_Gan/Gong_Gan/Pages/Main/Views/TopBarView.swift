@@ -10,6 +10,8 @@ import CoreLocation
 import SnapKit
 import RxSwift
 import RxCocoa
+import FirebaseAuth
+import FirebaseCore
 
 class TopBarView: UIView {
     private var locationManager = CLLocationManager()
@@ -134,11 +136,19 @@ class TopBarView: UIView {
             })
             .disposed(by: disposeBag)
     }
-    
+  
     @objc func musicButtonTapped() {
         musicButtonTap.toggle()
         
         musicButton.setImage(UIImage(systemName: musicButtonTap ? "speaker.slash.fill" : "music.note"), for: .normal)
+        
+        // TODO: 일단 로그아웃 구현을 음악 껐다 켰다 하는곳에 해놨음
+        let firebaseAuth = Auth.auth()
+                do {
+                    try firebaseAuth.signOut()
+                } catch let signOutError as NSError {
+                    print("Error signing out: %@", signOutError)
+                }
         
     }
 }

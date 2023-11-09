@@ -8,6 +8,8 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import FirebaseAuth
+import FirebaseCore
 
 class LoginViewController: UIViewController {
     let viewModel = LoginViewModel()
@@ -130,16 +132,18 @@ class LoginViewController: UIViewController {
         
         // TODO: FireBase 서버에 등록된 아이디인지 확인하여 로그인 성공 시키고 실패시키는 로직으로 리팩토링 필요
         loginButton.rx.tap.subscribe (onNext: { [weak self] _ in
-            if self?.userEmail == self?.viewModel.emailObserver.value && self?.userPassword == self?.viewModel.passwordObserver.value {
-                let alert = UIAlertController(title: "로그인 성공", message: "하이", preferredStyle: .alert)
-                let ok = UIAlertAction(title: "확인", style: .default)
-                alert.addAction(ok)
-                self?.present(alert, animated: true, completion: nil)
-            } else {
-                let alert = UIAlertController(title: "로그인 실패", message: "이메일 비번 다시 확인부탁", preferredStyle: .alert)
-                let ok = UIAlertAction(title: "확인", style: .default)
-                alert.addAction(ok)
-                self?.present(alert, animated: true, completion: nil)
+            guard let email = self?.emailTf.text else { return }
+            guard let password = self?.passWordTf.text else { return }
+            
+            Auth.auth().signIn(withEmail: email, password: password) {
+                [self] authResult, error in
+                if authResult == nil {
+                    if let errorCode = error {
+                        print(errorCode)
+                    }
+                } else if authResult != nil {
+                    
+                }
             }
         })
         .disposed(by: disposeBag)
