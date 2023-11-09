@@ -54,6 +54,13 @@ class LoginViewController: UIViewController {
         return button
     }()
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        emailTf.text = ""
+        passWordTf.text = ""
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
