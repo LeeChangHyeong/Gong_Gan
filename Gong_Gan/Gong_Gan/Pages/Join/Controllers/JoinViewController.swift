@@ -9,6 +9,8 @@ import UIKit
 import RxSwift
 import RxCocoa
 import SnapKit
+import FirebaseAuth
+import FirebaseCore
 
 class JoinViewController: UIViewController {
     private let viewModel = LoginViewModel()
@@ -98,10 +100,23 @@ class JoinViewController: UIViewController {
         
         // TODO: 회원가입 버튼 클릭시 실제로 회원가입 되고 MainView로 넘어가게 구현 해야함
         joinButton.rx.tap.subscribe(onNext: { [weak self] _ in
-            let alert = UIAlertController(title: "회원가입 완료", message: "☺️", preferredStyle: .alert)
-            let ok = UIAlertAction(title: "확인", style: .default)
-            alert.addAction(ok)
-            self?.present(alert, animated: true, completion: nil)
+            
+            guard let email = self?.emailTf.text else { return }
+            guard let password = self?.passWordTf.text else { return }
+
+            Auth.auth().createUser(withEmail: email, password: password) { result, error in
+                if let error = error {
+                    print("JoinViewController 회원가입 에러 -> \(error.localizedDescription)")
+                }
+                
+                if let result = result {
+                    let alert = UIAlertController(title: "회원가입 완료", message: "☺️", preferredStyle: .alert)
+                    let ok = UIAlertAction(title: "확인", style: .default)
+                    alert.addAction(ok)
+                    self?.present(alert, animated: true, completion: nil)
+                    print("JoinViewController 회원가입 성공 -> \(result)")
+                }
+            }
         })
     }
     
