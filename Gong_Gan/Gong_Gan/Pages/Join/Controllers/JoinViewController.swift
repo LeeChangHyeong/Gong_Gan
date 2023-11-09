@@ -1,14 +1,17 @@
 //
-//  LoginViewController.swift
+//  JoinViewController.swift
 //  Gong_Gan
 //
 //  Created by 이창형 on 11/7/23.
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import SnapKit
 
-class LoginViewController: UIViewController {
-
+class JoinViewController: UIViewController {
+    
     private let emailTf: UITextField = {
         let tf = UITextField()
         tf.placeholder = "이메일을 입력해주세요"
@@ -25,21 +28,11 @@ class LoginViewController: UIViewController {
         return tf
     }()
     
-    private let loginButton: UIButton = {
+    private let joinButton: UIButton = {
         let button = UIButton()
-        button.setTitle("로그인", for: .normal)
+        button.setTitle("회원가입", for: .normal)
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 6
-        
-        return button
-    }()
-    
-    private lazy var joinButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("회원가입하기", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = 6
-        button.addTarget(self, action: #selector(joinButtonTapped), for: .touchUpInside)
         
         return button
     }()
@@ -53,14 +46,13 @@ class LoginViewController: UIViewController {
         setConstraints()
     }
     
-    private func addViews() {
+    func addViews() {
         view.addSubview(emailTf)
         view.addSubview(passWordTf)
-        view.addSubview(loginButton)
         view.addSubview(joinButton)
     }
     
-    private func setConstraints() {
+    func setConstraints() {
         emailTf.snp.makeConstraints({
             $0.top.equalToSuperview().offset(100)
             $0.leading.equalToSuperview().offset(20)
@@ -75,24 +67,14 @@ class LoginViewController: UIViewController {
             $0.height.equalTo(30)
         })
         
-        loginButton.snp.makeConstraints({
-            $0.top.equalTo(passWordTf.snp.bottom).offset(30)
-            $0.centerX.equalToSuperview()
-            $0.width.equalTo(100)
-            $0.height.equalTo(30)
-        })
-        
         joinButton.snp.makeConstraints({
-            $0.top.equalTo(loginButton.snp.bottom).offset(30)
+            $0.top.equalTo(passWordTf.snp.bottom).offset(30)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(100)
             $0.height.equalTo(30)
         })
     }
     
-    @objc private func joinButtonTapped() {
-        let vc = JoinViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
+    
     
 }

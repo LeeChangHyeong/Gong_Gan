@@ -56,7 +56,7 @@ final class AppController {
     
     private func routeToLogin() {
         // TODO: 로그인 뷰로 보내줘야함 아직 개발 전이라 모두 다 mainView로 보내주는 중
-        rootViewController = UINavigationController(rootViewController: MainViewController())
+        rootViewController = UINavigationController(rootViewController: LoginViewController())
     }
     
 }

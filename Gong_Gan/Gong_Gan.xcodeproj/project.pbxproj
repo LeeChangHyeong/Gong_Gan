@@ -113,9 +113,25 @@
 		3231258E2AFC6D14002B9A25 /* Join */ = {
 			isa = PBXGroup;
 			children = (
-				323125802AFA64CB002B9A25 /* JoinViewController.swift */,
+				3231258F2AFC7506002B9A25 /* Controllers */,
+				323125902AFC7511002B9A25 /* ViewModels */,
 			);
 			path = Join;
+			sourceTree = "<group>";
+		};
+		3231258F2AFC7506002B9A25 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				323125802AFA64CB002B9A25 /* JoinViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		323125902AFC7511002B9A25 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		3283A5AA2A95F264001ECC9A = {
