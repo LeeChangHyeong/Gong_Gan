@@ -37,8 +37,6 @@ class JoinViewController: UIViewController {
         return button
     }()
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -74,7 +72,5 @@ class JoinViewController: UIViewController {
             $0.height.equalTo(30)
         })
     }
-    
-    
     
 }

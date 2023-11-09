@@ -6,8 +6,13 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class LoginViewController: UIViewController {
+    let viewModel = LoginViewModel()
+    let isEmailValid = BehaviorSubject(value: false)
+    let isPwValid = BehaviorSubject(value: false)
 
     private let emailTf: UITextField = {
         let tf = UITextField()
@@ -30,6 +35,7 @@ class LoginViewController: UIViewController {
         button.setTitle("로그인", for: .normal)
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 6
+        button.isEnabled = false
         
         return button
     }()
