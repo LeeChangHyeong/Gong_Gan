@@ -19,7 +19,7 @@ class LoginViewModel {
     var isValid: Observable<Bool> {
         return Observable.combineLatest(emailObserver, passwordObserver)
             .map{ email, password in
-                    print("\(email),  \(password)")
+                    print("LoginViewModel -> 아이디 비밀번호 입력중: \(email),  \(password)")
                 return !email.isEmpty && email.contains("@") && email.contains(".") && password.count > 0
             }
     }

@@ -13,6 +13,9 @@ class LoginViewController: UIViewController {
     let viewModel = LoginViewModel()
     let isEmailValid = BehaviorSubject(value: false)
     let isPwValid = BehaviorSubject(value: false)
+    let disposeBag = DisposeBag()
+    let userEmail = "shlee509@nate.com"
+    let userPassword = "dlckdgud11"
 
     private let emailTf: UITextField = {
         let tf = UITextField()
@@ -50,13 +53,12 @@ class LoginViewController: UIViewController {
         return button
     }()
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         addViews()
         setConstraints()
+        setupControl()
     }
     
     private func addViews() {
@@ -94,6 +96,45 @@ class LoginViewController: UIViewController {
             $0.width.equalTo(100)
             $0.height.equalTo(30)
         })
+    }
+    
+    private func setupControl() {
+        // 이메일 입력 textField를 viewModel의 emialObserver로 바인딩
+        emailTf.rx.text
+            .orEmpty
+            .bind(to: viewModel.emailObserver)
+            .disposed(by: disposeBag)
+        // 비밀번호 입력 textField를 viewModel의 passwordObserver로 바인딩
+        passWordTf.rx.text
+            .orEmpty
+            .bind(to: viewModel.passwordObserver)
+            .disposed(by: disposeBag)
+        
+        // viewModel에서 입력한 값을 통해 로그인 버튼의 enabled를 정해줌
+        viewModel.isValid.bind(to: loginButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        // 시각적으로 버튼이 활성화, 비활성화 되었는지 보여주기 위해 alpha값을 줌
+        viewModel.isValid
+            .map{$0 ? 1 : 0.3}
+            .bind(to: loginButton.rx.alpha)
+            .disposed(by: disposeBag)
+        
+        // TODO: FireBase 서버에 등록된 아이디인지 확인하여 로그인 성공 시키고 실패시키는 로직으로 리팩토링 필요
+        loginButton.rx.tap.subscribe (onNext: { [weak self] _ in
+            if self?.userEmail == self?.viewModel.emailObserver.value && self?.userPassword == self?.viewModel.passwordObserver.value {
+                let alert = UIAlertController(title: "로그인 성공", message: "하이", preferredStyle: .alert)
+                let ok = UIAlertAction(title: "확인", style: .default)
+                alert.addAction(ok)
+                self?.present(alert, animated: true, completion: nil)
+            } else {
+                let alert = UIAlertController(title: "로그인 실패", message: "이메일 비번 다시 확인부탁", preferredStyle: .alert)
+                let ok = UIAlertAction(title: "확인", style: .default)
+                alert.addAction(ok)
+                self?.present(alert, animated: true, completion: nil)
+            }
+        })
+        .disposed(by: disposeBag)
     }
     
     @objc private func joinButtonTapped() {
