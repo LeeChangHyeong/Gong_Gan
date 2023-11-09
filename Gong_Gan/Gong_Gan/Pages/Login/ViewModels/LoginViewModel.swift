@@ -19,8 +19,18 @@ class LoginViewModel {
     var isValid: Observable<Bool> {
         return Observable.combineLatest(emailObserver, passwordObserver)
             .map{ email, password in
-                    print("LoginViewModel -> 아이디 비밀번호 입력중: \(email),  \(password)")
-                return !email.isEmpty && email.contains("@") && email.contains(".") && password.count > 0
+                print("LoginViewModel -> 아이디 비밀번호 입력중: \(email),  \(password)")
+                return self.isValidEmail(email) && self.isValidPassword(password)
             }
+    }
+    
+    private func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
+        return emailPredicate.evaluate(with: email)
+    }
+    
+    private func isValidPassword(_ password: String) -> Bool {
+        return password.count > 0
     }
 }
