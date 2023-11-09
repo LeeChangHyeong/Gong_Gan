@@ -65,6 +65,59 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		323125892AFC6CB6002B9A25 /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				3231258E2AFC6D14002B9A25 /* Join */,
+				3231258D2AFC6D0B002B9A25 /* Login */,
+				3231258A2AFC6CBD002B9A25 /* Main */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
+		3231258A2AFC6CBD002B9A25 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				3231258C2AFC6CD3002B9A25 /* Views */,
+				3231258B2AFC6CC7002B9A25 /* Controllers */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		3231258B2AFC6CC7002B9A25 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3283A5BA2A95F264001ECC9A /* MainViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		3231258C2AFC6CD3002B9A25 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3283A5D02A96FD06001ECC9A /* MainView.swift */,
+				32D8E1C12AB20F71001D9AF3 /* TopBarView.swift */,
+				32D8E1C32AB20F84001D9AF3 /* BottomBarView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3231258D2AFC6D0B002B9A25 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				3231257C2AFA603A002B9A25 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		3231258E2AFC6D14002B9A25 /* Join */ = {
+			isa = PBXGroup;
+			children = (
+				323125802AFA64CB002B9A25 /* JoinViewController.swift */,
+			);
+			path = Join;
+			sourceTree = "<group>";
+		};
 		3283A5AA2A95F264001ECC9A = {
 			isa = PBXGroup;
 			children = (
@@ -87,26 +140,16 @@
 			isa = PBXGroup;
 			children = (
 				3231257E2AFA6318002B9A25 /* GoogleService-Info.plist */,
+				323125822AFA671F002B9A25 /* AppController.swift */,
 				3283A5B62A95F264001ECC9A /* AppDelegate.swift */,
 				3283A5B82A95F264001ECC9A /* SceneDelegate.swift */,
 				32D8E1BA2AB1FAFA001D9AF3 /* Helpers */,
 				3283A5CE2A95F279001ECC9A /* Models */,
-				3283A5CD2A95F273001ECC9A /* Views */,
-				3283A5CF2A95F27F001ECC9A /* Controllers */,
+				323125892AFC6CB6002B9A25 /* Pages */,
 				3283A5C22A95F265001ECC9A /* Assets.xcassets */,
 				3283A5C72A95F265001ECC9A /* Info.plist */,
 			);
 			path = Gong_Gan;
-			sourceTree = "<group>";
-		};
-		3283A5CD2A95F273001ECC9A /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				3283A5D02A96FD06001ECC9A /* MainView.swift */,
-				32D8E1C12AB20F71001D9AF3 /* TopBarView.swift */,
-				32D8E1C32AB20F84001D9AF3 /* BottomBarView.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		3283A5CE2A95F279001ECC9A /* Models */ = {
@@ -115,17 +158,6 @@
 				3283A5BF2A95F264001ECC9A /* Gong_Gan.xcdatamodeld */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		3283A5CF2A95F27F001ECC9A /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				3283A5BA2A95F264001ECC9A /* MainViewController.swift */,
-				3231257C2AFA603A002B9A25 /* LoginViewController.swift */,
-				323125802AFA64CB002B9A25 /* JoinViewController.swift */,
-				323125822AFA671F002B9A25 /* AppController.swift */,
-			);
-			path = Controllers;
 			sourceTree = "<group>";
 		};
 		32D8E1BA2AB1FAFA001D9AF3 /* Helpers */ = {
