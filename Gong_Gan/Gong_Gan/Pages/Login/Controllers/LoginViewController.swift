@@ -14,6 +14,7 @@ class LoginViewController: UIViewController {
     let isEmailValid = BehaviorSubject(value: false)
     let isPwValid = BehaviorSubject(value: false)
     let disposeBag = DisposeBag()
+    // TODO: 임시로 성공할때 적는 이메일 비밀번호
     let userEmail = "shlee509@nate.com"
     let userPassword = "dlckdgud11"
 
