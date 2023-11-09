@@ -96,6 +96,7 @@ class JoinViewController: UIViewController {
             .bind(to: joinButton.rx.alpha)
             .disposed(by: disposeBag)
         
+        // TODO: 회원가입 버튼 클릭시 실제로 회원가입 되고 MainView로 넘어가게 구현 해야함
         joinButton.rx.tap.subscribe(onNext: { [weak self] _ in
             let alert = UIAlertController(title: "회원가입 완료", message: "☺️", preferredStyle: .alert)
             let ok = UIAlertAction(title: "확인", style: .default)
