@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 import FirebaseAuth
 import FirebaseCore
+import AuthenticationServices
 
 class LoginViewController: UIViewController {
     let viewModel = LoginViewModel()
@@ -46,7 +47,7 @@ class LoginViewController: UIViewController {
         return button
     }()
     
-    private lazy var joinButton: UIButton = {
+    private let joinButton: UIButton = {
         let button = UIButton()
         button.setTitle("회원가입하기", for: .normal)
         button.backgroundColor = .systemBlue
@@ -55,6 +56,11 @@ class LoginViewController: UIViewController {
         
         return button
     }()
+    
+    private let appleLoginButton: ASAuthorizationAppleIDButton = {
+        let button = ASAuthorizationAppleIDButton(type: .signIn, style: .black)
+            return button
+        }()
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -76,6 +82,7 @@ class LoginViewController: UIViewController {
         view.addSubview(passWordTf)
         view.addSubview(loginButton)
         view.addSubview(joinButton)
+        view.addSubview(appleLoginButton)
     }
     
     private func setConstraints() {
@@ -102,6 +109,13 @@ class LoginViewController: UIViewController {
         
         joinButton.snp.makeConstraints({
             $0.top.equalTo(loginButton.snp.bottom).offset(30)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(100)
+            $0.height.equalTo(30)
+        })
+        
+        appleLoginButton.snp.makeConstraints({
+            $0.top.equalTo(joinButton.snp.bottom).offset(30)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(100)
             $0.height.equalTo(30)

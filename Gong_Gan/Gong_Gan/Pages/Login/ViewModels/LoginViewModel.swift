@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import RxRelay
+import AuthenticationServices
 
 class LoginViewModel {
     // LoginViewController의 이메일 TextField와 비밀번호 TextField를 받아온다

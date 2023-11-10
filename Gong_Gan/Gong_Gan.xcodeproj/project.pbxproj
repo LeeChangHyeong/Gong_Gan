@@ -12,6 +12,7 @@
 		323125812AFA64CB002B9A25 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323125802AFA64CB002B9A25 /* JoinViewController.swift */; };
 		323125832AFA671F002B9A25 /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323125822AFA671F002B9A25 /* AppController.swift */; };
 		323125922AFCCF0B002B9A25 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323125912AFCCF0B002B9A25 /* LoginViewModel.swift */; };
+		3231259A2AFDEE03002B9A25 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323125992AFDEE03002B9A25 /* LoginModel.swift */; };
 		3283A5B72A95F264001ECC9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3283A5B62A95F264001ECC9A /* AppDelegate.swift */; };
 		3283A5B92A95F264001ECC9A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3283A5B82A95F264001ECC9A /* SceneDelegate.swift */; };
 		3283A5BB2A95F264001ECC9A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3283A5BA2A95F264001ECC9A /* MainViewController.swift */; };
@@ -30,6 +31,8 @@
 		323125802AFA64CB002B9A25 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
 		323125822AFA671F002B9A25 /* AppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
 		323125912AFCCF0B002B9A25 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		323125972AFDD883002B9A25 /* Gong_Gan.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Gong_Gan.entitlements; sourceTree = "<group>"; };
+		323125992AFDEE03002B9A25 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		3283A5B32A95F264001ECC9A /* Gong_Gan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gong_Gan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3283A5B62A95F264001ECC9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3283A5B82A95F264001ECC9A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,8 +110,9 @@
 		3231258D2AFC6D0B002B9A25 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				323125932AFCDD4C002B9A25 /* Controllers */,
+				323125982AFDEDF3002B9A25 /* Models */,
 				323125942AFCDD55002B9A25 /* ViewModels */,
+				323125932AFCDD4C002B9A25 /* Controllers */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -145,6 +149,14 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		323125982AFDEDF3002B9A25 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				323125992AFDEE03002B9A25 /* LoginModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		3283A5AA2A95F264001ECC9A = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +178,7 @@
 		3283A5B52A95F264001ECC9A /* Gong_Gan */ = {
 			isa = PBXGroup;
 			children = (
+				323125972AFDD883002B9A25 /* Gong_Gan.entitlements */,
 				3231257E2AFA6318002B9A25 /* GoogleService-Info.plist */,
 				323125822AFA671F002B9A25 /* AppController.swift */,
 				3283A5B62A95F264001ECC9A /* AppDelegate.swift */,
@@ -325,6 +338,7 @@
 				323125832AFA671F002B9A25 /* AppController.swift in Sources */,
 				3283A5B72A95F264001ECC9A /* AppDelegate.swift in Sources */,
 				3283A5D12A96FD06001ECC9A /* MainView.swift in Sources */,
+				3231259A2AFDEE03002B9A25 /* LoginModel.swift in Sources */,
 				323125922AFCCF0B002B9A25 /* LoginViewModel.swift in Sources */,
 				32D8E1C22AB20F71001D9AF3 /* TopBarView.swift in Sources */,
 				323125812AFA64CB002B9A25 /* JoinViewController.swift in Sources */,
@@ -455,11 +469,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Gong_Gan/Gong_Gan.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FRZRS5Y9L6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Gong_Gan/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "\"현재 위치사용을 허용하시겠습니까\"";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -470,7 +486,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.changBro.Gong-Gan";
+				PRODUCT_BUNDLE_IDENTIFIER = com.changBro.GongGan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -487,11 +503,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Gong_Gan/Gong_Gan.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FRZRS5Y9L6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Gong_Gan/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "\"현재 위치사용을 허용하시겠습니까\"";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -502,7 +520,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.changBro.Gong-Gan";
+				PRODUCT_BUNDLE_IDENTIFIER = com.changBro.GongGan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
