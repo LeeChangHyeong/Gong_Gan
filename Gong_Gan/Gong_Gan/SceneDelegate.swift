@@ -7,6 +7,8 @@
 
 import UIKit
 import Firebase
+import KakaoSDKAuth
+
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -25,7 +27,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        window?.makeKeyAndVisible()
         let window = UIWindow(windowScene: windowScene)
         self.window = window
+        
+        // 카카오톡 앱키 초기화
+        
         AppController.shared.show(in: window)
+    }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        if let url = URLContexts.first?.url {
+                    if (AuthApi.isKakaoTalkLoginUrl(url)) {
+                        _ = AuthController.handleOpenUrl(url: url)
+                    }
+                }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

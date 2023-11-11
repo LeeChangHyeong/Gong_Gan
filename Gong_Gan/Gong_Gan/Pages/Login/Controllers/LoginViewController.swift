@@ -13,6 +13,9 @@ import FirebaseCore
 import AuthenticationServices
 import FirebaseFirestoreInternal
 import CryptoKit
+import KakaoSDKCommon
+import KakaoSDKAuth
+import KakaoSDKUser
 
 class LoginViewController: UIViewController {
     let viewModel = LoginViewModel()
@@ -70,6 +73,7 @@ class LoginViewController: UIViewController {
         button.setTitle("카카오로 로그인", for: .normal)
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 6
+        button.addTarget(self, action: #selector(KakaoLogin), for: .touchUpInside)
         
         return button
     }()
@@ -192,6 +196,95 @@ class LoginViewController: UIViewController {
     @objc private func joinButtonTapped() {
         let vc = JoinViewController()
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
+    @IBAction func KakaoLogin(_ sender: Any) {
+        if AuthApi.hasToken() {
+            UserApi.shared.accessTokenInfo { _, error in
+                if let error = error {
+                    print("_________login error_________")
+                    print(error)
+                    if UserApi.isKakaoTalkLoginAvailable() {
+                        UserApi.shared.loginWithKakaoTalk { oauthToken, error in
+                            if let error = error {
+                                print(error)
+                            } else {
+                                print("New Kakao Login")
+                                
+                                //do something
+                                _ = oauthToken
+                                
+                                // 로그인 성공 시
+                                UserApi.shared.me { kuser, error in
+                                    if let error = error {
+                                        print("------KAKAO : user loading failed------")
+                                        print(error)
+                                    } else {
+                                        Auth.auth().createUser(withEmail: (kuser?.kakaoAccount?.email)!, password: "\(String(describing: kuser?.id))") { fuser, error in
+                                            if let error = error {
+                                                print("FB : signup failed")
+                                                print(error)
+                                                Auth.auth().signIn(withEmail: (kuser?.kakaoAccount?.email)!, password: "\(String(describing: kuser?.id))", completion: nil)
+                                            } else {
+                                                print("FB : signup success")
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                                let VC = self.storyboard?.instantiateViewController(identifier: "MainViewController") as! MainViewController
+                                VC.modalPresentationStyle = .fullScreen
+                                self.present(VC, animated: true, completion: nil)
+                                
+                            }
+                        }
+                    }
+                } else {
+                    print("good login")
+                    let VC = self.storyboard?.instantiateViewController(identifier: "MainViewController") as! MainViewController
+                    VC.modalPresentationStyle = .fullScreen
+                    self.present(VC, animated: true, completion: nil)
+                }
+            }
+        } else {
+            if UserApi.isKakaoTalkLoginAvailable() {
+                UserApi.shared.loginWithKakaoTalk { oauthToken, error in
+                    if let error = error {
+                        print(error)
+                    } else {
+                        print("New Kakao Login")
+                        
+                        //do something
+                        _ = oauthToken
+                        
+                        // 로그인 성공 시
+                        UserApi.shared.me { kuser, error in
+                            if let error = error {
+                                print("------KAKAO : user loading failed------")
+                                print(error)
+                            } else {
+                                // TODO: 이메일 받아오도록 승인받아야함 카카오에서 그리곤 수정필요
+                                Auth.auth().createUser(withEmail: (kuser?.kakaoAccount?.email) ?? "sef@naver.com", password: "\(String(describing: kuser?.id))") { fuser, error in
+                                    if let error = error {
+                                        print("FB : signup failed")
+                                        print(error)
+                                        // TODO: 이메일 받아오도록 승인받아야함 카카오에서 그리곤 수정필요
+                                        Auth.auth().signIn(withEmail: (kuser?.kakaoAccount?.email) ?? "sef@naver.com", password: "\(String(describing: kuser?.id))", completion: nil)
+                                    } else {
+                                        print("FB : signup success")
+                                    }
+                                }
+                            }
+                        }
+                        
+//                        let VC = self.storyboard?.instantiateViewController(identifier: "MainViewController") as! MainViewController
+//                        VC.modalPresentationStyle = .fullScreen
+//                        self.present(VC, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
     }
     
     fileprivate var currentNonce: String?

@@ -228,6 +228,7 @@
 				3283A5B02A95F264001ECC9A /* Frameworks */,
 				3283A5B12A95F264001ECC9A /* Resources */,
 				E13362659270302DE76A33CE /* [CP] Embed Pods Frameworks */,
+				F4863A7F11059B170C4C0086 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -321,6 +322,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Gong_Gan/Pods-Gong_Gan-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F4863A7F11059B170C4C0086 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Gong_Gan/Pods-Gong_Gan-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Gong_Gan/Pods-Gong_Gan-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Gong_Gan/Pods-Gong_Gan-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

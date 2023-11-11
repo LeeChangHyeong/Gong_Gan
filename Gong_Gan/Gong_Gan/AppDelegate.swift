@@ -8,12 +8,16 @@
 import UIKit
 import CoreData
 import FirebaseCore
+import KakaoSDKCommon
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // 카카오 키 초기화
+        KakaoSDK.initSDK(appKey: "30c09b4a304fab31e7599c7e5b0293c7")
         
         return true
     }

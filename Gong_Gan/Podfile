@@ -14,5 +14,6 @@ target 'Gong_Gan' do
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
   pod 'Firebase'
+  pod 'KakaoSDK'
 
 end
