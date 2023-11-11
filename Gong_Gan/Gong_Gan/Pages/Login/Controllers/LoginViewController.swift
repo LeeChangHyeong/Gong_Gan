@@ -65,6 +65,15 @@ class LoginViewController: UIViewController {
         return button
     }()
     
+    private let kakaoLoginButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("카카오로 로그인", for: .normal)
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 6
+        
+        return button
+    }()
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
@@ -86,6 +95,7 @@ class LoginViewController: UIViewController {
         view.addSubview(loginButton)
         view.addSubview(joinButton)
         view.addSubview(appleLoginButton)
+        view.addSubview(kakaoLoginButton)
     }
     
     private func setConstraints() {
@@ -119,6 +129,13 @@ class LoginViewController: UIViewController {
         
         appleLoginButton.snp.makeConstraints({
             $0.top.equalTo(joinButton.snp.bottom).offset(30)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(100)
+            $0.height.equalTo(30)
+        })
+        
+        kakaoLoginButton.snp.makeConstraints({
+            $0.top.equalTo(appleLoginButton.snp.bottom).offset(30)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(100)
             $0.height.equalTo(30)
