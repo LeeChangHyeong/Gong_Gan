@@ -118,6 +118,13 @@ class MainViewController: UIViewController {
     
     private func addMemoButtonTapped() {
         let vc = WriteViewController()
+        let writeViewModel = WriteViewModel()
+        
+        // WriteViewController에 WriteViewModel 인스턴스 전달
+        vc.viewModel = writeViewModel
+        
+        // MainViewController의 배경 이미지를 WriteViewModel에 전달
+        writeViewModel.backgroundImage.accept(mainView.backGroundView.image)
         
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -136,20 +143,20 @@ extension MainViewController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let label = UILabel()
-            label.textColor = .white
-            label.text = captureModesList[row]
-            label.textAlignment = .center
-            label.transform = CGAffineTransform(rotationAngle: 90 * (.pi / 180))
+        label.textColor = .white
+        label.text = captureModesList[row]
+        label.textAlignment = .center
+        label.transform = CGAffineTransform(rotationAngle: 90 * (.pi / 180))
         
         pickerView.subviews.forEach {
-               $0.backgroundColor = UIColor.clear
-           }
-            
-            return label
+            $0.backgroundColor = UIColor.clear
+        }
+        
+        return label
     }
     
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-      return 100
+        return 100
     }
 }
 

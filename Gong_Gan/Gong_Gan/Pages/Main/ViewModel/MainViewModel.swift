@@ -11,4 +11,5 @@ import RxCocoa
 
 class MainViewModel {
     let addMemoButtonTapped = PublishRelay<Void>()
+    let selectedBackgroundImage = PublishRelay<UIImage?>()
 }
