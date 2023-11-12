@@ -28,8 +28,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         self.window = window
         
-        // 카카오톡 앱키 초기화
-        
         AppController.shared.show(in: window)
     }
     

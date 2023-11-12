@@ -172,7 +172,7 @@ class LoginViewController: UIViewController {
         loginButton.rx.tap.subscribe (onNext: { [weak self] _ in
             guard let email = self?.emailTf.text else { return }
             guard let password = self?.passWordTf.text else { return }
-            
+        
             Auth.auth().signIn(withEmail: email, password: password) {
                 [self] authResult, error in
                 if authResult == nil {

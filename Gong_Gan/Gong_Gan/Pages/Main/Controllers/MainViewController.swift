@@ -7,8 +7,12 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 class MainViewController: UIViewController {
+    private let viewModel = MainViewModel()
+    private let disposeBag = DisposeBag()
     
     // 백그라운드 터치 여부 확인
     var backGroundTap = false
@@ -33,6 +37,7 @@ class MainViewController: UIViewController {
         setCameraModePicker()
         addSubView()
         setConstraints()
+        bindViewModel()
     }
     
     private func addSubView() {
@@ -99,6 +104,22 @@ class MainViewController: UIViewController {
                 self.bottomBarView.alpha = 1.0
             }
         }
+    }
+    
+    private func bindViewModel() {
+        bottomBarView.viewModel = viewModel
+        
+        viewModel.addMemoButtonTapped
+            .subscribe(onNext: { [weak self] in
+                self?.addMemoButtonTapped()
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func addMemoButtonTapped() {
+        let vc = WriteViewController()
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

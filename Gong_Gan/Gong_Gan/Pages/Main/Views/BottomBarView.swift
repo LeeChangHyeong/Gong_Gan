@@ -8,6 +8,7 @@
 import UIKit
 
 class BottomBarView: UIView {
+    var viewModel: MainViewModel?
     
     let galleryButton: UIButton = {
         let button = UIButton()
@@ -25,18 +26,19 @@ class BottomBarView: UIView {
         button.tintColor = .white
         button.setImage(UIImage(systemName: "plus"), for: .normal)
         button.layer.cornerRadius = 30
+        button.addTarget(self, action: #selector(addMemoButtonTapped), for: .touchUpInside)
         
         return button
     }()
     
     private let containerView: UIView = {
-      let view = UIView()
-      view.backgroundColor = .clear
-      view.layer.borderWidth = 3
-      view.layer.cornerRadius = 35
-      view.layer.borderColor = UIColor.buttonColor.cgColor
-      
-      return view
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.layer.borderWidth = 3
+        view.layer.cornerRadius = 35
+        view.layer.borderColor = UIColor.buttonColor.cgColor
+        
+        return view
     }()
     
     let settingButton: UIButton = {
@@ -118,5 +120,9 @@ class BottomBarView: UIView {
             settingButton.widthAnchor.constraint(equalToConstant: 49),
             settingButton.heightAnchor.constraint(equalToConstant: 49)
         ])
+    }
+    
+    @objc private func addMemoButtonTapped() {
+        viewModel?.addMemoButtonTapped.accept(())
     }
 }

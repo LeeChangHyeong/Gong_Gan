@@ -13,6 +13,8 @@
 		323125832AFA671F002B9A25 /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323125822AFA671F002B9A25 /* AppController.swift */; };
 		323125922AFCCF0B002B9A25 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323125912AFCCF0B002B9A25 /* LoginViewModel.swift */; };
 		3231259A2AFDEE03002B9A25 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323125992AFDEE03002B9A25 /* LoginModel.swift */; };
+		3231259C2B00B547002B9A25 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3231259B2B00B547002B9A25 /* MainViewModel.swift */; };
+		323125A02B00B5A2002B9A25 /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3231259F2B00B5A2002B9A25 /* WriteViewController.swift */; };
 		3283A5B72A95F264001ECC9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3283A5B62A95F264001ECC9A /* AppDelegate.swift */; };
 		3283A5B92A95F264001ECC9A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3283A5B82A95F264001ECC9A /* SceneDelegate.swift */; };
 		3283A5BB2A95F264001ECC9A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3283A5BA2A95F264001ECC9A /* MainViewController.swift */; };
@@ -33,6 +35,8 @@
 		323125912AFCCF0B002B9A25 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		323125972AFDD883002B9A25 /* Gong_Gan.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Gong_Gan.entitlements; sourceTree = "<group>"; };
 		323125992AFDEE03002B9A25 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		3231259B2B00B547002B9A25 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		3231259F2B00B5A2002B9A25 /* WriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewController.swift; sourceTree = "<group>"; };
 		3283A5B32A95F264001ECC9A /* Gong_Gan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gong_Gan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3283A5B62A95F264001ECC9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3283A5B82A95F264001ECC9A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +80,7 @@
 				3231258E2AFC6D14002B9A25 /* Join */,
 				3231258D2AFC6D0B002B9A25 /* Login */,
 				3231258A2AFC6CBD002B9A25 /* Main */,
+				3231259E2B00B591002B9A25 /* Write */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -85,6 +90,7 @@
 			children = (
 				3231258C2AFC6CD3002B9A25 /* Views */,
 				3231258B2AFC6CC7002B9A25 /* Controllers */,
+				3231259D2B00B54B002B9A25 /* ViewModels */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -155,6 +161,22 @@
 				323125992AFDEE03002B9A25 /* LoginModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		3231259D2B00B54B002B9A25 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				3231259B2B00B547002B9A25 /* MainViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		3231259E2B00B591002B9A25 /* Write */ = {
+			isa = PBXGroup;
+			children = (
+				3231259F2B00B5A2002B9A25 /* WriteViewController.swift */,
+			);
+			path = Write;
 			sourceTree = "<group>";
 		};
 		3283A5AA2A95F264001ECC9A = {
@@ -351,6 +373,7 @@
 				3231257D2AFA603A002B9A25 /* LoginViewController.swift in Sources */,
 				32D8E1C42AB20F84001D9AF3 /* BottomBarView.swift in Sources */,
 				3283A5BB2A95F264001ECC9A /* MainViewController.swift in Sources */,
+				323125A02B00B5A2002B9A25 /* WriteViewController.swift in Sources */,
 				32D8E1BC2AB1FB08001D9AF3 /* UIColor.swift in Sources */,
 				3283A5C12A95F264001ECC9A /* Gong_Gan.xcdatamodeld in Sources */,
 				323125832AFA671F002B9A25 /* AppController.swift in Sources */,
@@ -361,6 +384,7 @@
 				32D8E1C22AB20F71001D9AF3 /* TopBarView.swift in Sources */,
 				323125812AFA64CB002B9A25 /* JoinViewController.swift in Sources */,
 				3283A5B92A95F264001ECC9A /* SceneDelegate.swift in Sources */,
+				3231259C2B00B547002B9A25 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
