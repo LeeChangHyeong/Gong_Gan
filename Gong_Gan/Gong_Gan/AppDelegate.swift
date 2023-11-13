@@ -9,6 +9,7 @@ import UIKit
 import CoreData
 import FirebaseCore
 import KakaoSDKCommon
+import IQKeyboardManagerSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 카카오 키 초기화
         KakaoSDK.initSDK(appKey: "30c09b4a304fab31e7599c7e5b0293c7")
+        
+        // 자동으로 키보드가 화면을 가리지 않게 함
+        IQKeyboardManager.shared.enable = true
+        
+        // 빈화면 터치시 키보드 자동으로 내려가게 구현
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+        
+        // Done 표시 끄기
+        IQKeyboardManager.shared.enableAutoToolbar = false
+
         
         return true
     }

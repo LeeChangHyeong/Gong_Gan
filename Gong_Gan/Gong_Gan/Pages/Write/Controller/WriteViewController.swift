@@ -10,10 +10,22 @@ import RxSwift
 import RxCocoa
 import SnapKit
 
+
 class WriteViewController: UIViewController {
     private let disposeBag = DisposeBag()
     var viewModel: WriteViewModel?
     var backgroundImage: UIImage?
+    
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
+    
+    private let textViewColor: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        view.isHidden = true
+        
+        return view
+    }()
     
     lazy var backGroundView: UIImageView = {
         let view = UIImageView(frame: UIScreen.main.bounds)
@@ -24,11 +36,10 @@ class WriteViewController: UIViewController {
     
     private let memoTextView: UITextView = {
         let view = UITextView()
-        view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-        view.textColor = .white
-        view.text = "Enter your text here"
-        view.isEditable = true
-        view.isUserInteractionEnabled = true
+        view.backgroundColor = .clear
+        view.textColor = .black
+        view.text = "터치하여 오늘의 일기를 작성하세요"
+        view.font = UIFont(name: "ArialHebrew", size: 15)
         
         return view
     }()
@@ -46,7 +57,7 @@ class WriteViewController: UIViewController {
         
         return button
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,15 +68,20 @@ class WriteViewController: UIViewController {
     
     private func addSubViews() {
         view.addSubview(backGroundView)
+        backGroundView.addSubview(textViewColor)
         view.addSubview(memoTextView)
         view.addSubview(backButton)
     }
     
     private func setConstraints() {
         memoTextView.snp.makeConstraints({
-            $0.leading.equalToSuperview().offset(20)
-            $0.trailing.bottom.equalToSuperview().offset(-20)
-            $0.top.equalToSuperview().offset(200)
+            $0.leading.equalToSuperview().offset(31)
+            $0.trailing.bottom.equalToSuperview().offset(-31)
+            $0.top.equalToSuperview().offset(125)
+        })
+        
+        textViewColor.snp.makeConstraints({
+            $0.edges.equalToSuperview()
         })
         
         backButton.snp.makeConstraints({
@@ -94,11 +110,23 @@ class WriteViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
+        memoTextView.rx.didBeginEditing
+            .subscribe(onNext: { [weak self] in
+                self?.textViewColor.isHidden = false
+            })
+            .disposed(by: disposeBag)
+        
+        memoTextView.rx.didEndEditing
+            .subscribe(onNext: { [weak self] in
+                self?.textViewColor.isHidden = true
+            })
+            .disposed(by: disposeBag)
+        
         backButton.rx.tap
-             .subscribe(onNext: { [weak self] in
-                 self?.navigationController?.popViewController(animated: true)
-             })
-             .disposed(by: disposeBag)
+            .subscribe(onNext: { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            })
+            .disposed(by: disposeBag)
     }
     
 }
