@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
+import AVFoundation
 
 class MainViewController: UIViewController {
     private let viewModel = MainViewModel()
@@ -20,6 +21,14 @@ class MainViewController: UIViewController {
     var rotationAngle: CGFloat! = -90  * (.pi/180)
     
     private let mainView = MainView()
+    private let cameraAnimationView: UIView = {
+        let view = UIView()
+        
+        view.backgroundColor = .black.withAlphaComponent(0.7)
+        view.isHidden = true
+        
+        return view
+    }()
     private let bottomBarView = BottomBarView()
     private let topBarView = TopBarView()
     
@@ -44,6 +53,7 @@ class MainViewController: UIViewController {
         view.addSubview(topBarView)
         view.addSubview(bottomBarView)
         bottomBarView.addSubview(cameraModePicker)
+        view.addSubview(cameraAnimationView)
     }
     
     private func setCameraModePicker() {
@@ -57,6 +67,12 @@ class MainViewController: UIViewController {
         bottomBarViewConstraints()
         topBarViewConstraints()
         cameraModePickerViewConstraints()
+        
+        cameraAnimationView.snp.makeConstraints({
+            $0.leading.trailing.equalToSuperview()
+            $0.top.equalTo(topBarView.snp.bottom)
+            $0.bottom.equalTo(bottomBarView.snp.top)
+        })
     }
     
     private func topBarViewConstraints() {
@@ -87,6 +103,7 @@ class MainViewController: UIViewController {
         })
         
     }
+    
     
     // 백그라운드 터치시 topBar, bottomBar 사라지면서 backGround가 전체화면으로 보임
     @objc private func backGroundViewTapped(_ recognizer: UITapGestureRecognizer) {
@@ -130,7 +147,29 @@ class MainViewController: UIViewController {
                 writeViewModel.updateBackgroundImage("도시") // 기본 이미지 이름
             }
         
-        navigationController?.pushViewController(vc, animated: true)
+        playCameraSound()
+        cameraAnimationView.isHidden = false
+        view.isUserInteractionEnabled = false
+         
+         
+         // 1초 후에 다시 숨김 후에 pushViewController 실행
+         Observable.just(())
+             .delay(.milliseconds(100), scheduler: MainScheduler.instance)
+             .subscribe(onNext: { [weak self] in
+                 self?.cameraAnimationView.isHidden = true
+             }, onCompleted: { [weak self] in
+                 // 0.2초 뒤에 pushViewController 실행
+                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                     self?.view.isUserInteractionEnabled = true
+                     self?.navigationController?.pushViewController(vc, animated: true)
+                 }
+             })
+             .disposed(by: disposeBag)
+    }
+    
+    private func playCameraSound() {
+        // 실제 아이폰 카메라 소리
+        AudioServicesPlaySystemSound(1108)
     }
 }
 
