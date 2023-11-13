@@ -39,7 +39,7 @@ class WriteViewController: UIViewController {
         
         return button
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,6 +51,7 @@ class WriteViewController: UIViewController {
     private func addSubViews() {
         view.addSubview(backGroundView)
         view.addSubview(memoTextView)
+        view.addSubview(backButton)
     }
     
     private func setConstraints() {
@@ -58,6 +59,11 @@ class WriteViewController: UIViewController {
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.bottom.equalToSuperview().offset(-20)
             $0.top.equalToSuperview().offset(200)
+        })
+        
+        backButton.snp.makeConstraints({
+            $0.leading.equalToSuperview().offset(16)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
         })
     }
     
@@ -79,6 +85,12 @@ class WriteViewController: UIViewController {
                 self?.memoTextView.text = ""
             })
             .disposed(by: disposeBag)
+        
+        backButton.rx.tap
+             .subscribe(onNext: { [weak self] in
+                 self?.navigationController?.popViewController(animated: true)
+             })
+             .disposed(by: disposeBag)
     }
     
 }

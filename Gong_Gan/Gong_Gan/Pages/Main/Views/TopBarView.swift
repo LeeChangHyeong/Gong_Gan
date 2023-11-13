@@ -119,6 +119,8 @@ class TopBarView: UIView {
     
     private func bindToLocationUpdate() {
         locationSubject
+            // 한 번만 실행
+            .take(1)
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self ] location in
                 CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
@@ -132,6 +134,9 @@ class TopBarView: UIView {
                         attributedString.append(NSAttributedString(string: " \(place.locality ?? "") \(place.subLocality ?? "")"))
                         
                         self?.locationLabel.attributedText = attributedString
+                        
+                        // 위치를 가지고 왔으면 업데이트 중지
+                        self?.locationManager.stopUpdatingLocation()
                     }
                 }
             })
