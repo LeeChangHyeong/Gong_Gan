@@ -11,4 +11,5 @@ import RxCocoa
 
 class WriteViewModel {
     let backgroundImage = BehaviorRelay<UIImage?>(value: nil)
+    let memoText = BehaviorRelay<String?>(value: nil)
 }
