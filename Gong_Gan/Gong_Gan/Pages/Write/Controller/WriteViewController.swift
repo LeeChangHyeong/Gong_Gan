@@ -39,6 +39,13 @@ class WriteViewController: UIViewController {
         
         return button
     }()
+    
+    private let saveMemoButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("저장하기", for: .normal)
+        
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
