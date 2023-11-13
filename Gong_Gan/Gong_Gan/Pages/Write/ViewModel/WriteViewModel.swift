@@ -10,6 +10,11 @@ import RxSwift
 import RxCocoa
 
 class WriteViewModel {
-    let backgroundImage = BehaviorRelay<UIImage?>(value: nil)
+    let backgroundImage = BehaviorRelay<String?>(value: nil)
     let memoText = BehaviorRelay<String?>(value: nil)
+    
+    // 이미지 이름을 업데이트 하는 함수
+    func updateBackgroundImage(_ name: String) {
+        backgroundImage.accept(name)
+    }
 }

@@ -72,8 +72,9 @@ class WriteViewController: UIViewController {
         viewModel?.backgroundImage
             .subscribe(onNext: { [weak self] image in
                 // 값이 업데이트되면 받아온 이미지를 배경으로 설정
-                self?.backGroundView.image = image
+                self?.backGroundView.image = UIImage(named: image!)
             })
+            .disposed(by: disposeBag)
         
         memoTextView.rx.text
             .bind(to: viewModel!.memoText)

@@ -11,5 +11,10 @@ import RxCocoa
 
 class MainViewModel {
     let addMemoButtonTapped = PublishRelay<Void>()
-    let selectedBackgroundImage = PublishRelay<UIImage?>()
+    let selectedBackgroundImage = BehaviorRelay<String?>(value: nil)
+    
+    
+    func updateSelectedImageName(_ name: String) {
+        selectedBackgroundImage.accept(name)
+        }
 }

@@ -123,8 +123,12 @@ class MainViewController: UIViewController {
         // WriteViewController에 WriteViewModel 인스턴스 전달
         vc.viewModel = writeViewModel
         
-        // MainViewController의 배경 이미지를 WriteViewModel에 전달
-        writeViewModel.backgroundImage.accept(mainView.backGroundView.image)
+        // MainViewController의 배경 이미지 이름을 WriteViewModel에 전달
+            if let selectedImageName = viewModel.selectedBackgroundImage.value {
+                writeViewModel.updateBackgroundImage(selectedImageName)
+            } else {
+                writeViewModel.updateBackgroundImage("도시") // 기본 이미지 이름
+            }
         
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -162,6 +166,9 @@ extension MainViewController: UIPickerViewDelegate {
 
 extension MainViewController: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        mainView.backGroundView.image = UIImage(named: captureModesList[row])
+        let selectedImageName = captureModesList[row]
+        mainView.backGroundView.image = UIImage(named: selectedImageName)
+        // MainViewController의 배경 이미지 이름을 viewModel에 전달
+        viewModel.updateSelectedImageName(selectedImageName)
     }
 }
