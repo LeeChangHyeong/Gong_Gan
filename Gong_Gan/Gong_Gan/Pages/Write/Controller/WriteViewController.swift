@@ -9,6 +9,9 @@ import UIKit
 import RxSwift
 import RxCocoa
 import SnapKit
+import FirebaseFirestore
+import FirebaseCore
+import FirebaseAuth
 
 
 class WriteViewController: UIViewController {
@@ -43,7 +46,6 @@ class WriteViewController: UIViewController {
         
         return view
     }()
-    
     
     private let backButton: UIButton = {
         let button = UIButton()
@@ -149,13 +151,19 @@ class WriteViewController: UIViewController {
             .disposed(by: disposeBag)
         
         viewModel?.nowDateText
-            .drive(nowDateLabel.rx.text)
-            .disposed(by: disposeBag)
+                .bind(to: nowDateLabel.rx.text)
+                .disposed(by: disposeBag)
+    
         
         saveMemoButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                print(self?.memoTextView.text)
-            })
+            .subscribe(onNext:{ [weak self] in
+                self?.viewModel?.saveMemo { error in
+                    if let error = error {
+                        print("WriteViewController saveMemo Error: \(error.localizedDescription)")
+                    }
+                }
+            }).disposed(by: disposeBag)
+
     }
     
 }

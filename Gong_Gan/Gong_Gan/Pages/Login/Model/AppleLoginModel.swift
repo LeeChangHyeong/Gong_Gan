@@ -13,3 +13,4 @@ struct AppleUser {
         let givenName: String?
         let email: String?
 }
+

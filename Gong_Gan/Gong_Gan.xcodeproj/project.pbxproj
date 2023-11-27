@@ -12,7 +12,7 @@
 		323125812AFA64CB002B9A25 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323125802AFA64CB002B9A25 /* JoinViewController.swift */; };
 		323125832AFA671F002B9A25 /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323125822AFA671F002B9A25 /* AppController.swift */; };
 		323125922AFCCF0B002B9A25 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323125912AFCCF0B002B9A25 /* LoginViewModel.swift */; };
-		3231259A2AFDEE03002B9A25 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323125992AFDEE03002B9A25 /* LoginModel.swift */; };
+		3231259A2AFDEE03002B9A25 /* AppleLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323125992AFDEE03002B9A25 /* AppleLoginModel.swift */; };
 		3231259C2B00B547002B9A25 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3231259B2B00B547002B9A25 /* MainViewModel.swift */; };
 		323125A02B00B5A2002B9A25 /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3231259F2B00B5A2002B9A25 /* WriteViewController.swift */; };
 		323125A22B00CC72002B9A25 /* WriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323125A12B00CC72002B9A25 /* WriteViewModel.swift */; };
@@ -22,6 +22,7 @@
 		3283A5C12A95F264001ECC9A /* Gong_Gan.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3283A5BF2A95F264001ECC9A /* Gong_Gan.xcdatamodeld */; };
 		3283A5C32A95F265001ECC9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3283A5C22A95F265001ECC9A /* Assets.xcassets */; };
 		3283A5D12A96FD06001ECC9A /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3283A5D02A96FD06001ECC9A /* MainView.swift */; };
+		32C35DC42B147ABB00269B65 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C35DC32B147ABB00269B65 /* UserData.swift */; };
 		32D8E1BC2AB1FB08001D9AF3 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1BB2AB1FB08001D9AF3 /* UIColor.swift */; };
 		32D8E1C22AB20F71001D9AF3 /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1C12AB20F71001D9AF3 /* TopBarView.swift */; };
 		32D8E1C42AB20F84001D9AF3 /* BottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1C32AB20F84001D9AF3 /* BottomBarView.swift */; };
@@ -35,7 +36,7 @@
 		323125822AFA671F002B9A25 /* AppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
 		323125912AFCCF0B002B9A25 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		323125972AFDD883002B9A25 /* Gong_Gan.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Gong_Gan.entitlements; sourceTree = "<group>"; };
-		323125992AFDEE03002B9A25 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		323125992AFDEE03002B9A25 /* AppleLoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginModel.swift; sourceTree = "<group>"; };
 		3231259B2B00B547002B9A25 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		3231259F2B00B5A2002B9A25 /* WriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewController.swift; sourceTree = "<group>"; };
 		323125A12B00CC72002B9A25 /* WriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewModel.swift; sourceTree = "<group>"; };
@@ -47,6 +48,7 @@
 		3283A5C22A95F265001ECC9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3283A5C72A95F265001ECC9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3283A5D02A96FD06001ECC9A /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		32C35DC32B147ABB00269B65 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		32D8E1BB2AB1FB08001D9AF3 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		32D8E1C12AB20F71001D9AF3 /* TopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
 		32D8E1C32AB20F84001D9AF3 /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };
@@ -160,7 +162,7 @@
 		323125982AFDEDF3002B9A25 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				323125992AFDEE03002B9A25 /* LoginModel.swift */,
+				323125992AFDEE03002B9A25 /* AppleLoginModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -245,6 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				32D8E1BB2AB1FB08001D9AF3 /* UIColor.swift */,
+				32C35DC32B147ABB00269B65 /* UserData.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -399,9 +402,10 @@
 				323125832AFA671F002B9A25 /* AppController.swift in Sources */,
 				3283A5B72A95F264001ECC9A /* AppDelegate.swift in Sources */,
 				3283A5D12A96FD06001ECC9A /* MainView.swift in Sources */,
-				3231259A2AFDEE03002B9A25 /* LoginModel.swift in Sources */,
+				3231259A2AFDEE03002B9A25 /* AppleLoginModel.swift in Sources */,
 				323125922AFCCF0B002B9A25 /* LoginViewModel.swift in Sources */,
 				32D8E1C22AB20F71001D9AF3 /* TopBarView.swift in Sources */,
+				32C35DC42B147ABB00269B65 /* UserData.swift in Sources */,
 				323125812AFA64CB002B9A25 /* JoinViewController.swift in Sources */,
 				3283A5B92A95F264001ECC9A /* SceneDelegate.swift in Sources */,
 				3231259C2B00B547002B9A25 /* MainViewModel.swift in Sources */,

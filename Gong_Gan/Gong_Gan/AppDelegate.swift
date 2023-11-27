@@ -7,9 +7,11 @@
 
 import UIKit
 import CoreData
-import FirebaseCore
 import KakaoSDKCommon
 import IQKeyboardManagerSwift
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseAuth
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -29,7 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Done 표시 끄기
         IQKeyboardManager.shared.enableAutoToolbar = false
 
-        
         return true
     }
 
