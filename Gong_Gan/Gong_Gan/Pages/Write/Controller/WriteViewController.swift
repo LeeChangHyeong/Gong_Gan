@@ -44,11 +44,19 @@ class WriteViewController: UIViewController {
         return view
     }()
     
+    
     private let backButton: UIButton = {
         let button = UIButton()
         button.setTitle("뒤로가기", for: .normal)
         
         return button
+    }()
+    
+    private let nowDateLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        
+        return label
     }()
     
     private let saveMemoButton: UIButton = {
@@ -60,7 +68,7 @@ class WriteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+//        navigationController?.isNavigationBarHidden = false
         addSubViews()
         setConstraints()
         setupControl()
@@ -71,6 +79,8 @@ class WriteViewController: UIViewController {
         backGroundView.addSubview(textViewColor)
         view.addSubview(memoTextView)
         view.addSubview(backButton)
+        view.addSubview(nowDateLabel)
+        view.addSubview(saveMemoButton)
     }
     
     private func setConstraints() {
@@ -86,6 +96,16 @@ class WriteViewController: UIViewController {
         
         backButton.snp.makeConstraints({
             $0.leading.equalToSuperview().offset(16)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+        })
+        
+        nowDateLabel.snp.makeConstraints({
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+        })
+        
+        saveMemoButton.snp.makeConstraints({
+            $0.trailing.equalToSuperview().offset(-16)
             $0.top.equalTo(view.safeAreaLayoutGuide)
         })
     }
@@ -126,6 +146,10 @@ class WriteViewController: UIViewController {
             .subscribe(onNext: { [weak self] in
                 self?.navigationController?.popViewController(animated: true)
             })
+            .disposed(by: disposeBag)
+        
+        viewModel?.nowDateText
+            .drive(nowDateLabel.rx.text)
             .disposed(by: disposeBag)
     }
     

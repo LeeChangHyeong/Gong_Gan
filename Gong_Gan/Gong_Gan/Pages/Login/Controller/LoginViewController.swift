@@ -147,7 +147,7 @@ class LoginViewController: UIViewController {
     }
     
     private func setupControl() {
-        // 이메일 입력 textField를 viewModel의 emialObserver로 바인딩
+        // 이메일 입력 textField를 viewModel의 emailObserver로 바인딩
         emailTf.rx.text
             .orEmpty
             .bind(to: viewModel.emailObserver)
