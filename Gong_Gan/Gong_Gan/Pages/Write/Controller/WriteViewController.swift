@@ -151,6 +151,11 @@ class WriteViewController: UIViewController {
         viewModel?.nowDateText
             .drive(nowDateLabel.rx.text)
             .disposed(by: disposeBag)
+        
+        saveMemoButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                print(self?.memoTextView.text)
+            })
     }
     
 }

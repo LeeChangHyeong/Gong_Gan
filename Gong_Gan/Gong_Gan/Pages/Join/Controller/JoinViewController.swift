@@ -11,6 +11,7 @@ import RxCocoa
 import SnapKit
 import FirebaseAuth
 import FirebaseCore
+import FirebaseFirestore
 
 class JoinViewController: UIViewController {
     private let viewModel = LoginViewModel()
@@ -109,12 +110,18 @@ class JoinViewController: UIViewController {
                     print("JoinViewController 회원가입 에러 -> \(error.localizedDescription)")
                 }
                 
-                if let result = result {
-                    let alert = UIAlertController(title: "회원가입 완료", message: "☺️", preferredStyle: .alert)
-                    let ok = UIAlertAction(title: "확인", style: .default)
-                    alert.addAction(ok)
-                    self?.present(alert, animated: true, completion: nil)
-                    print("JoinViewController 회원가입 성공 -> \(result)")
+                let data = ["email": email]
+                
+                // 파이어베이스 유저 객체를 가져옴
+                guard let user = result?.user else { return }
+                
+                // 가입에 성공하면 그 유저의 uid를 파이어베이스가 생성
+                // 이 uid를 기준으로 특정한 유저 데이터를 저장
+                Firestore.firestore().collection("users").document(user.uid).setData(data) { error in
+                    if let error = error {
+                        print("DEBUG: \(error.localizedDescription)")
+                        return
+                    }
                 }
             }
         })
