@@ -12,15 +12,19 @@ import SnapKit
 import FirebaseFirestore
 import FirebaseCore
 import FirebaseAuth
+import CoreLocation
 
 
 class WriteViewController: UIViewController {
     private let disposeBag = DisposeBag()
+    private var locationManager = CLLocationManager()
+    
     var viewModel: WriteViewModel?
     var backgroundImage: UIImage?
     
     private let scrollView = UIScrollView()
     private let contentView = UIView()
+    private let locationSubject = PublishSubject<CLLocation>()
     
     private let textViewColor: UIView = {
         let view = UIView()
@@ -85,6 +89,30 @@ class WriteViewController: UIViewController {
         return button
     }()
     
+    private let locationLabel: UILabel = {
+        let label = UILabel()
+        let attributedString = NSMutableAttributedString(string: "")
+        let imageAttachment = NSTextAttachment()
+        
+        let locationImage = UIImage(named: "location")?.withTintColor(.white)
+        imageAttachment.image = locationImage
+        attributedString.append(NSAttributedString(attachment: imageAttachment))
+        attributedString.append(NSAttributedString(string: " 서울시 강남구"))
+        
+        label.attributedText = attributedString
+        label.textColor = .white
+        label.sizeToFit()
+        
+        return label
+    }()
+    
+    private let locationButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .locationColor
+        button.layer.cornerRadius = 6
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -92,12 +120,17 @@ class WriteViewController: UIViewController {
         setNaviBar()
         setConstraints()
         setupControl()
+        setLocationManager()
+        bindToLocationUpdate()
     }
     
     private func addSubViews() {
         view.addSubview(backGroundView)
         backGroundView.addSubview(textViewColor)
         view.addSubview(memoTextView)
+        view.addSubview(musicButton)
+        view.addSubview(locationButton)
+        locationButton.addSubview(locationLabel)
     }
     
     private func setNaviBar() {
@@ -117,7 +150,64 @@ class WriteViewController: UIViewController {
         textViewColor.snp.makeConstraints({
             $0.edges.equalToSuperview()
         })
+        
+        musicButton.snp.makeConstraints({
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.top.equalToSuperview().offset(113)
+            $0.width.equalTo(36)
+            $0.height.equalTo(36)
+        })
+        
+        locationButton.snp.makeConstraints({
+            $0.top.equalToSuperview().offset(118)
+            $0.leading.equalToSuperview().offset(22)
+            $0.height.equalTo(31)
+            $0.width.equalTo(locationLabel.snp.width).offset(24)
+        })
+        
+        locationLabel.snp.makeConstraints({
+            $0.leading.equalTo(locationButton.snp.leading).offset(12)
+            $0.centerY.equalTo(locationButton.snp.centerY)
+        })
 }
+    
+    private func setLocationManager() {
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+    
+    private func bindToLocationUpdate() {
+        locationSubject
+            // 한 번만 실행
+            .take(1)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self ] location in
+                CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
+                    if let place = placemarks?.first {
+                        let attributedString = NSMutableAttributedString(string: "")
+                        let imageAttachment = NSTextAttachment()
+                        
+                        let locationImage = UIImage(named: "location")?.withTintColor(.white.withAlphaComponent(0.75))
+                        imageAttachment.image = locationImage
+                        attributedString.append(NSAttributedString(attachment: imageAttachment))
+                        
+                        let textAttributes: [NSAttributedString.Key: Any] = [
+                            .font: UIFont.systemFont(ofSize: 15, weight: .bold),
+                            .foregroundColor: UIColor.white.withAlphaComponent(0.75)
+                        ]
+                        
+                        attributedString.append(NSAttributedString(string: " \(place.locality ?? "") \(place.subLocality ?? "")", attributes: textAttributes))
+                        
+                        self?.locationLabel.attributedText = attributedString
+                        
+                        // 위치를 가지고 왔으면 업데이트 중지
+                        self?.locationManager.stopUpdatingLocation()
+                    }
+                }
+            })
+            .disposed(by: disposeBag)
+    }
     
     private func setupControl() {
         // WriteViewModel의 backgroundImage를 구독하여 값이 업데이트될 때마다 실행되는 클로저 정의
@@ -160,6 +250,7 @@ class WriteViewController: UIViewController {
         viewModel?.nowDateText
                 .bind(to: nowDateLabel.rx.text)
                 .disposed(by: disposeBag)
+        
     
         
         saveMemoButton.rx.tap
@@ -171,6 +262,17 @@ class WriteViewController: UIViewController {
                 }
             }).disposed(by: disposeBag)
 
+    }
+    
+}
+
+
+extension WriteViewController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            locationSubject.onNext(location)
+        }
     }
     
 }
