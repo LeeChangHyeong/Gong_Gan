@@ -24,7 +24,7 @@ class WriteViewController: UIViewController {
     
     private let textViewColor: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         view.isHidden = true
         
         return view
@@ -40,7 +40,7 @@ class WriteViewController: UIViewController {
     private let memoTextView: UITextView = {
         let view = UITextView()
         view.backgroundColor = .clear
-        view.textColor = .black
+        view.textColor = .white
         view.text = "터치하여 오늘의 일기를 작성하세요"
         view.font = UIFont(name: "ArialHebrew", size: 15)
         
@@ -49,29 +49,35 @@ class WriteViewController: UIViewController {
     
     private let backButton: UIButton = {
         let button = UIButton()
-        button.setTitle("뒤로가기", for: .normal)
-        
-        return button
+            let image = UIImage(systemName: "chevron.backward")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 22, weight: .regular))
+            button.setImage(image, for: .normal)
+
+            button.tintColor = .white
+            
+            return button
     }()
     
     private let nowDateLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
+        label.font = .systemFont(ofSize: 17, weight: .light)
         
         return label
     }()
     
     private let saveMemoButton: UIButton = {
         let button = UIButton()
-        button.setTitle("저장하기", for: .normal)
+        button.setTitle("완료", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 17, weight: .bold)
         
         return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        navigationController?.isNavigationBarHidden = false
+        
         addSubViews()
+        setNaviBar()
         setConstraints()
         setupControl()
     }
@@ -80,37 +86,26 @@ class WriteViewController: UIViewController {
         view.addSubview(backGroundView)
         backGroundView.addSubview(textViewColor)
         view.addSubview(memoTextView)
-        view.addSubview(backButton)
-        view.addSubview(nowDateLabel)
-        view.addSubview(saveMemoButton)
+    }
+    
+    private func setNaviBar() {
+        navigationController?.isNavigationBarHidden = false
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+        navigationItem.titleView = nowDateLabel
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveMemoButton)
     }
     
     private func setConstraints() {
         memoTextView.snp.makeConstraints({
             $0.leading.equalToSuperview().offset(31)
             $0.trailing.bottom.equalToSuperview().offset(-31)
-            $0.top.equalToSuperview().offset(125)
+            $0.top.equalToSuperview().offset(167)
         })
         
         textViewColor.snp.makeConstraints({
             $0.edges.equalToSuperview()
         })
-        
-        backButton.snp.makeConstraints({
-            $0.leading.equalToSuperview().offset(16)
-            $0.top.equalTo(view.safeAreaLayoutGuide)
-        })
-        
-        nowDateLabel.snp.makeConstraints({
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(view.safeAreaLayoutGuide)
-        })
-        
-        saveMemoButton.snp.makeConstraints({
-            $0.trailing.equalToSuperview().offset(-16)
-            $0.top.equalTo(view.safeAreaLayoutGuide)
-        })
-    }
+}
     
     private func setupControl() {
         // WriteViewModel의 backgroundImage를 구독하여 값이 업데이트될 때마다 실행되는 클로저 정의
