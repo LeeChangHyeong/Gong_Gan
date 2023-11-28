@@ -110,7 +110,18 @@ class WriteViewController: UIViewController {
         let button = UIButton()
         button.backgroundColor = .locationColor
         button.layer.cornerRadius = 6
+        
         return button
+    }()
+    
+    private let timeLabel: UILabel = {
+        let label = UILabel()
+        
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 12, weight: .regular)
+        label.text = "오전 10:03"
+        
+        return label
     }()
     
     override func viewDidLoad() {
@@ -131,6 +142,7 @@ class WriteViewController: UIViewController {
         view.addSubview(musicButton)
         view.addSubview(locationButton)
         locationButton.addSubview(locationLabel)
+        view.addSubview(timeLabel)
     }
     
     private func setNaviBar() {
@@ -163,6 +175,11 @@ class WriteViewController: UIViewController {
             $0.leading.equalToSuperview().offset(22)
             $0.height.equalTo(31)
             $0.width.equalTo(locationLabel.snp.width).offset(24)
+        })
+        
+        timeLabel.snp.makeConstraints({
+            $0.centerY.equalTo(locationButton)
+            $0.leading.equalTo(locationButton.snp.trailing).offset(12)
         })
         
         locationLabel.snp.makeConstraints({
@@ -250,7 +267,6 @@ class WriteViewController: UIViewController {
         viewModel?.nowDateText
                 .bind(to: nowDateLabel.rx.text)
                 .disposed(by: disposeBag)
-        
     
         
         saveMemoButton.rx.tap
@@ -261,6 +277,21 @@ class WriteViewController: UIViewController {
                     }
                 }
             }).disposed(by: disposeBag)
+        
+        // 현재 시간을 업데이트
+        viewModel?.updateCurrentTime()
+        
+        // currentTimeText를 timeLabel에 바인딩
+        viewModel?.currentTimeText
+            .bind(to: timeLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        // 타이머를 사용하여 매 초마다 현재 시간을 업데이트
+        Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel?.updateCurrentTime()
+            })
+            .disposed(by: disposeBag)
 
     }
     
