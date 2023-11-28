@@ -81,7 +81,7 @@ class MainViewController: UIViewController {
             $0.top.equalToSuperview()
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
-            $0.height.equalTo(127)
+            $0.height.equalTo(108)
         })
     }
     
@@ -89,7 +89,7 @@ class MainViewController: UIViewController {
         
         bottomBarView.snp.makeConstraints({
             $0.bottom.leading.trailing.equalToSuperview()
-            $0.height.equalTo(166)
+            $0.height.equalTo(207)
         })
     }
     
