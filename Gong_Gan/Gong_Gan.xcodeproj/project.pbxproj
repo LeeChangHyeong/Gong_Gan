@@ -17,6 +17,8 @@
 		323125A02B00B5A2002B9A25 /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3231259F2B00B5A2002B9A25 /* WriteViewController.swift */; };
 		323125A22B00CC72002B9A25 /* WriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323125A12B00CC72002B9A25 /* WriteViewModel.swift */; };
 		32718C432B15D1F400FF3EEF /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32718C422B15D1F400FF3EEF /* GalleryViewController.swift */; };
+		32718C452B15D8B500FF3EEF /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32718C442B15D8B500FF3EEF /* GalleryCollectionViewCell.swift */; };
+		32718C482B15F0EF00FF3EEF /* GalleryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32718C472B15F0EF00FF3EEF /* GalleryViewModel.swift */; };
 		3283A5B72A95F264001ECC9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3283A5B62A95F264001ECC9A /* AppDelegate.swift */; };
 		3283A5B92A95F264001ECC9A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3283A5B82A95F264001ECC9A /* SceneDelegate.swift */; };
 		3283A5BB2A95F264001ECC9A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3283A5BA2A95F264001ECC9A /* MainViewController.swift */; };
@@ -42,6 +44,8 @@
 		3231259F2B00B5A2002B9A25 /* WriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewController.swift; sourceTree = "<group>"; };
 		323125A12B00CC72002B9A25 /* WriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewModel.swift; sourceTree = "<group>"; };
 		32718C422B15D1F400FF3EEF /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
+		32718C442B15D8B500FF3EEF /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
+		32718C472B15F0EF00FF3EEF /* GalleryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewModel.swift; sourceTree = "<group>"; };
 		3283A5B32A95F264001ECC9A /* Gong_Gan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gong_Gan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3283A5B62A95F264001ECC9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3283A5B82A95F264001ECC9A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -198,6 +202,7 @@
 		32718C402B15D16F00FF3EEF /* Gallery */ = {
 			isa = PBXGroup;
 			children = (
+				32718C462B15F0E300FF3EEF /* ViewModel */,
 				32718C412B15D1E200FF3EEF /* Views */,
 			);
 			path = Gallery;
@@ -207,8 +212,17 @@
 			isa = PBXGroup;
 			children = (
 				32718C422B15D1F400FF3EEF /* GalleryViewController.swift */,
+				32718C442B15D8B500FF3EEF /* GalleryCollectionViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		32718C462B15F0E300FF3EEF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				32718C472B15F0EF00FF3EEF /* GalleryViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		3283A5AA2A95F264001ECC9A = {
@@ -408,11 +422,13 @@
 				3283A5BB2A95F264001ECC9A /* MainViewController.swift in Sources */,
 				323125A02B00B5A2002B9A25 /* WriteViewController.swift in Sources */,
 				32D8E1BC2AB1FB08001D9AF3 /* UIColor.swift in Sources */,
+				32718C482B15F0EF00FF3EEF /* GalleryViewModel.swift in Sources */,
 				3283A5C12A95F264001ECC9A /* Gong_Gan.xcdatamodeld in Sources */,
 				323125A22B00CC72002B9A25 /* WriteViewModel.swift in Sources */,
 				323125832AFA671F002B9A25 /* AppController.swift in Sources */,
 				3283A5B72A95F264001ECC9A /* AppDelegate.swift in Sources */,
 				3283A5D12A96FD06001ECC9A /* MainView.swift in Sources */,
+				32718C452B15D8B500FF3EEF /* GalleryCollectionViewCell.swift in Sources */,
 				3231259A2AFDEE03002B9A25 /* AppleLoginModel.swift in Sources */,
 				323125922AFCCF0B002B9A25 /* LoginViewModel.swift in Sources */,
 				32D8E1C22AB20F71001D9AF3 /* TopBarView.swift in Sources */,
