@@ -83,24 +83,24 @@ class TopBarView: UIView {
         musicButtonConstraints()
         locationButtonConstraints()
         locationLabelConstraints()
-        setLocationManager()
     }
     
     private func musicButtonConstraints() {
         musicButton.snp.makeConstraints({
             $0.height.equalTo(36)
             $0.width.equalTo(36)
-            $0.bottom.equalToSuperview().offset(-28)
+            $0.bottom.equalToSuperview().offset(-20)
             $0.trailing.equalToSuperview().offset(-28)
         })
     }
     
     private func locationButtonConstraints() {
         locationButton.snp.makeConstraints({
-            $0.height.equalTo(32)
+            $0.top.equalToSuperview().offset(60)
+            $0.height.equalTo(31)
             $0.width.equalTo(locationLabel.snp.width).offset(24)
-            $0.bottom.equalToSuperview().offset(-30)
-            $0.leading.equalToSuperview().offset(16)
+            $0.bottom.equalToSuperview().offset(-20)
+            $0.leading.equalToSuperview().offset(24)
         })
     }
     
