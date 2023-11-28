@@ -39,7 +39,7 @@ class TopBarView: UIView {
         let attributedString = NSMutableAttributedString(string: "")
         let imageAttachment = NSTextAttachment()
         
-        let locationImage = UIImage(systemName: "location.circle.fill")?.withTintColor(.white)
+        let locationImage = UIImage(named: "location")?.withTintColor(.white)
         imageAttachment.image = locationImage
         attributedString.append(NSAttributedString(attachment: imageAttachment))
         attributedString.append(NSAttributedString(string: " 서울시 강남구"))
@@ -54,7 +54,7 @@ class TopBarView: UIView {
     private let locationButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .locationColor
-        button.layer.cornerRadius = 3
+        button.layer.cornerRadius = 6
         return button
     }()
     
@@ -128,10 +128,16 @@ class TopBarView: UIView {
                         let attributedString = NSMutableAttributedString(string: "")
                         let imageAttachment = NSTextAttachment()
                         
-                        let locationImage = UIImage(systemName: "location.circle.fill")?.withTintColor(.white)
+                        let locationImage = UIImage(named: "location")?.withTintColor(.white)
                         imageAttachment.image = locationImage
                         attributedString.append(NSAttributedString(attachment: imageAttachment))
-                        attributedString.append(NSAttributedString(string: " \(place.locality ?? "") \(place.subLocality ?? "")"))
+                        
+                        let textAttributes: [NSAttributedString.Key: Any] = [
+                            .font: UIFont.systemFont(ofSize: 15, weight: .bold),
+                            .foregroundColor: UIColor.white
+                        ]
+                        
+                        attributedString.append(NSAttributedString(string: " \(place.locality ?? "") \(place.subLocality ?? "")", attributes: textAttributes))
                         
                         self?.locationLabel.attributedText = attributedString
                         

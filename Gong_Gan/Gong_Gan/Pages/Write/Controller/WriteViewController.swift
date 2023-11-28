@@ -73,6 +73,18 @@ class WriteViewController: UIViewController {
         return button
     }()
     
+    private let musicButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .buttonColor
+        button.tintColor = .white
+        button.setImage(UIImage(systemName: "music.note"), for: .normal)
+        button.layer.cornerRadius = 18
+//        button.addTarget(self, action: #selector(musicButtonTapped), for: .touchUpInside)
+        button.invalidateIntrinsicContentSize()
+        
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
