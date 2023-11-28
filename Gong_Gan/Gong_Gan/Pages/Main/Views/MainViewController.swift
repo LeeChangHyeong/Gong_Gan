@@ -131,6 +131,12 @@ class MainViewController: UIViewController {
                 self?.addMemoButtonTapped()
             })
             .disposed(by: disposeBag)
+        
+        viewModel.addGalleryButtonTapped
+            .subscribe(onNext: { [weak self] in
+                self?.addGalleryButtonTapped()
+            })
+            .disposed(by: disposeBag)
     }
     
     private func addMemoButtonTapped() {
@@ -165,6 +171,12 @@ class MainViewController: UIViewController {
                  }
              })
              .disposed(by: disposeBag)
+    }
+    
+    private func addGalleryButtonTapped() {
+        let vc = GalleryViewController()
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     private func playCameraSound() {

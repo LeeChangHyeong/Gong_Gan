@@ -16,6 +16,7 @@ class BottomBarView: UIView {
         button.setImage(UIImage(systemName: "book.closed.fill"), for: .normal)
         button.tintColor = .white
         button.layer.cornerRadius = 3
+        button.addTarget(self, action: #selector(addGalleryButtonTapped), for: .touchUpInside)
         
         return button
     }()
@@ -63,7 +64,7 @@ class BottomBarView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func addViews() {
+    private func addViews() {
         addSubview(galleryButton)
         addSubview(containerView)
         containerView.addSubview(addMemoButton)
@@ -120,6 +121,10 @@ class BottomBarView: UIView {
             settingButton.widthAnchor.constraint(equalToConstant: 49),
             settingButton.heightAnchor.constraint(equalToConstant: 49)
         ])
+    }
+    
+    @objc private func addGalleryButtonTapped() {
+        viewModel?.addGalleryButtonTapped.accept(())
     }
     
     @objc private func addMemoButtonTapped() {

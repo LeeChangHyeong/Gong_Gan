@@ -72,7 +72,7 @@ class WriteViewController: UIViewController {
     private let saveMemoButton: UIButton = {
         let button = UIButton()
         button.setTitle("완료", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 17, weight: .bold)
+        button.titleLabel?.font = .systemFont(ofSize: 17, weight: .regular)
         
         return button
     }()
