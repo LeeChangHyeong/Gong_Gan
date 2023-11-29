@@ -23,8 +23,9 @@ class GalleryViewModel {
                 if let memosArray = document["memos"] as? [[String: Any]] {
                     let imageNamesArray = memosArray.compactMap { $0["imageName"] as? String }
                     
-                    // galleryImageNames에 저장
-                    self.galleryImageNames.accept(imageNamesArray)
+                    // galleryImageNames에 최신 일기가 앞에 오도록 저장
+                    let reversedArray = imageNamesArray.reversed()
+                    self.galleryImageNames.accept(Array(reversedArray))
                     
                     print("Image names array: \(imageNamesArray)")
                 }

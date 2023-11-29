@@ -217,8 +217,11 @@ class WriteViewController: UIViewController {
                         
                         self?.locationLabel.attributedText = attributedString
                         
+                        self?.viewModel?.location = " \(place.locality ?? "") \(place.subLocality ?? "")"
+                        
                         // 위치를 가지고 왔으면 업데이트 중지
                         self?.locationManager.stopUpdatingLocation()
+                        
                     }
                 }
             })

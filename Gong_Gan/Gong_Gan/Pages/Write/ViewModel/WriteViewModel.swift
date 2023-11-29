@@ -17,6 +17,7 @@ class WriteViewModel {
     
     var backgroundImage = BehaviorRelay<String?>(value: nil)
     var memoText = BehaviorRelay<String?>(value: nil)
+    var location = ""
     
     // 현재 시간을나타내는 Observable 속성
     let currentTimeText = BehaviorRelay<String>(value: "")
@@ -46,7 +47,8 @@ class WriteViewModel {
                 "date": nowDateText.value, // nowDateText를 String으로 변환
                 "memo": memoText.value, // 메모 저장
                 "imageName": backgroundImage.value, // 이미지 이름 추가
-                "time": currentTimeText.value // 시간 저장
+                "time": currentTimeText.value, // 시간 저장
+                "location": location // 위치 정보 저장
             ]
 
             let userDocumentRef = Firestore.firestore().collection("users").document(uid)
