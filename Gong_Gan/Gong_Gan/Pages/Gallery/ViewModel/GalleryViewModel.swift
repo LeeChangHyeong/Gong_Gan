@@ -12,7 +12,7 @@ import RxCocoa
 class GalleryViewModel {
     let galleryImageNames = BehaviorRelay<[String]>(value: [])
     
-    func fetchData() {
+    func fetchGalleryData() {
         let uid = UserData.shared.getUserUid()
         let userDocumentRef = Firestore.firestore().collection("users").document(uid)
         

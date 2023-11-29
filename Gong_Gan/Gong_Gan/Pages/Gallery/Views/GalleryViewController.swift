@@ -49,13 +49,24 @@ class GalleryViewController: UIViewController {
     private let galleryCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        
+
+        // 한 줄에 3개의 셀이 표시되도록 설정
+        let cellSpacing: CGFloat = 3
+        let numberOfItemsPerRow: CGFloat = 3
+        let screenWidth = UIScreen.main.bounds.width
+        let cellWidth = (screenWidth - (cellSpacing * (numberOfItemsPerRow - 1) + cellSpacing * 2)) / numberOfItemsPerRow
+        layout.itemSize = CGSize(width: cellWidth, height: cellWidth)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: cellSpacing, bottom: 0, right: cellSpacing)
+        layout.minimumLineSpacing = cellSpacing
+        layout.minimumInteritemSpacing = cellSpacing
+
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .galleryColor
         collectionView.register(GalleryCollectionViewCell.self, forCellWithReuseIdentifier: GalleryCollectionViewCell.identifier)
-        
+
         return collectionView
     }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,8 +76,6 @@ class GalleryViewController: UIViewController {
         setConstraints()
         setupControl()
         setCollectionView()
-        
-        // Do any additional setup after loading the view.
     }
     
     private func addSubViews() {
@@ -101,43 +110,30 @@ class GalleryViewController: UIViewController {
     }
     
     private func setCollectionView() {
-//        let uid = UserData.shared.getUserUid()
-//        
-//        let userDocumentRef = Firestore.firestore().collection("users").document(uid)
-//        
-//        userDocumentRef.getDocument { document, error in
-//            if let error = error {
-//                print("갤러리 서버 통신 에러: \(error.localizedDescription)")
-//            } else if let document = document, document.exists {
-//                // 데이터가 있을때
-//                self.galleryCollectionView.isHidden = false
-//                let data = document.data()
-//                print(data)
-//            } else {
-//                // 데이터가 없을때
-//                self.galleryCollectionView.isHidden = true
-//            }
-//        }
         
-        viewModel.fetchData()
+        viewModel.fetchGalleryData()
+        
         viewModel.galleryImageNames
             .bind(to: galleryCollectionView.rx.items(cellIdentifier: GalleryCollectionViewCell.identifier, cellType: GalleryCollectionViewCell.self)) { index, element, cell in
-                cell.cellImageView.image = UIImage(named: "\(element)")
-                print(element)
+                cell.cellImageView.image = UIImage(named: element)
             }
             .disposed(by: disposeBag)
         
-        // UICollectionViewFlowLayout을 사용하여 셀을 가로 3칸씩 표시
-              if let layout = galleryCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-                  let cellSpacing: CGFloat = 8
-                  let numberOfItemsPerRow: CGFloat = 3
-
-                  let width = (galleryCollectionView.frame.width - (cellSpacing * (numberOfItemsPerRow - 1))) / numberOfItemsPerRow
-                  layout.itemSize = CGSize(width: width, height: width)
-                  layout.minimumInteritemSpacing = cellSpacing
-                  layout.minimumLineSpacing = cellSpacing
-              }
-        
-    }
+        galleryCollectionView.rx.collectionViewLayout
+        }
     
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//         let width = collectionView.frame.width
+//         let height = collectionView.frame.height
+//         let itemsPerRow: CGFloat = 2
+//         let widthPadding = sectionInsets.left * (itemsPerRow + 1)
+//         let itemsPerColumn: CGFloat = 3
+//         let heightPadding = sectionInsets.top * (itemsPerColumn + 1)
+//         let cellWidth = (width - widthPadding) / itemsPerRow
+//         let cellHeight = (height - heightPadding) / itemsPerColumn
+//         
+//         return CGSize(width: cellWidth, height: cellHeight)
+//         
+//     }
 }
