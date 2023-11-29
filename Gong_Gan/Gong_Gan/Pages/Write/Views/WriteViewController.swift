@@ -274,6 +274,8 @@ class WriteViewController: UIViewController {
                 self?.viewModel?.saveMemo { error in
                     if let error = error {
                         print("WriteViewController saveMemo Error: \(error.localizedDescription)")
+                    } else {
+                        self?.navigationController?.popViewController(animated: true)
                     }
                 }
             }).disposed(by: disposeBag)
