@@ -29,7 +29,6 @@ class WriteViewController: UIViewController {
     private let textViewColor: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-        view.isHidden = true
         
         return view
     }()
@@ -248,13 +247,18 @@ class WriteViewController: UIViewController {
         
         memoTextView.rx.didBeginEditing
             .subscribe(onNext: { [weak self] in
-                self?.textViewColor.isHidden = false
+//                self?.textViewColor.isHidden = false
+                self?.locationButton.isHidden = true
+                self?.timeLabel.isHidden = true
+                self?.musicButton.isHidden = true
             })
             .disposed(by: disposeBag)
         
         memoTextView.rx.didEndEditing
             .subscribe(onNext: { [weak self] in
-                self?.textViewColor.isHidden = true
+                self?.locationButton.isHidden = false
+                self?.timeLabel.isHidden = false
+                self?.musicButton.isHidden = false
             })
             .disposed(by: disposeBag)
         
@@ -322,6 +326,7 @@ class WriteViewController: UIViewController {
                 self?.viewModel?.updateCurrentTime()
             })
             .disposed(by: disposeBag)
+        
 
     }
     
