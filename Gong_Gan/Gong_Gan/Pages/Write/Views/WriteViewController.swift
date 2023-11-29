@@ -259,8 +259,36 @@ class WriteViewController: UIViewController {
             .disposed(by: disposeBag)
         
         backButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.navigationController?.popViewController(animated: true)
+            .flatMapLatest { [weak self] in
+                return Observable.create { observer in
+                    let alertController = UIAlertController(title: "뒤로 가시겠어요?", message: "변경된 내용은 저장되지 않아요. 😢", preferredStyle: .alert)
+                    
+                    let yesAction = UIAlertAction(title: "네", style: .default) { _ in
+                        observer.onNext(true)
+                        observer.onCompleted()
+                    }
+                    
+                    let noAction = UIAlertAction(title: "아니오", style: .destructive) { _ in
+                        observer.onNext(false)
+                        observer.onCompleted()
+                    }
+                    
+                    alertController.addAction(noAction)
+                    alertController.addAction(yesAction)
+                    
+                    
+                    self?.present(alertController, animated: true, completion: nil)
+                    
+                    return Disposables.create {
+                        alertController.dismiss(animated: true, completion: nil)
+                    }
+                }
+            }
+            .subscribe(onNext: { [weak self] shouldPop in
+                // 네 클릭시 shouldPop은 true
+                if shouldPop {
+                    self?.navigationController?.popViewController(animated: true)
+                }
             })
             .disposed(by: disposeBag)
         
