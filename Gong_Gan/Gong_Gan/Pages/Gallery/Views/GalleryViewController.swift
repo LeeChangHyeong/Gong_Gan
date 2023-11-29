@@ -49,7 +49,7 @@ class GalleryViewController: UIViewController {
     private let galleryCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-
+        
         // 한 줄에 3개의 셀이 표시되도록 설정
         let cellSpacing: CGFloat = 3
         let numberOfItemsPerRow: CGFloat = 3
@@ -59,15 +59,15 @@ class GalleryViewController: UIViewController {
         layout.sectionInset = UIEdgeInsets(top: 0, left: cellSpacing, bottom: 0, right: cellSpacing)
         layout.minimumLineSpacing = cellSpacing
         layout.minimumInteritemSpacing = cellSpacing
-
+        
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .galleryColor
         collectionView.register(GalleryCollectionViewCell.self, forCellWithReuseIdentifier: GalleryCollectionViewCell.identifier)
         collectionView.isHidden = true
-
+        
         return collectionView
     }()
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,30 +113,24 @@ class GalleryViewController: UIViewController {
     private func setCollectionView() {
         viewModel.fetchGalleryData()
         
-       
-            
-            viewModel.galleryImageNames
-                .bind(to: galleryCollectionView.rx.items(cellIdentifier: GalleryCollectionViewCell.identifier, cellType: GalleryCollectionViewCell.self)) { index, element, cell in
-                    self.galleryCollectionView.isHidden = false
-                    cell.cellImageView.image = UIImage(named: element)
-                }
-                .disposed(by: disposeBag)
         
-       
-        }
-    
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//         let width = collectionView.frame.width
-//         let height = collectionView.frame.height
-//         let itemsPerRow: CGFloat = 2
-//         let widthPadding = sectionInsets.left * (itemsPerRow + 1)
-//         let itemsPerColumn: CGFloat = 3
-//         let heightPadding = sectionInsets.top * (itemsPerColumn + 1)
-//         let cellWidth = (width - widthPadding) / itemsPerRow
-//         let cellHeight = (height - heightPadding) / itemsPerColumn
-//         
-//         return CGSize(width: cellWidth, height: cellHeight)
-//         
-//     }
+        
+        viewModel.galleryImageNames
+            .bind(to: galleryCollectionView.rx.items(cellIdentifier: GalleryCollectionViewCell.identifier, cellType: GalleryCollectionViewCell.self)) { index, element, cell in
+                self.galleryCollectionView.isHidden = false
+                cell.cellImageView.image = UIImage(named: element)
+            }
+            .disposed(by: disposeBag)
+        
+        galleryCollectionView.rx.modelSelected(String.self)
+            .subscribe(onNext: { _ in
+                let readViewController = ReadViewController()
+                
+                
+                self.navigationController?.pushViewController(readViewController, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        
+    }
 }
