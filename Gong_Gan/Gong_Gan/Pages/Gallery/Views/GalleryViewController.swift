@@ -63,6 +63,7 @@ class GalleryViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .galleryColor
         collectionView.register(GalleryCollectionViewCell.self, forCellWithReuseIdentifier: GalleryCollectionViewCell.identifier)
+        collectionView.isHidden = true
 
         return collectionView
     }()
@@ -110,16 +111,18 @@ class GalleryViewController: UIViewController {
     }
     
     private func setCollectionView() {
-        
         viewModel.fetchGalleryData()
         
-        viewModel.galleryImageNames
-            .bind(to: galleryCollectionView.rx.items(cellIdentifier: GalleryCollectionViewCell.identifier, cellType: GalleryCollectionViewCell.self)) { index, element, cell in
-                cell.cellImageView.image = UIImage(named: element)
-            }
-            .disposed(by: disposeBag)
+       
+            
+            viewModel.galleryImageNames
+                .bind(to: galleryCollectionView.rx.items(cellIdentifier: GalleryCollectionViewCell.identifier, cellType: GalleryCollectionViewCell.self)) { index, element, cell in
+                    self.galleryCollectionView.isHidden = false
+                    cell.cellImageView.image = UIImage(named: element)
+                }
+                .disposed(by: disposeBag)
         
-        galleryCollectionView.rx.collectionViewLayout
+       
         }
     
     
