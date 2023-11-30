@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		320657632B1721EF0030D565 /* ReadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320657622B1721EF0030D565 /* ReadViewController.swift */; };
+		320657662B183AA90030D565 /* GalleryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320657652B183AA90030D565 /* GalleryDataModel.swift */; };
 		3231257D2AFA603A002B9A25 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3231257C2AFA603A002B9A25 /* LoginViewController.swift */; };
 		3231257F2AFA6318002B9A25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3231257E2AFA6318002B9A25 /* GoogleService-Info.plist */; };
 		323125812AFA64CB002B9A25 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323125802AFA64CB002B9A25 /* JoinViewController.swift */; };
@@ -35,6 +36,7 @@
 
 /* Begin PBXFileReference section */
 		320657622B1721EF0030D565 /* ReadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadViewController.swift; sourceTree = "<group>"; };
+		320657652B183AA90030D565 /* GalleryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryDataModel.swift; sourceTree = "<group>"; };
 		3231257C2AFA603A002B9A25 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3231257E2AFA6318002B9A25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		323125802AFA64CB002B9A25 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +94,14 @@
 				320657622B1721EF0030D565 /* ReadViewController.swift */,
 			);
 			path = Read;
+			sourceTree = "<group>";
+		};
+		320657642B183A820030D565 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				320657652B183AA90030D565 /* GalleryDataModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		323125892AFC6CB6002B9A25 /* Pages */ = {
@@ -213,8 +223,9 @@
 		32718C402B15D16F00FF3EEF /* Gallery */ = {
 			isa = PBXGroup;
 			children = (
-				32718C462B15F0E300FF3EEF /* ViewModel */,
+				320657642B183A820030D565 /* Model */,
 				32718C412B15D1E200FF3EEF /* Views */,
+				32718C462B15F0E300FF3EEF /* ViewModel */,
 			);
 			path = Gallery;
 			sourceTree = "<group>";
@@ -428,6 +439,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				320657662B183AA90030D565 /* GalleryDataModel.swift in Sources */,
 				3231257D2AFA603A002B9A25 /* LoginViewController.swift in Sources */,
 				32D8E1C42AB20F84001D9AF3 /* BottomBarView.swift in Sources */,
 				3283A5BB2A95F264001ECC9A /* MainViewController.swift in Sources */,
