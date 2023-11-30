@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		320351922B1869DC0055798A /* ReadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320351912B1869DC0055798A /* ReadViewModel.swift */; };
 		320657632B1721EF0030D565 /* ReadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320657622B1721EF0030D565 /* ReadViewController.swift */; };
 		320657662B183AA90030D565 /* GalleryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320657652B183AA90030D565 /* GalleryDataModel.swift */; };
 		3231257D2AFA603A002B9A25 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3231257C2AFA603A002B9A25 /* LoginViewController.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		320351912B1869DC0055798A /* ReadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadViewModel.swift; sourceTree = "<group>"; };
 		320657622B1721EF0030D565 /* ReadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadViewController.swift; sourceTree = "<group>"; };
 		320657652B183AA90030D565 /* GalleryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryDataModel.swift; sourceTree = "<group>"; };
 		3231257C2AFA603A002B9A25 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -88,10 +90,27 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		320657612B1721D00030D565 /* Read */ = {
+		3203518F2B1869C80055798A /* View */ = {
 			isa = PBXGroup;
 			children = (
 				320657622B1721EF0030D565 /* ReadViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		320351902B1869CF0055798A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				320351912B1869DC0055798A /* ReadViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		320657612B1721D00030D565 /* Read */ = {
+			isa = PBXGroup;
+			children = (
+				320351902B1869CF0055798A /* ViewModel */,
+				3203518F2B1869C80055798A /* View */,
 			);
 			path = Read;
 			sourceTree = "<group>";
@@ -459,6 +478,7 @@
 				32C35DC42B147ABB00269B65 /* UserData.swift in Sources */,
 				323125812AFA64CB002B9A25 /* JoinViewController.swift in Sources */,
 				32718C432B15D1F400FF3EEF /* GalleryViewController.swift in Sources */,
+				320351922B1869DC0055798A /* ReadViewModel.swift in Sources */,
 				3283A5B92A95F264001ECC9A /* SceneDelegate.swift in Sources */,
 				3231259C2B00B547002B9A25 /* MainViewModel.swift in Sources */,
 			);

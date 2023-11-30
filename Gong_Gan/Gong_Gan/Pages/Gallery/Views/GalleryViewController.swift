@@ -22,7 +22,6 @@ class GalleryViewController: UIViewController {
         let button = UIButton()
         let image = UIImage(systemName: "chevron.backward")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 22, weight: .regular))
         button.setImage(image, for: .normal)
-        
         button.tintColor = .white
         
         return button
@@ -68,6 +67,9 @@ class GalleryViewController: UIViewController {
         return collectionView
     }()
     
+    override func viewDidAppear(_ animated: Bool) {
+        viewModel.fetchGalleryData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,7 +130,5 @@ class GalleryViewController: UIViewController {
                 self.navigationController?.pushViewController(readViewController, animated: true)
             })
             .disposed(by: disposeBag)
-        
-        
     }
 }

@@ -17,6 +17,7 @@ import FirebaseAuth
 class ReadViewController: UIViewController {
     private let disposeBag = DisposeBag()
     var selectedGalleryData: GalleryDataModel?
+    private var viewModel: ReadViewModel!
     
     private let textViewColor: UIView = {
         let view = UIView()
@@ -128,6 +129,8 @@ class ReadViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        viewModel = ReadViewModel(selectedGalleryData: selectedGalleryData)
+        
         addSubViews()
         setNaviBar()
         setConstraints()
@@ -228,6 +231,14 @@ class ReadViewController: UIViewController {
         }
         
         let deleteAction = UIAction(title: "삭제", image: UIImage(systemName: "trash")) { [weak self] _ in
+            
+            self?.viewModel.deleteMemo { error in
+                if let error = error {
+                    print("일기 삭제 실패: \(error.localizedDescription)")
+                } else {
+                    self?.navigationController?.popViewController(animated: true)
+                }
+            }
         }
         
         let menu = UIMenu(children: [editAction, deleteAction])
