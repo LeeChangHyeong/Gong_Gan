@@ -15,6 +15,7 @@ import FirebaseAuth
 
 
 class ReadViewController: UIViewController {
+    private var didEditing = false
     private let disposeBag = DisposeBag()
     var selectedGalleryData: GalleryDataModel?
     private var viewModel: ReadViewModel!
@@ -223,11 +224,28 @@ class ReadViewController: UIViewController {
                     self?.showOptionsMenu()
                 })
                 .disposed(by: disposeBag)
+        
+        memoTextView.rx.didBeginEditing
+            .subscribe(onNext: { [weak self] in
+                self?.locationButton.isHidden = true
+                self?.timeLabel.isHidden = true
+                self?.musicButton.isHidden = true
+            })
+            .disposed(by: disposeBag)
+        
+        memoTextView.rx.didEndEditing
+            .subscribe(onNext: { [weak self] in
+                self?.locationButton.isHidden = false
+                self?.timeLabel.isHidden = false
+                self?.musicButton.isHidden = false
+            })
+            .disposed(by: disposeBag)
 
     }
     private func showOptionsMenu() {
         let editAction = UIAction(title: "수정", image: UIImage(systemName: "pencil")) { [weak self] _ in
-            
+            self?.memoTextView.isEditable = true
+            self?.memoTextView.becomeFirstResponder()
         }
         
         let deleteAction = UIAction(title: "삭제", image: UIImage(systemName: "trash")) { [weak self] _ in
@@ -247,6 +265,5 @@ class ReadViewController: UIViewController {
         // 꾹 안눌러도 메뉴 뜨게 iOS 14이상 지원
         optionButton.showsMenuAsPrimaryAction = true
     }
-    
 }
 

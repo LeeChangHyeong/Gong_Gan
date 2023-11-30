@@ -251,7 +251,6 @@ class WriteViewController: UIViewController {
         
         memoTextView.rx.didBeginEditing
             .subscribe(onNext: { [weak self] in
-//                self?.textViewColor.isHidden = false
                 self?.locationButton.isHidden = true
                 self?.timeLabel.isHidden = true
                 self?.musicButton.isHidden = true
@@ -330,19 +329,14 @@ class WriteViewController: UIViewController {
                 self?.viewModel?.updateCurrentTime()
             })
             .disposed(by: disposeBag)
-        
-
     }
-    
 }
 
 
 extension WriteViewController: CLLocationManagerDelegate {
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
             locationSubject.onNext(location)
         }
     }
-    
 }
