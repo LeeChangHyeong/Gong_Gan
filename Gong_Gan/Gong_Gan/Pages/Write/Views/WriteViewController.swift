@@ -152,11 +152,6 @@ class WriteViewController: UIViewController {
     }
     
     private func setConstraints() {
-        memoTextView.snp.makeConstraints({
-            $0.leading.equalToSuperview().offset(31)
-            $0.trailing.bottom.equalToSuperview().offset(-31)
-            $0.top.equalToSuperview().offset(167)
-        })
         
         textViewColor.snp.makeConstraints({
             $0.edges.equalToSuperview()
@@ -164,16 +159,22 @@ class WriteViewController: UIViewController {
         
         musicButton.snp.makeConstraints({
             $0.trailing.equalToSuperview().offset(-20)
-            $0.top.equalToSuperview().offset(113)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(5)
             $0.width.equalTo(36)
             $0.height.equalTo(36)
         })
         
         locationButton.snp.makeConstraints({
-            $0.top.equalToSuperview().offset(118)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
             $0.leading.equalToSuperview().offset(22)
             $0.height.equalTo(31)
             $0.width.equalTo(locationLabel.snp.width).offset(24)
+        })
+        
+        memoTextView.snp.makeConstraints({
+            $0.leading.equalToSuperview().offset(31)
+            $0.trailing.bottom.equalToSuperview().offset(-31)
+            $0.top.equalTo(locationButton.snp.bottom).offset(24)
         })
         
         timeLabel.snp.makeConstraints({
