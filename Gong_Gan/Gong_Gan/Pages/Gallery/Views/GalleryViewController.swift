@@ -113,9 +113,6 @@ class GalleryViewController: UIViewController {
     private func setCollectionView() {
         viewModel.fetchGalleryData()
         
-//        viewModel.galleryData
-//            .bind(to: galleryCollectionView.rx.items)
-        
         viewModel.galleryData
             .bind(to: galleryCollectionView.rx.items(cellIdentifier: GalleryCollectionViewCell.identifier, cellType: GalleryCollectionViewCell.self)) { index, element, cell in
                 self.galleryCollectionView.isHidden = false
@@ -123,9 +120,10 @@ class GalleryViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        galleryCollectionView.rx.modelSelected(String.self)
-            .subscribe(onNext: { _ in
+        galleryCollectionView.rx.modelSelected(GalleryDataModel.self)
+            .subscribe(onNext: { selectedGalleryData in
                 let readViewController = ReadViewController()
+                readViewController.selectedGalleryData = selectedGalleryData
                 
                 self.navigationController?.pushViewController(readViewController, animated: true)
             })

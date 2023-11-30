@@ -16,6 +16,7 @@ import FirebaseAuth
 
 class ReadViewController: UIViewController {
     private let disposeBag = DisposeBag()
+    var selectedGalleryData: GalleryDataModel?
     
     private let textViewColor: UIView = {
         let view = UIView()
@@ -37,6 +38,7 @@ class ReadViewController: UIViewController {
         view.textColor = .white
         view.text = "터치하여 오늘의 일기를 작성하세요"
         view.font = UIFont(name: "ArialHebrew", size: 15)
+        view.isEditable = false
         
         return view
     }()
@@ -59,13 +61,13 @@ class ReadViewController: UIViewController {
         return label
     }()
     
-    private let saveMemoButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("완료", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 17, weight: .regular)
-        
-        return button
-    }()
+//    private let saveMemoButton: UIButton = {
+//        let button = UIButton()
+//        button.setTitle("완료", for: .normal)
+//        button.titleLabel?.font = .systemFont(ofSize: 17, weight: .regular)
+//        
+//        return button
+//    }()
     
     private let musicButton: UIButton = {
         let button = UIButton()
@@ -120,6 +122,7 @@ class ReadViewController: UIViewController {
         addSubViews()
         setNaviBar()
         setConstraints()
+        setupData()
         setupControl()
     }
     
@@ -136,8 +139,8 @@ class ReadViewController: UIViewController {
     private func setNaviBar() {
         navigationController?.isNavigationBarHidden = false
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
-        navigationItem.titleView = nowDateLabel
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveMemoButton)
+//        navigationItem.titleView = nowDateLabel
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveMemoButton)
     }
     
     private func setConstraints() {
@@ -176,8 +179,33 @@ class ReadViewController: UIViewController {
         })
 }
     
-    private func setupControl() {
+    private func setupData() {
+        memoTextView.text = selectedGalleryData?.memo
+        backGroundView.image = UIImage(named: selectedGalleryData!.imageName)
+        nowDateLabel.text = selectedGalleryData?.date
         
+        // locationLabel의 attributedText 설정
+        let newLocationText = (selectedGalleryData?.location)!
+            let newLocationAttributedString = NSAttributedString(string: newLocationText, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+
+            let imageAttachment = NSTextAttachment()
+            let locationImage = UIImage(named: "location")?.withTintColor(.white)
+            imageAttachment.image = locationImage
+
+            let finalAttributedString = NSMutableAttributedString(attachment: imageAttachment)
+            finalAttributedString.append(newLocationAttributedString)
+
+            locationLabel.attributedText = finalAttributedString
+            timeLabel.text = selectedGalleryData?.time
+        
+    }
+    
+    private func setupControl() {
+        backButton.rx.tap
+                .subscribe(onNext: { [weak self] in
+                    self?.navigationController?.popViewController(animated: true)
+                })
+                .disposed(by: disposeBag)
 
     }
     
