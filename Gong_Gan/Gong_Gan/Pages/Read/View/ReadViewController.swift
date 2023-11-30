@@ -153,7 +153,11 @@ class ReadViewController: UIViewController {
         navigationController?.isNavigationBarHidden = false
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         navigationItem.titleView = nowDateLabel
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: optionButton)
+        if !didEditing {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(customView: optionButton)
+        } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveMemoButton)
+        }
     }
     
     private func setConstraints() {
@@ -215,10 +219,40 @@ class ReadViewController: UIViewController {
     
     private func setupControl() {
         backButton.rx.tap
-                .subscribe(onNext: { [weak self] in
+            .flatMapLatest { [weak self] in
+                return Observable.create { observer in
+                    if self?.didEditing ?? false {
+                        let alertController = UIAlertController(title: "뒤로 가시겠어요?", message: "변경된 내용은 저장되지 않아요. 😢", preferredStyle: .alert)
+                        
+                        let yesAction = UIAlertAction(title: "네", style: .default) { _ in
+                            observer.onNext(true)
+                            observer.onCompleted()
+                        }
+                        
+                        let noAction = UIAlertAction(title: "아니오", style: .destructive) { _ in
+                            observer.onNext(false)
+                            observer.onCompleted()
+                        }
+                        
+                        alertController.addAction(noAction)
+                        alertController.addAction(yesAction)
+                        
+                        self?.present(alertController, animated: true, completion: nil)
+                    } else {
+                        observer.onNext(true)
+                        observer.onCompleted()
+                    }
+                    
+                    return Disposables.create()
+                }
+            }
+            .subscribe(onNext: { [weak self] shouldPop in
+                if shouldPop {
                     self?.navigationController?.popViewController(animated: true)
-                })
-                .disposed(by: disposeBag)
+                }
+            })
+            .disposed(by: disposeBag)
+        
         optionButton.rx.tap
                 .subscribe(onNext: { [weak self] in
                     self?.showOptionsMenu()
@@ -246,6 +280,8 @@ class ReadViewController: UIViewController {
         let editAction = UIAction(title: "수정", image: UIImage(systemName: "pencil")) { [weak self] _ in
             self?.memoTextView.isEditable = true
             self?.memoTextView.becomeFirstResponder()
+            self?.didEditing = true
+            self?.setNaviBar()
         }
         
         let deleteAction = UIAction(title: "삭제", image: UIImage(systemName: "trash")) { [weak self] _ in
