@@ -61,13 +61,14 @@ class ReadViewController: UIViewController {
         return label
     }()
     
-//    private let saveMemoButton: UIButton = {
-//        let button = UIButton()
-//        button.setTitle("완료", for: .normal)
-//        button.titleLabel?.font = .systemFont(ofSize: 17, weight: .regular)
-//        
-//        return button
-//    }()
+    private let optionButton: UIButton = {
+        let button = UIButton()
+        let image = UIImage(systemName: "ellipsis")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 22, weight: .regular))
+        button.setImage(image, for: .normal)
+        button.tintColor = .white
+        
+        return button
+    }()
     
     private let musicButton: UIButton = {
         let button = UIButton()
@@ -139,8 +140,8 @@ class ReadViewController: UIViewController {
     private func setNaviBar() {
         navigationController?.isNavigationBarHidden = false
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
-//        navigationItem.titleView = nowDateLabel
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveMemoButton)
+        navigationItem.titleView = nowDateLabel
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: optionButton)
     }
     
     private func setConstraints() {
