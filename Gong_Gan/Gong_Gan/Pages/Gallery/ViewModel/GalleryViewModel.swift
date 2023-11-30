@@ -10,28 +10,45 @@ import RxSwift
 import RxCocoa
 
 class GalleryViewModel {
-    let galleryImageNames = BehaviorRelay<[String]>(value: [])
+    let galleryData = BehaviorRelay<[GalleryDataModel]>(value: [])
     
     func fetchGalleryData() {
         let uid = UserData.shared.getUserUid()
         let userDocumentRef = Firestore.firestore().collection("users").document(uid)
         
-        
         userDocumentRef.getDocument { document, error in
             if let document = document, document.exists {
-                // "memos" 필드의 값이 배열인 경우, 각 문서에서 "imageName" 값을 추출하여 배열에 저장
                 if let memosArray = document["memos"] as? [[String: Any]] {
-                    let imageNamesArray = memosArray.compactMap { $0["imageName"] as? String }
+                    let reversedMemosArray = memosArray.reversed()
                     
-                    // galleryImageNames에 최신 일기가 앞에 오도록 저장
-                    let reversedArray = imageNamesArray.reversed()
-                    self.galleryImageNames.accept(Array(reversedArray))
+                    // 모든 데이터를 저장할 배열 초기화
+                    var galleryDataArray: [GalleryDataModel] = []
                     
-                    print("Image names array: \(imageNamesArray)")
+                    for memoDict in reversedMemosArray {
+                        guard
+                            let date = memoDict["date"] as? String,
+                            let imageName = memoDict["imageName"] as? String,
+                            let location = memoDict["location"] as? String,
+                            let memo = memoDict["memo"] as? String,
+                            let time = memoDict["time"] as? String
+                        else {
+                            continue
+                        }
+                        
+                        // 모든 데이터를 GalleryDataModel로 만들어 배열에 저장
+                        let galleryData = GalleryDataModel(date: date, imageName: imageName, location: location, memo: memo, time: time)
+                        galleryDataArray.append(galleryData)
+                    }
+                    
+                    // galleryData에 데이터 저장
+                    self.galleryData.accept(galleryDataArray)
+                    
+                    print("Gallery data array: \(galleryDataArray)")
                 }
             } else {
                 print("Document does not exist")
             }
         }
     }
+    
 }
