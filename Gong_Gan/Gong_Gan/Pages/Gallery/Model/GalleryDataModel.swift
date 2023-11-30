@@ -8,6 +8,7 @@
 import Foundation
 
 struct GalleryDataModel {
+    let memoID: String
     let date: String
     let imageName: String
     let location: String

@@ -42,8 +42,11 @@ class WriteViewModel {
     
     func saveMemo(completion: @escaping (Error?) -> Void) {
             let uid = UserData.shared.getUserUid()
+            // 새로운 UUID 생성
+           let memoID = UUID().uuidString
 
             let data = [
+                "memoID": memoID,
                 "date": nowDateText.value, // nowDateText를 String으로 변환
                 "memo": memoText.value, // 메모 저장
                 "imageName": backgroundImage.value, // 이미지 이름 추가
