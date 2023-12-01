@@ -274,7 +274,20 @@ class ReadViewController: UIViewController {
                 self?.musicButton.isHidden = false
             })
             .disposed(by: disposeBag)
-
+        
+        saveMemoButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                self.viewModel.updateMemo(newMemo: self.memoTextView.text) { error in
+                    if let error = error {
+                        print("일기 수정 실패: \(error.localizedDescription)")
+                    } else {
+                        self.didEditing = false
+                        self.memoTextView.isEditable = false
+                        self.setNaviBar()
+                    }
+                }
+            }).disposed(by: disposeBag)
     }
     private func showOptionsMenu() {
         let editAction = UIAction(title: "수정", image: UIImage(systemName: "pencil")) { [weak self] _ in

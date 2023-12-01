@@ -10,12 +10,6 @@ import RxSwift
 import RxCocoa
 import FirebaseFirestore
 
-
-import Foundation
-import RxSwift
-import RxCocoa
-import FirebaseFirestore
-
 class ReadViewModel {
     private let disposeBag = DisposeBag()
     
@@ -45,6 +39,30 @@ class ReadViewModel {
 
                 userDocumentRef.updateData(["memos": existingMemos]) { error in
                     completion(error)
+                }
+            }
+        }
+    }
+    
+    func updateMemo(newMemo: String, completion: @escaping (Error?) -> Void) {
+        guard let memoID = selectedGalleryData.value?.memoID else {
+            return
+        }
+        
+        let uid = UserData.shared.getUserUid()
+        let userDocumentRef = Firestore.firestore().collection("users").document(uid)
+        
+        userDocumentRef.getDocument { document, error in
+            if let document = document, document.exists {
+                var existingMemos = document.data()?["memos"] as? [[String: Any]] ?? []
+                
+            // 해당 memoID와 일치하는 메모를 찾아 업데이트
+                if let index = existingMemos.firstIndex(where: {$0["memoID"] as? String == memoID}) {
+                    existingMemos[index]["memo"] = newMemo
+                }
+                
+                userDocumentRef.updateData(["memos": existingMemos]) { error in
+                        completion(error)
                 }
             }
         }
