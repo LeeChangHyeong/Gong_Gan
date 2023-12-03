@@ -38,10 +38,14 @@ class MainViewController: UIViewController {
         view = mainView
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backGroundViewTapped)))
-        self.navigationController?.isNavigationBarHidden = true
+        
         
         setCameraModePicker()
         addSubView()
@@ -137,6 +141,11 @@ class MainViewController: UIViewController {
                 self?.addGalleryButtonTapped()
             })
             .disposed(by: disposeBag)
+        
+        viewModel.addSettingButtonTapped
+            .subscribe(onNext: { [weak self] in
+                self?.addSettingButtonTapped()
+            })
     }
     
     private func addMemoButtonTapped() {
@@ -157,7 +166,6 @@ class MainViewController: UIViewController {
         cameraAnimationView.isHidden = false
         view.isUserInteractionEnabled = false
          
-         
          // 1초 후에 다시 숨김 후에 pushViewController 실행
          Observable.just(())
              .delay(.milliseconds(100), scheduler: MainScheduler.instance)
@@ -175,6 +183,12 @@ class MainViewController: UIViewController {
     
     private func addGalleryButtonTapped() {
         let vc = GalleryViewController()
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func addSettingButtonTapped() {
+        let vc = SettingViewController()
         
         self.navigationController?.pushViewController(vc, animated: true)
     }

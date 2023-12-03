@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		320351922B1869DC0055798A /* ReadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320351912B1869DC0055798A /* ReadViewModel.swift */; };
+		320351972B1B728C0055798A /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320351962B1B728C0055798A /* SettingViewController.swift */; };
 		320657632B1721EF0030D565 /* ReadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320657622B1721EF0030D565 /* ReadViewController.swift */; };
 		320657662B183AA90030D565 /* GalleryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320657652B183AA90030D565 /* GalleryDataModel.swift */; };
 		3231257D2AFA603A002B9A25 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3231257C2AFA603A002B9A25 /* LoginViewController.swift */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		320351912B1869DC0055798A /* ReadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadViewModel.swift; sourceTree = "<group>"; };
+		320351962B1B728C0055798A /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		320657622B1721EF0030D565 /* ReadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadViewController.swift; sourceTree = "<group>"; };
 		320657652B183AA90030D565 /* GalleryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryDataModel.swift; sourceTree = "<group>"; };
 		3231257C2AFA603A002B9A25 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,30 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		320351932B1B725D0055798A /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				320351952B1B727C0055798A /* ViewModel */,
+				320351942B1B726E0055798A /* Views */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		320351942B1B726E0055798A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				320351962B1B728C0055798A /* SettingViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		320351952B1B727C0055798A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		320657612B1721D00030D565 /* Read */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +155,7 @@
 				3231258E2AFC6D14002B9A25 /* Join */,
 				3231258D2AFC6D0B002B9A25 /* Login */,
 				3231258A2AFC6CBD002B9A25 /* Main */,
+				320351932B1B725D0055798A /* Setting */,
 				3231259E2B00B591002B9A25 /* Write */,
 				32718C402B15D16F00FF3EEF /* Gallery */,
 				320657612B1721D00030D565 /* Read */,
@@ -469,6 +496,7 @@
 				323125A22B00CC72002B9A25 /* WriteViewModel.swift in Sources */,
 				323125832AFA671F002B9A25 /* AppController.swift in Sources */,
 				3283A5B72A95F264001ECC9A /* AppDelegate.swift in Sources */,
+				320351972B1B728C0055798A /* SettingViewController.swift in Sources */,
 				320657632B1721EF0030D565 /* ReadViewController.swift in Sources */,
 				3283A5D12A96FD06001ECC9A /* MainView.swift in Sources */,
 				32718C452B15D8B500FF3EEF /* GalleryCollectionViewCell.swift in Sources */,

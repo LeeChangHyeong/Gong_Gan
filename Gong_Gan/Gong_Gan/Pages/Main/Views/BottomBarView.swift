@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import SnapKit
+import RxSwift
+import RxCocoa
 
 class BottomBarView: UIView {
     var viewModel: MainViewModel?
@@ -58,6 +61,7 @@ class BottomBarView: UIView {
         backgroundColor = .black.withAlphaComponent(0.4)
         addViews()
         setConstraints()
+        setupControl()
     }
     
     required init?(coder: NSCoder) {
@@ -77,6 +81,13 @@ class BottomBarView: UIView {
         containerViewConstraints()
         addMemoButtonConstratints()
         settingButtonConstraints()
+    }
+    
+    private func setupControl() {
+        settingButton.rx.tap
+            .subscribe(onNext: {
+                self.settingButtonTapped()
+            })
     }
     
     private func galleryButtonConstraints() {
@@ -129,5 +140,9 @@ class BottomBarView: UIView {
     
     @objc private func addMemoButtonTapped() {
         viewModel?.addMemoButtonTapped.accept(())
+    }
+    
+    @objc private func settingButtonTapped() {
+        viewModel?.addSettingButtonTapped.accept(())
     }
 }
