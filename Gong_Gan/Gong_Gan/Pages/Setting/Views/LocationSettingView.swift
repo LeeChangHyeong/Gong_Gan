@@ -14,7 +14,6 @@ class LocationSettingView: UIView {
     
     private let disposeBag = DisposeBag()
     
-    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "위치 설정"
@@ -66,10 +65,10 @@ class LocationSettingView: UIView {
     
     private func observeSwitchChanges() {
         toggleSwitch.rx.controlEvent(.valueChanged)
-            .subscribe(onNext: { [weak self] in
-                self?.openLocationPermissionSettings()
-            })
-            .disposed(by: disposeBag)
+               .subscribe(onNext: { [weak self] in
+                   self?.openLocationPermissionSettings()
+               })
+               .disposed(by: disposeBag)
     }
     
     private func openLocationPermissionSettings() {

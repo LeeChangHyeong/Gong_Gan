@@ -24,12 +24,12 @@ class SettingViewController: UIViewController {
     
     private let backButton: UIButton = {
         let button = UIButton()
-            let image = UIImage(systemName: "chevron.backward")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 22, weight: .regular))
-            button.setImage(image, for: .normal)
-
-            button.tintColor = .white
-            
-            return button
+        let image = UIImage(systemName: "chevron.backward")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 22, weight: .regular))
+        button.setImage(image, for: .normal)
+        
+        button.tintColor = .white
+        
+        return button
     }()
     
     private let titleLabel: UILabel = {
@@ -42,9 +42,10 @@ class SettingViewController: UIViewController {
     }()
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         updateLocationPermission()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .galleryColor
@@ -103,10 +104,17 @@ class SettingViewController: UIViewController {
                 self.navigationController?.popViewController(animated: true)
             })
             .disposed(by: disposeBag)
+        
+        // 뷰가 backGround에서 foreGround로 들어올때 실행하여 위치 권한을 변경하지 않고 들어올때도 switch 상태 유지
+        NotificationCenter.default.rx.notification(UIApplication.willEnterForegroundNotification)
+            .subscribe(onNext: { [weak self] _ in
+                self?.updateLocationPermission()
+            })
+            .disposed(by: disposeBag)
     }
     
-    private func updateLocationPermission() {
-            var locationPermissionEnabled = false
+    func updateLocationPermission() {
+        var locationPermissionEnabled = false
         
         let status = CLLocationManager.authorizationStatus()
         
@@ -115,9 +123,9 @@ class SettingViewController: UIViewController {
         } else {
             locationPermissionEnabled = true
         }
-            
-            // LocationSettingView에서 switch 상태를 업데이트합니다.
-            locationSettingView.setSwitchState(isEnabled: locationPermissionEnabled)
-        }
+        
+        // LocationSettingView에서 switch 상태를 업데이트합니다.
+        locationSettingView.setSwitchState(isEnabled: locationPermissionEnabled)
+    }
 }
 
