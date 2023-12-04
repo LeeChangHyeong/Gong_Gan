@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		320351922B1869DC0055798A /* ReadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320351912B1869DC0055798A /* ReadViewModel.swift */; };
 		320351972B1B728C0055798A /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320351962B1B728C0055798A /* SettingViewController.swift */; };
+		320351992B1D89370055798A /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320351982B1D89370055798A /* MyInfoView.swift */; };
+		3203519B2B1D8F850055798A /* LocationSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3203519A2B1D8F850055798A /* LocationSettingView.swift */; };
+		3203519D2B1D8FAF0055798A /* VersionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3203519C2B1D8FAF0055798A /* VersionView.swift */; };
+		3203519F2B1D8FF20055798A /* InquiryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3203519E2B1D8FF20055798A /* InquiryView.swift */; };
 		320657632B1721EF0030D565 /* ReadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320657622B1721EF0030D565 /* ReadViewController.swift */; };
 		320657662B183AA90030D565 /* GalleryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320657652B183AA90030D565 /* GalleryDataModel.swift */; };
 		3231257D2AFA603A002B9A25 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3231257C2AFA603A002B9A25 /* LoginViewController.swift */; };
@@ -29,6 +33,7 @@
 		3283A5C12A95F264001ECC9A /* Gong_Gan.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3283A5BF2A95F264001ECC9A /* Gong_Gan.xcdatamodeld */; };
 		3283A5C32A95F265001ECC9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3283A5C22A95F265001ECC9A /* Assets.xcassets */; };
 		3283A5D12A96FD06001ECC9A /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3283A5D02A96FD06001ECC9A /* MainView.swift */; };
+		32B11EBF2B1D952D0022FCC5 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B11EBE2B1D952D0022FCC5 /* SettingViewModel.swift */; };
 		32C35DC42B147ABB00269B65 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C35DC32B147ABB00269B65 /* UserData.swift */; };
 		32D8E1BC2AB1FB08001D9AF3 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1BB2AB1FB08001D9AF3 /* UIColor.swift */; };
 		32D8E1C22AB20F71001D9AF3 /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1C12AB20F71001D9AF3 /* TopBarView.swift */; };
@@ -39,6 +44,10 @@
 /* Begin PBXFileReference section */
 		320351912B1869DC0055798A /* ReadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadViewModel.swift; sourceTree = "<group>"; };
 		320351962B1B728C0055798A /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		320351982B1D89370055798A /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
+		3203519A2B1D8F850055798A /* LocationSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSettingView.swift; sourceTree = "<group>"; };
+		3203519C2B1D8FAF0055798A /* VersionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionView.swift; sourceTree = "<group>"; };
+		3203519E2B1D8FF20055798A /* InquiryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryView.swift; sourceTree = "<group>"; };
 		320657622B1721EF0030D565 /* ReadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadViewController.swift; sourceTree = "<group>"; };
 		320657652B183AA90030D565 /* GalleryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryDataModel.swift; sourceTree = "<group>"; };
 		3231257C2AFA603A002B9A25 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +71,7 @@
 		3283A5C22A95F265001ECC9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3283A5C72A95F265001ECC9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3283A5D02A96FD06001ECC9A /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		32B11EBE2B1D952D0022FCC5 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		32C35DC32B147ABB00269B65 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		32D8E1BB2AB1FB08001D9AF3 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		32D8E1C12AB20F71001D9AF3 /* TopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
@@ -121,6 +131,10 @@
 			isa = PBXGroup;
 			children = (
 				320351962B1B728C0055798A /* SettingViewController.swift */,
+				320351982B1D89370055798A /* MyInfoView.swift */,
+				3203519A2B1D8F850055798A /* LocationSettingView.swift */,
+				3203519C2B1D8FAF0055798A /* VersionView.swift */,
+				3203519E2B1D8FF20055798A /* InquiryView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -128,6 +142,7 @@
 		320351952B1B727C0055798A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				32B11EBE2B1D952D0022FCC5 /* SettingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -492,10 +507,12 @@
 				323125A02B00B5A2002B9A25 /* WriteViewController.swift in Sources */,
 				32D8E1BC2AB1FB08001D9AF3 /* UIColor.swift in Sources */,
 				32718C482B15F0EF00FF3EEF /* GalleryViewModel.swift in Sources */,
+				3203519D2B1D8FAF0055798A /* VersionView.swift in Sources */,
 				3283A5C12A95F264001ECC9A /* Gong_Gan.xcdatamodeld in Sources */,
 				323125A22B00CC72002B9A25 /* WriteViewModel.swift in Sources */,
 				323125832AFA671F002B9A25 /* AppController.swift in Sources */,
 				3283A5B72A95F264001ECC9A /* AppDelegate.swift in Sources */,
+				32B11EBF2B1D952D0022FCC5 /* SettingViewModel.swift in Sources */,
 				320351972B1B728C0055798A /* SettingViewController.swift in Sources */,
 				320657632B1721EF0030D565 /* ReadViewController.swift in Sources */,
 				3283A5D12A96FD06001ECC9A /* MainView.swift in Sources */,
@@ -504,9 +521,12 @@
 				323125922AFCCF0B002B9A25 /* LoginViewModel.swift in Sources */,
 				32D8E1C22AB20F71001D9AF3 /* TopBarView.swift in Sources */,
 				32C35DC42B147ABB00269B65 /* UserData.swift in Sources */,
+				3203519F2B1D8FF20055798A /* InquiryView.swift in Sources */,
 				323125812AFA64CB002B9A25 /* JoinViewController.swift in Sources */,
+				3203519B2B1D8F850055798A /* LocationSettingView.swift in Sources */,
 				32718C432B15D1F400FF3EEF /* GalleryViewController.swift in Sources */,
 				320351922B1869DC0055798A /* ReadViewModel.swift in Sources */,
+				320351992B1D89370055798A /* MyInfoView.swift in Sources */,
 				3283A5B92A95F264001ECC9A /* SceneDelegate.swift in Sources */,
 				3231259C2B00B547002B9A25 /* MainViewModel.swift in Sources */,
 			);

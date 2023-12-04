@@ -31,5 +31,6 @@ extension UIColor {
     static let galleryColor = UIColor(hexCode: "191919")
     static let galleryLabelColor = UIColor(hexCode: "868686")
     static let settingCellColor = UIColor(hexCode: "262826")
+    static let settingArrowColor = UIColor(hexCode: "8B8B8B")
 }
 

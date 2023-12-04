@@ -16,6 +16,11 @@ import FirebaseAuth
 class SettingViewController: UIViewController {
     private let disposeBag = DisposeBag()
     
+    private let myInfoView = MyInfoView()
+    private let locationSettingView = LocationSettingView()
+    private let versionView = VersionView()
+    private let inquriyView = InquiryView()
+    
     private let backButton: UIButton = {
         let button = UIButton()
             let image = UIImage(systemName: "chevron.backward")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 22, weight: .regular))
@@ -30,22 +35,63 @@ class SettingViewController: UIViewController {
         let label = UILabel()
         label.textColor = .white
         label.text = "설정"
-        label.font = .systemFont(ofSize: 17, weight: .light)
+        label.font = .systemFont(ofSize: 17, weight: .bold)
         
         return label
     }()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .galleryColor
         setNaviBar()
+        addSubView()
+        setConstraints()
         setupControl()
+        
     }
     
     private func setNaviBar() {
         navigationController?.isNavigationBarHidden = false
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         navigationItem.titleView = titleLabel
+    }
+    
+    private func addSubView() {
+        view.addSubview(myInfoView)
+        view.addSubview(locationSettingView)
+        view.addSubview(versionView)
+        view.addSubview(inquriyView)
+    }
+    
+    private func setConstraints() {
+        myInfoView.snp.makeConstraints({
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
+            $0.height.equalTo(50)
+        })
+        
+        locationSettingView.snp.makeConstraints({
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.top.equalTo(myInfoView.snp.bottom).offset(8)
+            $0.height.equalTo(50)
+        })
+        
+        versionView.snp.makeConstraints({
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.top.equalTo(locationSettingView.snp.bottom).offset(40)
+            $0.height.equalTo(50)
+        })
+        
+        inquriyView.snp.makeConstraints({
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.top.equalTo(versionView.snp.bottom).offset(8)
+            $0.height.equalTo(50)
+        })
     }
     
     private func setupControl() {
