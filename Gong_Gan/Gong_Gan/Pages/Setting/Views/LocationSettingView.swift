@@ -12,6 +12,9 @@ import RxSwift
 
 class LocationSettingView: UIView {
     
+    private let disposeBag = DisposeBag()
+    
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "위치 설정"
@@ -22,17 +25,18 @@ class LocationSettingView: UIView {
     }()
     
     let toggleSwitch: UISwitch = {
-           let switchControl = UISwitch()
-           return switchControl
-       }()
+        let switchControl = UISwitch()
+        return switchControl
+    }()
     
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .settingCellColor
         layer.cornerRadius = 10
         addViews()
         setConstraints()
+        observeSwitchChanges()
     }
     
     required init?(coder: NSCoder) {
@@ -55,5 +59,27 @@ class LocationSettingView: UIView {
             $0.centerY.equalToSuperview()
         })
     }
-
+    
+    func setSwitchState(isEnabled: Bool) {
+        toggleSwitch.isOn = isEnabled
+    }
+    
+    private func observeSwitchChanges() {
+        toggleSwitch.rx.controlEvent(.valueChanged)
+            .subscribe(onNext: { [weak self] in
+                self?.openLocationPermissionSettings()
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func openLocationPermissionSettings() {
+        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+            return
+        }
+        
+        if UIApplication.shared.canOpenURL(settingsUrl) {
+            UIApplication.shared.open(settingsUrl)
+        }
+    }
+    
 }

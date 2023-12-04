@@ -12,6 +12,7 @@ import SnapKit
 import FirebaseFirestore
 import FirebaseCore
 import FirebaseAuth
+import CoreLocation
 
 class SettingViewController: UIViewController {
     private let disposeBag = DisposeBag()
@@ -40,6 +41,9 @@ class SettingViewController: UIViewController {
         return label
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        updateLocationPermission()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +52,6 @@ class SettingViewController: UIViewController {
         addSubView()
         setConstraints()
         setupControl()
-        
     }
     
     private func setNaviBar() {
@@ -101,5 +104,20 @@ class SettingViewController: UIViewController {
             })
             .disposed(by: disposeBag)
     }
+    
+    private func updateLocationPermission() {
+            var locationPermissionEnabled = false
+        
+        let status = CLLocationManager.authorizationStatus()
+        
+        if status == CLAuthorizationStatus.denied || status == CLAuthorizationStatus.restricted {
+            locationPermissionEnabled = false
+        } else {
+            locationPermissionEnabled = true
+        }
+            
+            // LocationSettingView에서 switch 상태를 업데이트합니다.
+            locationSettingView.setSwitchState(isEnabled: locationPermissionEnabled)
+        }
 }
 
