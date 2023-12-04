@@ -22,6 +22,7 @@ class SettingViewController: UIViewController {
     private let versionView = VersionView()
     private let inquriyView = InquiryView()
     
+    private let viewModel = SettingViewModel()
     private let backButton: UIButton = {
         let button = UIButton()
         let image = UIImage(systemName: "chevron.backward")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 22, weight: .regular))
@@ -40,11 +41,6 @@ class SettingViewController: UIViewController {
         
         return label
     }()
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        updateLocationPermission()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,28 +100,19 @@ class SettingViewController: UIViewController {
                 self.navigationController?.popViewController(animated: true)
             })
             .disposed(by: disposeBag)
-        
-        // 뷰가 backGround에서 foreGround로 들어올때 실행하여 위치 권한을 변경하지 않고 들어올때도 switch 상태 유지
-        NotificationCenter.default.rx.notification(UIApplication.willEnterForegroundNotification)
-            .subscribe(onNext: { [weak self] _ in
-                self?.updateLocationPermission()
+        // ViewModel과 ViewController를 바인딩
+        viewModel.locationPermissionEnabled
+            .drive(onNext: { [weak self] isEnabled in
+                // LocationSettingView에서 switch 상태를 업데이트
+                self?.locationSettingView.setSwitchState(isEnabled: isEnabled)
             })
             .disposed(by: disposeBag)
-    }
-    
-    func updateLocationPermission() {
-        var locationPermissionEnabled = false
         
-        let status = CLLocationManager.authorizationStatus()
-        
-        if status == CLAuthorizationStatus.denied || status == CLAuthorizationStatus.restricted {
-            locationPermissionEnabled = false
-        } else {
-            locationPermissionEnabled = true
-        }
-        
-        // LocationSettingView에서 switch 상태를 업데이트합니다.
-        locationSettingView.setSwitchState(isEnabled: locationPermissionEnabled)
+        // viewWillAppear 이벤트를 ViewModel로 전달
+        rx.sentMessage(#selector(viewWillAppear(_:)))
+            .map { _ in }
+            .bind(to: viewModel.viewWillAppear)
+            .disposed(by: disposeBag)
     }
 }
 
