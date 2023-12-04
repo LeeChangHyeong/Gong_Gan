@@ -111,7 +111,7 @@ class JoinViewController: UIViewController {
                 }
                 
                 let data = ["email": email,
-                            "displayName": "our"]
+                            "platform": "our"]
                 
                 // 파이어베이스 유저 객체를 가져옴
                 guard let user = result?.user else { return }
