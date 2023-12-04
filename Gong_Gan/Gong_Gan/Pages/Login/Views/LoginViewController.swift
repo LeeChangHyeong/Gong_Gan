@@ -375,13 +375,12 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                 }
                 guard let user = authResult?.user else { return }
                 let email = user.email ?? ""
-                let displayName = user.displayName ?? ""
+                let loginName = "apple"
                 guard let uid = Auth.auth().currentUser?.uid else { return }
                 let db = Firestore.firestore()
-                db.collection("User").document(uid).setData([
+                db.collection("users").document(uid).setData([
                     "email": email,
-                    "displayName": displayName,
-                    "uid": uid
+                    "displayName": loginName
                 ]) { err in
                     if let err = err {
                         print("Error writing document: \(err)")

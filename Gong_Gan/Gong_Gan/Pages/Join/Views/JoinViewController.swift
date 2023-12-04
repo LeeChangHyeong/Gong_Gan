@@ -110,7 +110,8 @@ class JoinViewController: UIViewController {
                     print("JoinViewController 회원가입 에러 -> \(error.localizedDescription)")
                 }
                 
-                let data = ["email": email]
+                let data = ["email": email,
+                            "displayName": "our"]
                 
                 // 파이어베이스 유저 객체를 가져옴
                 guard let user = result?.user else { return }
