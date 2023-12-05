@@ -133,8 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				320351962B1B728C0055798A /* SettingViewController.swift */,
-				320351982B1D89370055798A /* MyInfoView.swift */,
-				32B11EC02B1ECD980022FCC5 /* MyInfoViewController.swift */,
+				32B11EC22B1ED59D0022FCC5 /* MyInfo */,
 				3203519A2B1D8F850055798A /* LocationSettingView.swift */,
 				3203519C2B1D8FAF0055798A /* VersionView.swift */,
 				3203519E2B1D8FF20055798A /* InquiryView.swift */,
@@ -352,6 +351,15 @@
 				3283A5BF2A95F264001ECC9A /* Gong_Gan.xcdatamodeld */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		32B11EC22B1ED59D0022FCC5 /* MyInfo */ = {
+			isa = PBXGroup;
+			children = (
+				320351982B1D89370055798A /* MyInfoView.swift */,
+				32B11EC02B1ECD980022FCC5 /* MyInfoViewController.swift */,
+			);
+			path = MyInfo;
 			sourceTree = "<group>";
 		};
 		32D8E1BA2AB1FAFA001D9AF3 /* Helpers */ = {

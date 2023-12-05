@@ -9,6 +9,9 @@ import Foundation
 import RxSwift
 import RxCocoa
 import CoreLocation
+import FirebaseFirestore
+import FirebaseCore
+import FirebaseAuth
 
 class SettingViewModel {
     let viewWillAppear = PublishSubject<Void>()
@@ -27,4 +30,23 @@ class SettingViewModel {
         }
         .asDriver(onErrorJustReturn: false)
     }
+    
+    func fetchUserEmail() -> Observable<String> {
+            return Observable.create { observer in
+                let uid = UserData.shared.getUserUid()
+                let userDocumentRef = Firestore.firestore().collection("users").document(uid)
+
+                userDocumentRef.getDocument { (document, error) in
+                    if let document = document, document.exists, let data = document.data(),
+                        let email = data["email"] as? String {
+                        observer.onNext(email)
+                    } else {
+                        observer.onError(NSError(domain: "UserData", code: 1, userInfo: nil))
+                    }
+                    observer.onCompleted()
+                }
+
+                return Disposables.create()
+            }
+        }
 }

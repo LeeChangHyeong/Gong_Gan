@@ -23,6 +23,7 @@ class SettingViewController: UIViewController {
     private let inquriyView = InquiryView()
     
     private let viewModel = SettingViewModel()
+    
     private let backButton: UIButton = {
         let button = UIButton()
         let image = UIImage(systemName: "chevron.backward")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 22, weight: .regular))
@@ -54,6 +55,8 @@ class SettingViewController: UIViewController {
     }
     
     deinit {
+        // NotificationCenter에서 등록한 옵저버를 해제
+        // 메모리 누수 방지
             removeNotificationObserver()
         }
     
@@ -123,7 +126,8 @@ class SettingViewController: UIViewController {
     
     @objc private func handleMyInfoViewTap() {
             // MyInfoView가 탭되었을 때 수행할 동작을 여기에 추가
-            let myInfoVC = MyInfoViewController()  // 이동할 ViewController에 대한 예시
+            let myInfoVC = MyInfoViewController()
+        
             navigationController?.pushViewController(myInfoVC, animated: true)
         }
     
