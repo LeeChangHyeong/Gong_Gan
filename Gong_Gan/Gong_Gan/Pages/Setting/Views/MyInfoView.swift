@@ -46,7 +46,8 @@ class MyInfoView: UIView {
         layer.cornerRadius = 10
         addViews()
         setConstraints()
-        checkPlatform()
+        setupTapGesture()
+//        checkPlatform()
     }
     
     required init?(coder: NSCoder) {
@@ -91,5 +92,15 @@ class MyInfoView: UIView {
             }
         }
     }
+    
+    private func setupTapGesture() {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(myInfoTapped))
+            self.addGestureRecognizer(tapGesture)
+            self.isUserInteractionEnabled = true
+        }
+    
+    @objc private func myInfoTapped() {
+           NotificationCenter.default.post(name: Notification.Name("MyInfoViewTapped"), object: nil)
+       }
 
 }

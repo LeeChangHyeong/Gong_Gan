@@ -49,7 +49,13 @@ class SettingViewController: UIViewController {
         addSubView()
         setConstraints()
         setupControl()
+        
+        setupNotificationObserver()
     }
+    
+    deinit {
+            removeNotificationObserver()
+        }
     
     private func setNaviBar() {
         navigationController?.isNavigationBarHidden = false
@@ -114,5 +120,20 @@ class SettingViewController: UIViewController {
             .bind(to: viewModel.viewWillAppear)
             .disposed(by: disposeBag)
     }
+    
+    @objc private func handleMyInfoViewTap() {
+            // MyInfoView가 탭되었을 때 수행할 동작을 여기에 추가
+            let myInfoVC = MyInfoViewController()  // 이동할 ViewController에 대한 예시
+            navigationController?.pushViewController(myInfoVC, animated: true)
+        }
+    
+    private func setupNotificationObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleMyInfoViewTap), name: Notification.Name("MyInfoViewTapped"), object: nil)
+    }
+
+    private func removeNotificationObserver() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
 }
 

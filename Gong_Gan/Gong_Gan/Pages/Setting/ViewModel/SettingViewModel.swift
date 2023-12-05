@@ -12,7 +12,6 @@ import CoreLocation
 
 class SettingViewModel {
     let viewWillAppear = PublishSubject<Void>()
-    
     let locationPermissionEnabled: Driver<Bool>
     
     private let disposeBag = DisposeBag()
