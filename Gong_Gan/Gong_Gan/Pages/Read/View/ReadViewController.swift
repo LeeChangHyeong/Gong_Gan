@@ -298,7 +298,6 @@ class ReadViewController: UIViewController {
         }
         
         let deleteAction = UIAction(title: "삭제", image: UIImage(systemName: "trash")) { [weak self] _ in
-            
             self?.viewModel.deleteMemo { error in
                 if let error = error {
                     print("일기 삭제 실패: \(error.localizedDescription)")

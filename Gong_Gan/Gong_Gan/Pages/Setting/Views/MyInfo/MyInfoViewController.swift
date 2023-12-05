@@ -12,10 +12,13 @@ import RxCocoa
 import FirebaseFirestore
 import FirebaseCore
 import FirebaseAuth
+import KakaoSDKUser
 
 class MyInfoViewController: UIViewController {
     private let disposeBag = DisposeBag()
     private let viewModel = SettingViewModel()
+    private let logOutView = LogOutView()
+    private let withdrawalView = WithdrawalView()
     
     private let backButton: UIButton = {
         let button = UIButton()
@@ -60,7 +63,7 @@ class MyInfoViewController: UIViewController {
         addSubViews()
         setConstraints()
         setupControl()
-//        checkEmail()
+        setupNotificationObserver()
     }
     
     private func setNaviBar() {
@@ -72,6 +75,8 @@ class MyInfoViewController: UIViewController {
     private func addSubViews() {
         view.addSubview(accountLabel)
         view.addSubview(emailLabel)
+        view.addSubview(logOutView)
+        view.addSubview(withdrawalView)
     }
     
     private func setConstraints() {
@@ -83,6 +88,20 @@ class MyInfoViewController: UIViewController {
         emailLabel.snp.makeConstraints({
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
             $0.trailing.equalToSuperview().offset(-32)
+        })
+        
+        logOutView.snp.makeConstraints({
+            $0.top.equalTo(accountLabel.snp.bottom).offset(24)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(50)
+        })
+        
+        withdrawalView.snp.makeConstraints({
+            $0.top.equalTo(logOutView.snp.bottom).offset(8)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(50)
         })
     }
     
@@ -103,21 +122,79 @@ class MyInfoViewController: UIViewController {
                     .disposed(by: disposeBag)
     }
     
-    private func checkEmail() {
-        let uid = UserData.shared.getUserUid()
-        let userDocumentRef = Firestore.firestore().collection("users").document(uid)
+    @objc private func handleLogOutViewTap() {
+        let alertController = UIAlertController(title: "로그아웃", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
         
-        userDocumentRef.getDocument { [weak self] (document, error) in
-            guard let self = self, let document = document, document.exists, let data = document.data()
-            else {
-                // 처리 중에 오류가 발생하거나 데이터가 없을 경우
-                return
+        let logOutAction = UIAlertAction(title: "로그아웃", style: .default) {_ in
+            // 카카오톡 로그아웃
+            UserApi.shared.logout { error in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    print("로그아웃 성공")
+                }
             }
             
-            if let email = data["email"] as? String {
-                self.emailLabel.text = email
-            }
+            // firebase에서 지원하는 플랫폼 로그아웃
+            let firebaseAuth = Auth.auth()
+                    do {
+                        try firebaseAuth.signOut()
+                    } catch let signOutError as NSError {
+                        print("Error signing out: %@", signOutError)
+                    }
         }
+        
+        let cancelAction = UIAlertAction(title: "아니오", style: .destructive, handler: nil)
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(logOutAction)
+
+            present(alertController, animated: true, completion: nil)
+    }
+    
+    @objc private func handleWithdrawalViewTap() {
+        let alertController = UIAlertController(title: "회원탈퇴", message: "정말 회원탈퇴하시겠습니까?", preferredStyle: .alert)
+        
+        let withdrawalAction = UIAlertAction(title: "회원탈퇴", style: .default) { _ in
+            
+            let uid = UserData.shared.getUserUid()
+            print(uid)
+            let userDocumentRef = Firestore.firestore().collection("users").document(uid)
+            
+            // 회원탈퇴 로직
+            if let currentUser = Auth.auth().currentUser {
+                currentUser.delete { error in
+                    if let error = error {
+                        print("회원탈퇴 에러: \(error.localizedDescription)")
+                    } else {
+                        print("회원탈퇴 성공")
+                        // 회원 탈퇴 성공시 데이터 삭제
+                        userDocumentRef.delete { error in
+                            if let error = error {
+                                print("문서 삭제 에러: \(error.localizedDescription)")
+                            } else {
+                                print("문서 데이터 삭제 성공")
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "아니오", style: .destructive, handler: nil)
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(withdrawalAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    
+    private func setupNotificationObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleLogOutViewTap), name: Notification.Name("LogOutViewTapped"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleWithdrawalViewTap), name: Notification.Name("WithdrawalViewTapped"), object: nil)
     }
 
 }

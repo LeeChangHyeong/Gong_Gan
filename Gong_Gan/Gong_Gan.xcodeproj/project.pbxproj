@@ -35,6 +35,8 @@
 		3283A5D12A96FD06001ECC9A /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3283A5D02A96FD06001ECC9A /* MainView.swift */; };
 		32B11EBF2B1D952D0022FCC5 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B11EBE2B1D952D0022FCC5 /* SettingViewModel.swift */; };
 		32B11EC12B1ECD980022FCC5 /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B11EC02B1ECD980022FCC5 /* MyInfoViewController.swift */; };
+		32B11EC42B1EDBD00022FCC5 /* LogOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B11EC32B1EDBD00022FCC5 /* LogOutView.swift */; };
+		32B11EC62B1EDC0B0022FCC5 /* WithdrawalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B11EC52B1EDC0B0022FCC5 /* WithdrawalView.swift */; };
 		32C35DC42B147ABB00269B65 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C35DC32B147ABB00269B65 /* UserData.swift */; };
 		32D8E1BC2AB1FB08001D9AF3 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1BB2AB1FB08001D9AF3 /* UIColor.swift */; };
 		32D8E1C22AB20F71001D9AF3 /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1C12AB20F71001D9AF3 /* TopBarView.swift */; };
@@ -74,6 +76,8 @@
 		3283A5D02A96FD06001ECC9A /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		32B11EBE2B1D952D0022FCC5 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		32B11EC02B1ECD980022FCC5 /* MyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
+		32B11EC32B1EDBD00022FCC5 /* LogOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutView.swift; sourceTree = "<group>"; };
+		32B11EC52B1EDC0B0022FCC5 /* WithdrawalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalView.swift; sourceTree = "<group>"; };
 		32C35DC32B147ABB00269B65 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		32D8E1BB2AB1FB08001D9AF3 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		32D8E1C12AB20F71001D9AF3 /* TopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
@@ -358,6 +362,8 @@
 			children = (
 				320351982B1D89370055798A /* MyInfoView.swift */,
 				32B11EC02B1ECD980022FCC5 /* MyInfoViewController.swift */,
+				32B11EC32B1EDBD00022FCC5 /* LogOutView.swift */,
+				32B11EC52B1EDC0B0022FCC5 /* WithdrawalView.swift */,
 			);
 			path = MyInfo;
 			sourceTree = "<group>";
@@ -512,6 +518,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				320657662B183AA90030D565 /* GalleryDataModel.swift in Sources */,
+				32B11EC62B1EDC0B0022FCC5 /* WithdrawalView.swift in Sources */,
+				32B11EC42B1EDBD00022FCC5 /* LogOutView.swift in Sources */,
 				3231257D2AFA603A002B9A25 /* LoginViewController.swift in Sources */,
 				32D8E1C42AB20F84001D9AF3 /* BottomBarView.swift in Sources */,
 				3283A5BB2A95F264001ECC9A /* MainViewController.swift in Sources */,

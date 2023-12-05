@@ -153,24 +153,6 @@ class TopBarView: UIView {
         musicButtonTap.toggle()
         
         musicButton.setImage(UIImage(systemName: musicButtonTap ? "speaker.slash.fill" : "music.note"), for: .normal)
-        
-        // 카카오톡 로그아웃
-        UserApi.shared.logout { error in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                print("로그아웃 성공")
-            }
-        }
-        
-        // TODO: 일단 로그아웃 구현을 음악 껐다 켰다 하는곳에 해놨음
-        let firebaseAuth = Auth.auth()
-                do {
-                    try firebaseAuth.signOut()
-                } catch let signOutError as NSError {
-                    print("Error signing out: %@", signOutError)
-                }
-        
     }
 }
 
