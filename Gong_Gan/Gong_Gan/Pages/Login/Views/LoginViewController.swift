@@ -68,15 +68,17 @@ class LoginViewController: UIViewController {
         return button
     }()
     
-    private let kakaoLoginButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("카카오로 로그인", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = 6
-        button.addTarget(self, action: #selector(KakaoLogin), for: .touchUpInside)
-        
-        return button
-    }()
+    // TODO: 카카오 로그인시 이메일을 아직 받아오지 못하기 때문에 임시 제거
+    // TODO: 카카오 로그인시 이메일을 받아오려면 카카오에 검수를해 동의를 받아야함
+//    private let kakaoLoginButton: UIButton = {
+//        let button = UIButton()
+//        button.setTitle("카카오로 로그인", for: .normal)
+//        button.backgroundColor = .systemBlue
+//        button.layer.cornerRadius = 6
+//        button.addTarget(self, action: #selector(KakaoLogin), for: .touchUpInside)
+//        
+//        return button
+//    }()
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -99,7 +101,7 @@ class LoginViewController: UIViewController {
         view.addSubview(loginButton)
         view.addSubview(joinButton)
         view.addSubview(appleLoginButton)
-        view.addSubview(kakaoLoginButton)
+//        view.addSubview(kakaoLoginButton)
     }
     
     private func setConstraints() {
@@ -138,12 +140,12 @@ class LoginViewController: UIViewController {
             $0.height.equalTo(30)
         })
         
-        kakaoLoginButton.snp.makeConstraints({
-            $0.top.equalTo(appleLoginButton.snp.bottom).offset(30)
-            $0.centerX.equalToSuperview()
-            $0.width.equalTo(100)
-            $0.height.equalTo(30)
-        })
+//        kakaoLoginButton.snp.makeConstraints({
+//            $0.top.equalTo(appleLoginButton.snp.bottom).offset(30)
+//            $0.centerX.equalToSuperview()
+//            $0.width.equalTo(100)
+//            $0.height.equalTo(30)
+//        })
     }
     
     private func setupControl() {
