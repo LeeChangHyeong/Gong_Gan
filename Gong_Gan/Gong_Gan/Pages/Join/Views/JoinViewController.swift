@@ -19,16 +19,16 @@ class JoinViewController: UIViewController {
     
     private let backButton: UIButton = {
         let button = UIButton()
-            let image = UIImage(systemName: "chevron.backward")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 22, weight: .regular))
-            button.setImage(image, for: .normal)
-
-            button.tintColor = .white
-            
-            return button
+        let image = UIImage(systemName: "chevron.backward")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 22, weight: .regular))
+        button.setImage(image, for: .normal)
+        
+        button.tintColor = .white
+        
+        return button
     }()
     
     private let joinLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.text = "이메일로 회원가입하기"
         label.font = .systemFont(ofSize: 24, weight: .bold)
         label.textColor = .white
@@ -37,7 +37,7 @@ class JoinViewController: UIViewController {
     }()
     
     private let emailLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.text = "이메일"
         label.font = .systemFont(ofSize: 17, weight: .bold)
         label.textColor = .white
@@ -52,8 +52,8 @@ class JoinViewController: UIViewController {
         tf.backgroundColor = .joinTextFieldColor
         
         let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: tf.frame.height))
-            tf.leftView = leftPaddingView
-            tf.leftViewMode = .always
+        tf.leftView = leftPaddingView
+        tf.leftViewMode = .always
         
         tf.keyboardType = .emailAddress
         
@@ -62,12 +62,25 @@ class JoinViewController: UIViewController {
     
     private let emailVaildErrorLabel: UILabel = {
         let label = UILabel()
+        label.isHidden = true
+        
+        let attachment = NSTextAttachment()
+        attachment.image = UIImage(systemName: "exclamationmark.circle")?.withTintColor(.red, renderingMode: .alwaysOriginal)
+        
+        let attributedString = NSMutableAttributedString(attachment: attachment)
+        
+        attributedString.append(NSAttributedString(string: " 이미 존재하는 이메일입니다.", attributes: [
+            .foregroundColor: UIColor.red,
+            .font: UIFont.systemFont(ofSize: 13, weight: .bold)
+        ]))
+        
+        label.attributedText = attributedString
         
         return label
     }()
     
     private let passwordLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.text = "비밀번호"
         label.font = .systemFont(ofSize: 17, weight: .bold)
         label.textColor = .white
@@ -82,16 +95,10 @@ class JoinViewController: UIViewController {
         tf.backgroundColor = .joinTextFieldColor
         
         let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: tf.frame.height))
-            tf.leftView = leftPaddingView
-            tf.leftViewMode = .always
+        tf.leftView = leftPaddingView
+        tf.leftViewMode = .always
         
         return tf
-    }()
-    
-    private let passwordVaildErrorLabel: UILabel = {
-        let label = UILabel()
-        
-        return label
     }()
     
     private let joinButton: UIButton = {
@@ -112,6 +119,7 @@ class JoinViewController: UIViewController {
         setConstraints()
         setupControl()
         setNaviBar()
+        setJoinButton()
     }
     
     private func setNaviBar() {
@@ -125,7 +133,6 @@ class JoinViewController: UIViewController {
         view.addSubview(emailVaildErrorLabel)
         view.addSubview(passwordLabel)
         view.addSubview(passWordTf)
-        view.addSubview(passwordVaildErrorLabel)
         view.addSubview(joinButton)
     }
     
@@ -164,17 +171,45 @@ class JoinViewController: UIViewController {
             $0.height.equalTo(49)
         })
         
-        passwordVaildErrorLabel.snp.makeConstraints({
-            $0.top.equalTo(passWordTf.snp.bottom).offset(48)
-            $0.leading.equalToSuperview().offset(20)
-        })
-        
         joinButton.snp.makeConstraints({
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(56)
         })
+    }
+    
+    private func setJoinButton() {
+        // 키보드의 올라오는 이벤트를 감지하여 높이를 가져오는 Observable
+        let keyboardWillShowObservable = NotificationCenter.default.rx.notification(UIResponder.keyboardWillShowNotification)
+            .map { notification -> CGFloat in
+                guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
+                    return 0
+                }
+                return keyboardFrame.cgRectValue.height
+            }
+        
+        // 키보드의 내려가는 이벤트를 감지하여 높이를 가져오는 Observable
+        let keyboardWillHideObservable = NotificationCenter.default.rx.notification(UIResponder.keyboardWillHideNotification)
+            .map { _ -> CGFloat in
+                return 0
+            }
+        
+        // 올라오는 이벤트와 내려가는 이벤트를 합침
+        let keyboardHeightObservable = Observable.merge(keyboardWillShowObservable, keyboardWillHideObservable)
+        
+        // Join button의 bottom constraint을 키보드의 높이에 따라 업데이트
+        keyboardHeightObservable
+            .subscribe(onNext: { [weak self] keyboardHeight in
+                guard let self = self else { return }
+                self.joinButton.snp.updateConstraints { make in
+                    make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-20 - keyboardHeight)
+                }
+                UIView.animate(withDuration: 0.25) {
+                    self.view.layoutIfNeeded()
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     private func setupControl() {
@@ -203,17 +238,25 @@ class JoinViewController: UIViewController {
             .bind(to: joinButton.rx.alpha)
             .disposed(by: disposeBag)
         
-        // TODO: 회원가입 버튼 클릭시 실제로 회원가입 되고 MainView로 넘어가게 구현 해야함
+        emailTf.rx.controlEvent([.editingDidBegin, .editingChanged])
+            .subscribe(onNext: { [weak self] _ in
+                self?.emailVaildErrorLabel.isHidden = true
+            })
+            .disposed(by: disposeBag)
+        
         joinButton.rx.tap.subscribe(onNext: { [weak self] _ in
             
             guard let email = self?.emailTf.text else { return }
             guard let password = self?.passWordTf.text else { return }
-
+            
             Auth.auth().createUser(withEmail: email, password: password) { result, error in
                 if let error = error {
                     print("JoinViewController 회원가입 에러 -> \(error.localizedDescription)")
+                    
+                    if error.localizedDescription == "The email address is already in use by another account." {
+                        self?.emailVaildErrorLabel.isHidden = false
+                    }
                 }
-                
                 let data = ["email": email,
                             "platform": "our"]
                 
@@ -233,43 +276,43 @@ class JoinViewController: UIViewController {
     }
     
     
-//    private func setupControl() {
-//        // 이메일 입력 textField를 viewModel의 emialObserver로 바인딩
-//        emailTf.rx.text
-//            .orEmpty
-//            .bind(to: viewModel.emailObserver)
-//            .disposed(by: disposeBag)
-//        // 비밀번호 입력 textField를 viewModel의 passwordObserver로 바인딩
-//        passWordTf.rx.text
-//            .orEmpty
-//            .bind(to: viewModel.passwordObserver)
-//            .disposed(by: disposeBag)
-//        
-//        // viewModel에서 입력한 값을 통해 로그인 버튼의 enabled를 정해줌
-//        viewModel.isValid.bind(to: loginButton.rx.isEnabled)
-//            .disposed(by: disposeBag)
-//        
-//        // 시각적으로 버튼이 활성화, 비활성화 되었는지 보여주기 위해 alpha값을 줌
-//        viewModel.isValid
-//            .map{$0 ? 1 : 0.3}
-//            .bind(to: loginButton.rx.alpha)
-//            .disposed(by: disposeBag)
-//        
-//        // TODO: FireBase 서버에 등록된 아이디인지 확인하여 로그인 성공 시키고 실패시키는 로직으로 리팩토링 필요
-//        loginButton.rx.tap.subscribe (onNext: { [weak self] _ in
-//            if self?.userEmail == self?.viewModel.emailObserver.value && self?.userPassword == self?.viewModel.passwordObserver.value {
-//                let alert = UIAlertController(title: "로그인 성공", message: "하이", preferredStyle: .alert)
-//                let ok = UIAlertAction(title: "확인", style: .default)
-//                alert.addAction(ok)
-//                self?.present(alert, animated: true, completion: nil)
-//            } else {
-//                let alert = UIAlertController(title: "로그인 실패", message: "이메일 비번 다시 확인부탁", preferredStyle: .alert)
-//                let ok = UIAlertAction(title: "확인", style: .default)
-//                alert.addAction(ok)
-//                self?.present(alert, animated: true, completion: nil)
-//            }
-//        })
-//        .disposed(by: disposeBag)
-//    }
+    //    private func setupControl() {
+    //        // 이메일 입력 textField를 viewModel의 emialObserver로 바인딩
+    //        emailTf.rx.text
+    //            .orEmpty
+    //            .bind(to: viewModel.emailObserver)
+    //            .disposed(by: disposeBag)
+    //        // 비밀번호 입력 textField를 viewModel의 passwordObserver로 바인딩
+    //        passWordTf.rx.text
+    //            .orEmpty
+    //            .bind(to: viewModel.passwordObserver)
+    //            .disposed(by: disposeBag)
+    //
+    //        // viewModel에서 입력한 값을 통해 로그인 버튼의 enabled를 정해줌
+    //        viewModel.isValid.bind(to: loginButton.rx.isEnabled)
+    //            .disposed(by: disposeBag)
+    //
+    //        // 시각적으로 버튼이 활성화, 비활성화 되었는지 보여주기 위해 alpha값을 줌
+    //        viewModel.isValid
+    //            .map{$0 ? 1 : 0.3}
+    //            .bind(to: loginButton.rx.alpha)
+    //            .disposed(by: disposeBag)
+    //
+    //        // TODO: FireBase 서버에 등록된 아이디인지 확인하여 로그인 성공 시키고 실패시키는 로직으로 리팩토링 필요
+    //        loginButton.rx.tap.subscribe (onNext: { [weak self] _ in
+    //            if self?.userEmail == self?.viewModel.emailObserver.value && self?.userPassword == self?.viewModel.passwordObserver.value {
+    //                let alert = UIAlertController(title: "로그인 성공", message: "하이", preferredStyle: .alert)
+    //                let ok = UIAlertAction(title: "확인", style: .default)
+    //                alert.addAction(ok)
+    //                self?.present(alert, animated: true, completion: nil)
+    //            } else {
+    //                let alert = UIAlertController(title: "로그인 실패", message: "이메일 비번 다시 확인부탁", preferredStyle: .alert)
+    //                let ok = UIAlertAction(title: "확인", style: .default)
+    //                alert.addAction(ok)
+    //                self?.present(alert, animated: true, completion: nil)
+    //            }
+    //        })
+    //        .disposed(by: disposeBag)
+    //    }
     
 }
