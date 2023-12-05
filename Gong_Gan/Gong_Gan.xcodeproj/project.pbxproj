@@ -38,6 +38,7 @@
 		32B11EC42B1EDBD00022FCC5 /* LogOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B11EC32B1EDBD00022FCC5 /* LogOutView.swift */; };
 		32B11EC62B1EDC0B0022FCC5 /* WithdrawalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B11EC52B1EDC0B0022FCC5 /* WithdrawalView.swift */; };
 		32C35DC42B147ABB00269B65 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C35DC32B147ABB00269B65 /* UserData.swift */; };
+		32C3DD0D2B1F09E9008B9EB6 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C3DD0C2B1F09E9008B9EB6 /* Keys.swift */; };
 		32D8E1BC2AB1FB08001D9AF3 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1BB2AB1FB08001D9AF3 /* UIColor.swift */; };
 		32D8E1C22AB20F71001D9AF3 /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1C12AB20F71001D9AF3 /* TopBarView.swift */; };
 		32D8E1C42AB20F84001D9AF3 /* BottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1C32AB20F84001D9AF3 /* BottomBarView.swift */; };
@@ -79,6 +80,7 @@
 		32B11EC32B1EDBD00022FCC5 /* LogOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutView.swift; sourceTree = "<group>"; };
 		32B11EC52B1EDC0B0022FCC5 /* WithdrawalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalView.swift; sourceTree = "<group>"; };
 		32C35DC32B147ABB00269B65 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		32C3DD0C2B1F09E9008B9EB6 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		32D8E1BB2AB1FB08001D9AF3 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		32D8E1C12AB20F71001D9AF3 /* TopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
 		32D8E1C32AB20F84001D9AF3 /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };
@@ -335,6 +337,7 @@
 		3283A5B52A95F264001ECC9A /* Gong_Gan */ = {
 			isa = PBXGroup;
 			children = (
+				32C3DD0B2B1F09D8008B9EB6 /* Keys */,
 				323125972AFDD883002B9A25 /* Gong_Gan.entitlements */,
 				3231257E2AFA6318002B9A25 /* GoogleService-Info.plist */,
 				323125822AFA671F002B9A25 /* AppController.swift */,
@@ -366,6 +369,14 @@
 				32B11EC52B1EDC0B0022FCC5 /* WithdrawalView.swift */,
 			);
 			path = MyInfo;
+			sourceTree = "<group>";
+		};
+		32C3DD0B2B1F09D8008B9EB6 /* Keys */ = {
+			isa = PBXGroup;
+			children = (
+				32C3DD0C2B1F09E9008B9EB6 /* Keys.swift */,
+			);
+			path = Keys;
 			sourceTree = "<group>";
 		};
 		32D8E1BA2AB1FAFA001D9AF3 /* Helpers */ = {
@@ -521,6 +532,7 @@
 				32B11EC62B1EDC0B0022FCC5 /* WithdrawalView.swift in Sources */,
 				32B11EC42B1EDBD00022FCC5 /* LogOutView.swift in Sources */,
 				3231257D2AFA603A002B9A25 /* LoginViewController.swift in Sources */,
+				32C3DD0D2B1F09E9008B9EB6 /* Keys.swift in Sources */,
 				32D8E1C42AB20F84001D9AF3 /* BottomBarView.swift in Sources */,
 				3283A5BB2A95F264001ECC9A /* MainViewController.swift in Sources */,
 				323125A02B00B5A2002B9A25 /* WriteViewController.swift in Sources */,

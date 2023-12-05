@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         // 카카오 키 초기화
-        KakaoSDK.initSDK(appKey: "30c09b4a304fab31e7599c7e5b0293c7")
+        KakaoSDK.initSDK(appKey: Keys.kakaoKey)
         
         // 자동으로 키보드가 화면을 가리지 않게 함
         IQKeyboardManager.shared.enable = true
