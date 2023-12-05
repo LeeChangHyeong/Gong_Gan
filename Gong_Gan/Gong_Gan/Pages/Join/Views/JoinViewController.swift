@@ -17,26 +17,88 @@ class JoinViewController: UIViewController {
     private let viewModel = LoginViewModel()
     private let disposeBag = DisposeBag()
     
+    private let backButton: UIButton = {
+        let button = UIButton()
+            let image = UIImage(systemName: "chevron.backward")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 22, weight: .regular))
+            button.setImage(image, for: .normal)
+
+            button.tintColor = .white
+            
+            return button
+    }()
+    
+    private let joinLabel: UILabel = {
+       let label = UILabel()
+        label.text = "이메일로 회원가입하기"
+        label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.textColor = .white
+        
+        return label
+    }()
+    
+    private let emailLabel: UILabel = {
+       let label = UILabel()
+        label.text = "이메일"
+        label.font = .systemFont(ofSize: 17, weight: .bold)
+        label.textColor = .white
+        
+        return label
+    }()
+    
     private let emailTf: UITextField = {
         let tf = UITextField()
         tf.placeholder = "이메일을 입력해주세요"
-        tf.borderStyle = .roundedRect
+        tf.layer.cornerRadius = 8
+        tf.backgroundColor = .joinTextFieldColor
+        
+        let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: tf.frame.height))
+            tf.leftView = leftPaddingView
+            tf.leftViewMode = .always
+        
+        tf.keyboardType = .emailAddress
         
         return tf
+    }()
+    
+    private let emailVaildErrorLabel: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
+    private let passwordLabel: UILabel = {
+       let label = UILabel()
+        label.text = "비밀번호"
+        label.font = .systemFont(ofSize: 17, weight: .bold)
+        label.textColor = .white
+        
+        return label
     }()
     
     private let passWordTf: UITextField = {
         let tf = UITextField()
         tf.placeholder = "비밀번호를 입력해주세요"
-        tf.borderStyle = .roundedRect
+        tf.layer.cornerRadius = 8
+        tf.backgroundColor = .joinTextFieldColor
+        
+        let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: tf.frame.height))
+            tf.leftView = leftPaddingView
+            tf.leftViewMode = .always
         
         return tf
     }()
     
+    private let passwordVaildErrorLabel: UILabel = {
+        let label = UILabel()
+        
+        return label
+    }()
+    
     private let joinButton: UIButton = {
         let button = UIButton()
-        button.setTitle("회원가입", for: .normal)
-        button.backgroundColor = .systemBlue
+        button.setTitle("가입완료", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 17, weight: .bold)
+        button.backgroundColor = .joinButtonColor
         button.layer.cornerRadius = 6
         button.isEnabled = false
         
@@ -45,42 +107,83 @@ class JoinViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .galleryColor
         addViews()
         setConstraints()
         setupControl()
+        setNaviBar()
     }
     
-    func addViews() {
+    private func setNaviBar() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+    }
+    
+    private func addViews() {
+        view.addSubview(joinLabel)
+        view.addSubview(emailLabel)
         view.addSubview(emailTf)
+        view.addSubview(emailVaildErrorLabel)
+        view.addSubview(passwordLabel)
         view.addSubview(passWordTf)
+        view.addSubview(passwordVaildErrorLabel)
         view.addSubview(joinButton)
     }
     
-    func setConstraints() {
+    private func setConstraints() {
+        joinLabel.snp.makeConstraints({
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
+            $0.leading.equalToSuperview().offset(20)
+        })
+        
+        emailLabel.snp.makeConstraints({
+            $0.top.equalTo(joinLabel.snp.bottom).offset(32)
+            $0.leading.equalToSuperview().offset(20)
+        })
+        
         emailTf.snp.makeConstraints({
-            $0.top.equalToSuperview().offset(100)
+            $0.top.equalTo(emailLabel.snp.bottom).offset(12)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
-            $0.height.equalTo(30)
+            $0.height.equalTo(49)
+        })
+        
+        emailVaildErrorLabel.snp.makeConstraints({
+            $0.top.equalTo(emailTf.snp.bottom).offset(8)
+            $0.leading.equalToSuperview().offset(20)
+        })
+        
+        passwordLabel.snp.makeConstraints({
+            $0.top.equalTo(emailTf.snp.bottom).offset(48)
+            $0.leading.equalToSuperview().offset(20)
         })
         
         passWordTf.snp.makeConstraints({
-            $0.top.equalTo(emailTf.snp.bottom).offset(16)
+            $0.top.equalTo(passwordLabel.snp.bottom).offset(12)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
-            $0.height.equalTo(30)
+            $0.height.equalTo(49)
+        })
+        
+        passwordVaildErrorLabel.snp.makeConstraints({
+            $0.top.equalTo(passWordTf.snp.bottom).offset(48)
+            $0.leading.equalToSuperview().offset(20)
         })
         
         joinButton.snp.makeConstraints({
-            $0.top.equalTo(passWordTf.snp.bottom).offset(30)
-            $0.centerX.equalToSuperview()
-            $0.width.equalTo(100)
-            $0.height.equalTo(30)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(56)
         })
     }
     
     private func setupControl() {
+        backButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            })
+            .disposed(by: disposeBag)
+        
         emailTf.rx.text
             .orEmpty
             .bind(to: viewModel.emailObserver)
@@ -91,7 +194,8 @@ class JoinViewController: UIViewController {
             .bind(to: viewModel.passwordObserver)
             .disposed(by: disposeBag)
         
-        viewModel.isValid.bind(to: joinButton.rx.isEnabled)
+        viewModel.isValid
+            .bind(to: joinButton.rx.isEnabled)
             .disposed(by: disposeBag)
         
         viewModel.isValid

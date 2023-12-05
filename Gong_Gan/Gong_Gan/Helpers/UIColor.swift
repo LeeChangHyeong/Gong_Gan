@@ -26,6 +26,8 @@ extension UIColor {
                       alpha: alpha)
         }
     
+    static let joinTextFieldColor = UIColor(hexCode: "F6F6F6")
+    static let joinButtonColor = UIColor(hexCode: "595959")
     static let buttonColor = UIColor(hexCode: "2A2A2A")
     static let locationColor = UIColor(hexCode: "2A2A2A")
     static let galleryColor = UIColor(hexCode: "191919")
