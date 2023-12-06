@@ -52,12 +52,12 @@ class WriteViewController: UIViewController {
     
     private let backButton: UIButton = {
         let button = UIButton()
-            let image = UIImage(systemName: "chevron.backward")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 22, weight: .regular))
-            button.setImage(image, for: .normal)
-
-            button.tintColor = .white
-            
-            return button
+        let image = UIImage(systemName: "chevron.backward")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 22, weight: .regular))
+        button.setImage(image, for: .normal)
+        
+        button.tintColor = .white
+        
+        return button
     }()
     
     private let nowDateLabel: UILabel = {
@@ -82,7 +82,7 @@ class WriteViewController: UIViewController {
         button.tintColor = .white
         button.setImage(UIImage(systemName: "music.note"), for: .normal)
         button.layer.cornerRadius = 18
-//        button.addTarget(self, action: #selector(musicButtonTapped), for: .touchUpInside)
+        //        button.addTarget(self, action: #selector(musicButtonTapped), for: .touchUpInside)
         button.invalidateIntrinsicContentSize()
         
         return button
@@ -132,6 +132,7 @@ class WriteViewController: UIViewController {
         setupControl()
         setLocationManager()
         bindToLocationUpdate()
+        setupSwipeGesture()
     }
     
     private func addSubViews() {
@@ -186,7 +187,7 @@ class WriteViewController: UIViewController {
             $0.leading.equalTo(locationButton.snp.leading).offset(12)
             $0.centerY.equalTo(locationButton.snp.centerY)
         })
-}
+    }
     
     private func setLocationManager() {
         locationManager.delegate = self
@@ -196,7 +197,7 @@ class WriteViewController: UIViewController {
     
     private func bindToLocationUpdate() {
         locationSubject
-            // 한 번만 실행
+        // 한 번만 실행
             .take(1)
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self ] location in
@@ -227,6 +228,34 @@ class WriteViewController: UIViewController {
                 }
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func setupSwipeGesture() {
+        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+        swipeGesture.direction = .right
+        view.addGestureRecognizer(swipeGesture)
+    }
+    
+    @objc private func handleSwipe(_ gesture: UISwipeGestureRecognizer) {
+        if gesture.direction == .right {
+            handleBackButtonTap()
+        }
+    }
+    
+    @objc private func handleBackButtonTap() {
+        
+        let alertController = UIAlertController(title: "뒤로 가시겠어요?", message: "변경된 내용은 저장되지 않아요. 😢", preferredStyle: .alert)
+        
+        let yesAction = UIAlertAction(title: "네", style: .destructive) { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        
+        let noAction = UIAlertAction(title: "아니오", style: .cancel, handler: nil)
+        
+        alertController.addAction(noAction)
+        alertController.addAction(yesAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     private func setupControl() {
@@ -300,9 +329,9 @@ class WriteViewController: UIViewController {
             .disposed(by: disposeBag)
         
         viewModel?.nowDateText
-                .bind(to: nowDateLabel.rx.text)
-                .disposed(by: disposeBag)
-    
+            .bind(to: nowDateLabel.rx.text)
+            .disposed(by: disposeBag)
+        
         
         saveMemoButton.rx.tap
             .subscribe(onNext:{ [weak self] in

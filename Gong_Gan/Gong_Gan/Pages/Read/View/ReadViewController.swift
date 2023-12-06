@@ -137,6 +137,7 @@ class ReadViewController: UIViewController {
         setConstraints()
         setupData()
         setupControl()
+        setupSwipeGesture()
     }
     
     private func addSubViews() {
@@ -216,6 +217,38 @@ class ReadViewController: UIViewController {
             timeLabel.text = selectedGalleryData?.time
         
     }
+    
+    private func setupSwipeGesture() {
+            let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+            swipeGesture.direction = .right
+            view.addGestureRecognizer(swipeGesture)
+        }
+    
+    @objc private func handleSwipe(_ gesture: UISwipeGestureRecognizer) {
+            if gesture.direction == .right {
+                handleBackButtonTap()
+            }
+        }
+    
+    // 특수한 view에서는 swipe를 다르게 설정해주어야 하기 때문에
+    @objc private func handleBackButtonTap() {
+            if didEditing {
+                let alertController = UIAlertController(title: "뒤로 가시겠어요?", message: "변경된 내용은 저장되지 않아요. 😢", preferredStyle: .alert)
+
+                let yesAction = UIAlertAction(title: "네", style: .destructive) { [weak self] _ in
+                    self?.navigationController?.popViewController(animated: true)
+                }
+
+                let noAction = UIAlertAction(title: "아니오", style: .cancel, handler: nil)
+
+                alertController.addAction(noAction)
+                alertController.addAction(yesAction)
+
+                present(alertController, animated: true, completion: nil)
+            } else {
+                navigationController?.popViewController(animated: true)
+            }
+        }
     
     private func setupControl() {
         backButton.rx.tap
