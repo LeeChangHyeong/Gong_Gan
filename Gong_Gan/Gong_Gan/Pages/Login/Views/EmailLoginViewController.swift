@@ -38,6 +38,9 @@ class EmailLoginViewController: UIViewController {
             tf.borderStyle = .roundedRect
             tf.backgroundColor = .settingCellColor
         tf.textColor = .white
+        let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: tf.frame.height))
+        tf.leftView = leftPaddingView
+        tf.leftViewMode = .always
         
         return tf
     }()
@@ -62,6 +65,24 @@ class EmailLoginViewController: UIViewController {
             tf.backgroundColor = .settingCellColor
         tf.textColor = .white
         
+        let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: tf.frame.height))
+        tf.leftView = leftPaddingView
+        tf.leftViewMode = .always
+        
+        // Secure Text Entry를 사용하여 비밀번호를 가림
+        tf.isSecureTextEntry = true
+        
+        // 비밀번호 볼 수 있도록 하는 버튼
+        let showHideButton = UIButton(type: .custom)
+        
+        showHideButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 12)
+        showHideButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        showHideButton.tintColor = UIColor.systemGray
+        showHideButton.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
+        
+        tf.rightView = showHideButton
+        tf.rightViewMode = .always
+        
         return tf
     }()
     
@@ -71,6 +92,25 @@ class EmailLoginViewController: UIViewController {
         label.textColor = .white
         label.font = .systemFont(ofSize: 17, weight: .bold)
         
+        
+        return label
+    }()
+    
+    private let loginFailLabel: UILabel = {
+        let label = UILabel()
+        label.isHidden = true
+        
+        let attachment = NSTextAttachment()
+        attachment.image = UIImage(systemName: "exclamationmark.circle")?.withTintColor(.red, renderingMode: .alwaysOriginal)
+        
+        let attributedString = NSMutableAttributedString(attachment: attachment)
+        
+        attributedString.append(NSAttributedString(string: " 이메일과 비밀번호를 다시 확인해주세요.", attributes: [
+            .foregroundColor: UIColor.red,
+            .font: UIFont.systemFont(ofSize: 13, weight: .bold)
+        ]))
+        
+        label.attributedText = attributedString
         
         return label
     }()
@@ -95,6 +135,7 @@ class EmailLoginViewController: UIViewController {
         view.addSubview(emailTf)
         view.addSubview(passWordTf)
         view.addSubview(loginButton)
+        view.addSubview(loginFailLabel)
     }
     
     private func setConstraints() {
@@ -110,6 +151,11 @@ class EmailLoginViewController: UIViewController {
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(49)
+        })
+        
+        loginFailLabel.snp.makeConstraints({
+            $0.top.equalTo(passWordTf.snp.bottom).offset(8)
+            $0.leading.equalToSuperview().offset(20)
         })
         
         loginButton.snp.makeConstraints({
@@ -153,6 +199,18 @@ class EmailLoginViewController: UIViewController {
             .bind(to: loginButton.rx.alpha)
             .disposed(by: disposeBag)
         
+        emailTf.rx.controlEvent([.editingDidBegin,.editingChanged])
+            .subscribe(onNext: { [weak self] _ in
+                self?.loginFailLabel.isHidden = true
+            })
+            .disposed(by: disposeBag)
+        
+        passWordTf.rx.controlEvent([.editingDidBegin,.editingChanged])
+            .subscribe(onNext: { [weak self] _ in
+                self?.loginFailLabel.isHidden = true
+            })
+            .disposed(by: disposeBag)
+        
         loginButton.rx.tap.subscribe (onNext: { [weak self] _ in
             guard let email = self?.emailTf.text else { return }
             guard let password = self?.passWordTf.text else { return }
@@ -162,6 +220,8 @@ class EmailLoginViewController: UIViewController {
                 if authResult == nil {
                     if let errorCode = error {
                         print(errorCode)
+                        self?.loginFailLabel.isHidden = false
+                        
                     }
                 } else if authResult != nil {
                     
@@ -170,4 +230,16 @@ class EmailLoginViewController: UIViewController {
         })
         .disposed(by: disposeBag)
     }
+    
+    @objc private func togglePasswordVisibility() {
+        // "비밀번호 보이기" 버튼을 토글하여 Secure Text Entry를 업데이트
+        passWordTf.isSecureTextEntry.toggle()
+        
+        // 버튼 이미지 변경
+        let imageName = passWordTf.isSecureTextEntry ? "eye.slash" : "eye"
+        if let button = passWordTf.rightView as? UIButton {
+            button.setImage(UIImage(systemName: imageName), for: .normal)
+        }
+    }
+
 }
