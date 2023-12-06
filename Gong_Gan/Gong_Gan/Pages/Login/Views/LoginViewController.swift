@@ -49,21 +49,45 @@ class LoginViewController: UIViewController {
         return button
     }()
     
-    private let joinButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("회원가입하기", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = 6
-        button.addTarget(self, action: #selector(joinButtonTapped), for: .touchUpInside)
-        
-        return button
-    }()
     
     private let appleLoginButton: UIButton = {
         let button = UIButton()
         button.setTitle("애플로 로그인", for: .normal)
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 6
+        
+        return button
+    }()
+    
+//    private let notMemberLabel: UILabel = {
+//        let label = UILabel()
+//        label.text = "아직 회원이 아니라면? "
+//        label.font = .systemFont(ofSize: 15, weight: .regular)
+//        label.textColor = .galleryLabelColor
+//        
+//        return label
+//    }()
+    
+    private let joinButton: UIButton = {
+        let button = UIButton()
+        let fullText = "아직 회원이 아니라면? 회원가입"
+        
+        button.setTitle(fullText, for: .normal)
+        button.setTitleColor(.galleryLabelColor, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 15, weight: .regular)
+        
+        // 전체 텍스트에 대한 스타일 설정
+        let attributedString = NSMutableAttributedString(string: fullText, attributes: [
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .regular)
+        ])
+        
+        // "회원가입" 부분에만 밑줄 추가
+        let range = (fullText as NSString).range(of: "회원가입")
+        attributedString.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range)
+        
+        button.setAttributedTitle(attributedString, for: .normal)
+        
+        button.addTarget(self, action: #selector(joinButtonTapped), for: .touchUpInside)
         
         return button
     }()
@@ -140,25 +164,16 @@ class LoginViewController: UIViewController {
             $0.height.equalTo(30)
         })
         
-        joinButton.snp.makeConstraints({
-            $0.top.equalTo(loginButton.snp.bottom).offset(30)
-            $0.centerX.equalToSuperview()
-            $0.width.equalTo(100)
-            $0.height.equalTo(30)
-        })
-        
-        appleLoginButton.snp.makeConstraints({
-            $0.top.equalTo(joinButton.snp.bottom).offset(30)
-            $0.centerX.equalToSuperview()
-            $0.width.equalTo(100)
-            $0.height.equalTo(30)
-        })
-        
         seeFirstButton.snp.makeConstraints({
-            $0.bottom.equalToSuperview().offset(-73)
+            $0.bottom.equalToSuperview().offset(-71)
             $0.centerX.equalToSuperview()
-            $0.height.equalTo(20)
         })
+        
+        joinButton.snp.makeConstraints({
+            $0.bottom.equalTo(seeFirstButton.snp.top).offset(-79)
+            $0.centerX.equalToSuperview()
+        })
+        
         
 //        kakaoLoginButton.snp.makeConstraints({
 //            $0.top.equalTo(appleLoginButton.snp.bottom).offset(30)
