@@ -58,7 +58,7 @@ class BottomBarView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .black.withAlphaComponent(0.4)
+        backgroundColor = .black
         addViews()
         setConstraints()
         setupControl()

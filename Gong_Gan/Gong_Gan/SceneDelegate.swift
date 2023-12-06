@@ -17,16 +17,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
-        // 네비게이션 컨트롤러 코드로 셋팅하기 ⭐️
         guard let windowScene = (scene as? UIWindowScene) else { return }
-//        window = UIWindow(windowScene: windowScene)
-//
-//        let naviVC = UINavigationController(rootViewController: MainViewController())
-//
-//        window?.rootViewController = naviVC
-//        window?.makeKeyAndVisible()
+
         let window = UIWindow(windowScene: windowScene)
         self.window = window
+        
+        setupGlobalSwipeGesture()
         
         AppController.shared.show(in: window)
     }
@@ -38,6 +34,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     }
                 }
     }
+    
+    func setupGlobalSwipeGesture() {
+            let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+            swipeGesture.direction = .right
+            window?.addGestureRecognizer(swipeGesture)
+        }
+        
+        @objc private func handleSwipe(_ gesture: UISwipeGestureRecognizer) {
+            if gesture.direction == .right {
+                if let navigationController = window?.rootViewController as? UINavigationController {
+                    navigationController.popViewController(animated: true)
+                }
+            }
+        }
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
