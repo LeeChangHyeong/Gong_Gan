@@ -37,6 +37,7 @@
 		32B11EC12B1ECD980022FCC5 /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B11EC02B1ECD980022FCC5 /* MyInfoViewController.swift */; };
 		32B11EC42B1EDBD00022FCC5 /* LogOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B11EC32B1EDBD00022FCC5 /* LogOutView.swift */; };
 		32B11EC62B1EDC0B0022FCC5 /* WithdrawalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B11EC52B1EDC0B0022FCC5 /* WithdrawalView.swift */; };
+		32BDCFAA2B206AA700D155EA /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BDCFA92B206AA700D155EA /* WeatherModel.swift */; };
 		32C35DC42B147ABB00269B65 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C35DC32B147ABB00269B65 /* UserData.swift */; };
 		32C3DD0D2B1F09E9008B9EB6 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C3DD0C2B1F09E9008B9EB6 /* Keys.swift */; };
 		32C3DD0F2B20312F008B9EB6 /* EmailLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C3DD0E2B20312F008B9EB6 /* EmailLoginViewController.swift */; };
@@ -80,6 +81,7 @@
 		32B11EC02B1ECD980022FCC5 /* MyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
 		32B11EC32B1EDBD00022FCC5 /* LogOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutView.swift; sourceTree = "<group>"; };
 		32B11EC52B1EDC0B0022FCC5 /* WithdrawalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalView.swift; sourceTree = "<group>"; };
+		32BDCFA92B206AA700D155EA /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		32C35DC32B147ABB00269B65 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		32C3DD0C2B1F09E9008B9EB6 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		32C3DD0E2B20312F008B9EB6 /* EmailLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginViewController.swift; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				3283A5BF2A95F264001ECC9A /* Gong_Gan.xcdatamodeld */,
+				32BDCFA92B206AA700D155EA /* WeatherModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -555,6 +558,7 @@
 				323125922AFCCF0B002B9A25 /* LoginViewModel.swift in Sources */,
 				32D8E1C22AB20F71001D9AF3 /* TopBarView.swift in Sources */,
 				32C35DC42B147ABB00269B65 /* UserData.swift in Sources */,
+				32BDCFAA2B206AA700D155EA /* WeatherModel.swift in Sources */,
 				3203519F2B1D8FF20055798A /* InquiryView.swift in Sources */,
 				32B11EC12B1ECD980022FCC5 /* MyInfoViewController.swift in Sources */,
 				323125812AFA64CB002B9A25 /* JoinViewController.swift in Sources */,
