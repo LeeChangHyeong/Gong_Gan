@@ -15,10 +15,11 @@ import FirebaseFirestore
 
 class EmailLoginViewController: UIViewController {
     private let viewModel = LoginViewModel()
-    let isEmailValid = BehaviorSubject(value: false)
-    let isPwValid = BehaviorSubject(value: false)
     private let disposeBag = DisposeBag()
     
+    let isEmailValid = BehaviorSubject(value: false)
+    let isPwValid = BehaviorSubject(value: false)
+
     private let backButton: UIButton = {
         let button = UIButton()
         let image = UIImage(systemName: "chevron.backward")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 22, weight: .regular))
@@ -31,8 +32,12 @@ class EmailLoginViewController: UIViewController {
     
     private let emailTf: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "이메일을 입력해주세요"
-        tf.borderStyle = .roundedRect
+        // placeholder의 색을 변경하기 위한 NSAttributedString 생성
+        let placeholderText = NSAttributedString(string: "이메일", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeHolderColor])
+        tf.attributedPlaceholder = placeholderText
+            tf.borderStyle = .roundedRect
+            tf.backgroundColor = .settingCellColor
+        tf.textColor = .white
         
         return tf
     }()
@@ -40,7 +45,8 @@ class EmailLoginViewController: UIViewController {
     private let loginButton: UIButton = {
         let button = UIButton()
         button.setTitle("로그인", for: .normal)
-        button.backgroundColor = .systemBlue
+        button.titleLabel?.font = .systemFont(ofSize: 17, weight: .bold)
+        button.backgroundColor = .galleryLabelColor
         button.layer.cornerRadius = 6
         button.isEnabled = false
         
@@ -49,8 +55,12 @@ class EmailLoginViewController: UIViewController {
     
     private let passWordTf: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "비밀번호를 입력해주세요"
-        tf.borderStyle = .roundedRect
+        // placeholder의 색을 변경하기 위한 NSAttributedString 생성
+        let placeholderText = NSAttributedString(string: "비밀번호", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeHolderColor])
+        tf.attributedPlaceholder = placeholderText
+            tf.borderStyle = .roundedRect
+            tf.backgroundColor = .settingCellColor
+        tf.textColor = .white
         
         return tf
     }()
@@ -89,24 +99,24 @@ class EmailLoginViewController: UIViewController {
     
     private func setConstraints() {
         emailTf.snp.makeConstraints({
-            $0.top.equalToSuperview().offset(100)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
-            $0.height.equalTo(30)
+            $0.height.equalTo(49)
         })
         
         passWordTf.snp.makeConstraints({
             $0.top.equalTo(emailTf.snp.bottom).offset(16)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
-            $0.height.equalTo(30)
+            $0.height.equalTo(49)
         })
         
         loginButton.snp.makeConstraints({
-            $0.top.equalTo(passWordTf.snp.bottom).offset(30)
-            $0.centerX.equalToSuperview()
-            $0.width.equalTo(100)
-            $0.height.equalTo(30)
+            $0.top.equalTo(passWordTf.snp.bottom).offset(48)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(56)
         })
     }
     

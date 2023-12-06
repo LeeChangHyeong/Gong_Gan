@@ -35,5 +35,6 @@ extension UIColor {
     static let settingCellColor = UIColor(hexCode: "262826")
     static let settingArrowColor = UIColor(hexCode: "8B8B8B")
     static let emailLoginButtonColor = UIColor(hexCode: "3E3E3E")
+    static let placeHolderColor = UIColor(hexCode: "656565")
 }
 
