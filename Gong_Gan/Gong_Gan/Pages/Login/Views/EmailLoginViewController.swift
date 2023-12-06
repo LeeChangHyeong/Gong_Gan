@@ -19,7 +19,7 @@ class EmailLoginViewController: UIViewController {
     
     let isEmailValid = BehaviorSubject(value: false)
     let isPwValid = BehaviorSubject(value: false)
-
+    
     private let backButton: UIButton = {
         let button = UIButton()
         let image = UIImage(systemName: "chevron.backward")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 22, weight: .regular))
@@ -35,8 +35,8 @@ class EmailLoginViewController: UIViewController {
         // placeholder의 색을 변경하기 위한 NSAttributedString 생성
         let placeholderText = NSAttributedString(string: "이메일", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeHolderColor])
         tf.attributedPlaceholder = placeholderText
-            tf.borderStyle = .roundedRect
-            tf.backgroundColor = .settingCellColor
+        tf.layer.cornerRadius = 8
+        tf.backgroundColor = .settingCellColor
         tf.textColor = .white
         let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: tf.frame.height))
         tf.leftView = leftPaddingView
@@ -61,8 +61,8 @@ class EmailLoginViewController: UIViewController {
         // placeholder의 색을 변경하기 위한 NSAttributedString 생성
         let placeholderText = NSAttributedString(string: "비밀번호", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeHolderColor])
         tf.attributedPlaceholder = placeholderText
-            tf.borderStyle = .roundedRect
-            tf.backgroundColor = .settingCellColor
+        tf.layer.cornerRadius = 8
+        tf.backgroundColor = .settingCellColor
         tf.textColor = .white
         
         let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: tf.frame.height))
@@ -121,7 +121,7 @@ class EmailLoginViewController: UIViewController {
         emailTf.text = ""
         passWordTf.text = ""
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .galleryColor
@@ -241,5 +241,5 @@ class EmailLoginViewController: UIViewController {
             button.setImage(UIImage(systemName: imageName), for: .normal)
         }
     }
-
+    
 }

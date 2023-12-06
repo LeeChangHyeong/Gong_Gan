@@ -47,9 +47,11 @@ class JoinViewController: UIViewController {
     
     private let emailTf: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "이메일을 입력해주세요"
+        let placeholderText = NSAttributedString(string: "이메일을 입력해주세요.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeHolderColor])
+        tf.attributedPlaceholder = placeholderText
         tf.layer.cornerRadius = 8
-        tf.backgroundColor = .joinTextFieldColor
+        tf.backgroundColor = .settingCellColor
+        tf.textColor = .white
         
         let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: tf.frame.height))
         tf.leftView = leftPaddingView
@@ -90,9 +92,11 @@ class JoinViewController: UIViewController {
     
     private let passWordTf: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "비밀번호를 입력해주세요"
+        let placeholderText = NSAttributedString(string: "비밀번호를 입력해주세요.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeHolderColor])
+        tf.attributedPlaceholder = placeholderText
         tf.layer.cornerRadius = 8
-        tf.backgroundColor = .joinTextFieldColor
+        tf.backgroundColor = .settingCellColor
+        tf.textColor = .white
         
         let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: tf.frame.height))
         tf.leftView = leftPaddingView
@@ -120,7 +124,7 @@ class JoinViewController: UIViewController {
         button.setTitle("가입완료", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 17, weight: .bold)
         button.backgroundColor = .joinButtonColor
-        button.layer.cornerRadius = 6
+        button.layer.cornerRadius = 14
         button.isEnabled = false
         
         return button
