@@ -51,6 +51,7 @@ class MainViewController: UIViewController {
         addSubView()
         setConstraints()
         bindViewModel()
+        setupSwipeGestures()
     }
     
     private func addSubView() {
@@ -197,9 +198,56 @@ class MainViewController: UIViewController {
         // 실제 아이폰 카메라 소리
         AudioServicesPlaySystemSound(1108)
     }
+    
+    // 스와이프 제스처를 감지하기 위한 함수
+        private func setupSwipeGestures() {
+            let swipeLeftGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+            swipeLeftGesture.direction = .left
+            view.addGestureRecognizer(swipeLeftGesture)
+
+            let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+            swipeRightGesture.direction = .right
+            view.addGestureRecognizer(swipeRightGesture)
+        }
+
+        // 스와이프 제스처 핸들러
+        @objc private func handleSwipe(_ gesture: UISwipeGestureRecognizer) {
+            if gesture.direction == .left {
+                // 왼쪽으로 스와이프할 때 picker를 이동시키는 동작 수행
+                movePickerLeft()
+            } else if gesture.direction == .right {
+                // 오른쪽으로 스와이프할 때 picker를 이동시키는 동작 수행
+                movePickerRight()
+            }
+        }
+
+    // Picker를 왼쪽으로 이동시키는 함수
+    private func movePickerLeft() {
+        let selectedRow = cameraModePicker.selectedRow(inComponent: 0)
+        let newSelectedRow = min(selectedRow + 1, captureModesList.count - 1)
+        
+        if selectedRow != newSelectedRow {
+            UIView.animate(withDuration: 0.3) {
+                self.cameraModePicker.selectRow(newSelectedRow, inComponent: 0, animated: true)
+                self.pickerView(self.cameraModePicker, didSelectRow: newSelectedRow, inComponent: 0)
+            }
+        }
+    }
+
+    // Picker를 오른쪽으로 이동시키는 함수
+    private func movePickerRight() {
+        
+        let selectedRow = cameraModePicker.selectedRow(inComponent: 0)
+        let newSelectedRow = max(selectedRow - 1, 0)
+
+        if selectedRow != newSelectedRow {
+            UIView.animate(withDuration: 0.3) {
+                self.cameraModePicker.selectRow(newSelectedRow, inComponent: 0, animated: true)
+                self.pickerView(self.cameraModePicker, didSelectRow: newSelectedRow, inComponent: 0)
+            }
+        }
+    }
 }
-
-
 
 extension MainViewController: UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
