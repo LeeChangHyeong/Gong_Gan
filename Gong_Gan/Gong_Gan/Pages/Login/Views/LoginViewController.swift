@@ -68,6 +68,19 @@ class LoginViewController: UIViewController {
         return button
     }()
     
+    private let seeFirstButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("먼저 둘러볼게요", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 15, weight: .regular)
+        
+        let attributedString = NSAttributedString(string: button.titleLabel?.text ?? "", attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.baselineOffset: 4])
+        button.setAttributedTitle(attributedString, for: .normal)
+
+        return button
+    }()
+
+    
     // TODO: 카카오 로그인시 이메일을 아직 받아오지 못하기 때문에 임시 제거
     // TODO: 카카오 로그인시 이메일을 받아오려면 카카오에 검수를해 동의를 받아야함
 //    private let kakaoLoginButton: UIButton = {
@@ -89,7 +102,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .galleryColor
         addViews()
         setConstraints()
         setupControl()
@@ -101,6 +114,7 @@ class LoginViewController: UIViewController {
         view.addSubview(loginButton)
         view.addSubview(joinButton)
         view.addSubview(appleLoginButton)
+        view.addSubview(seeFirstButton)
 //        view.addSubview(kakaoLoginButton)
     }
     
@@ -138,6 +152,12 @@ class LoginViewController: UIViewController {
             $0.centerX.equalToSuperview()
             $0.width.equalTo(100)
             $0.height.equalTo(30)
+        })
+        
+        seeFirstButton.snp.makeConstraints({
+            $0.bottom.equalToSuperview().offset(-73)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(20)
         })
         
 //        kakaoLoginButton.snp.makeConstraints({

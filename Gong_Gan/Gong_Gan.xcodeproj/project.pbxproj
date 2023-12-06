@@ -39,6 +39,7 @@
 		32B11EC62B1EDC0B0022FCC5 /* WithdrawalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B11EC52B1EDC0B0022FCC5 /* WithdrawalView.swift */; };
 		32C35DC42B147ABB00269B65 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C35DC32B147ABB00269B65 /* UserData.swift */; };
 		32C3DD0D2B1F09E9008B9EB6 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C3DD0C2B1F09E9008B9EB6 /* Keys.swift */; };
+		32C3DD0F2B20312F008B9EB6 /* EmailLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C3DD0E2B20312F008B9EB6 /* EmailLoginViewController.swift */; };
 		32D8E1BC2AB1FB08001D9AF3 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1BB2AB1FB08001D9AF3 /* UIColor.swift */; };
 		32D8E1C22AB20F71001D9AF3 /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1C12AB20F71001D9AF3 /* TopBarView.swift */; };
 		32D8E1C42AB20F84001D9AF3 /* BottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1C32AB20F84001D9AF3 /* BottomBarView.swift */; };
@@ -81,6 +82,7 @@
 		32B11EC52B1EDC0B0022FCC5 /* WithdrawalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalView.swift; sourceTree = "<group>"; };
 		32C35DC32B147ABB00269B65 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		32C3DD0C2B1F09E9008B9EB6 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		32C3DD0E2B20312F008B9EB6 /* EmailLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginViewController.swift; sourceTree = "<group>"; };
 		32D8E1BB2AB1FB08001D9AF3 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		32D8E1C12AB20F71001D9AF3 /* TopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
 		32D8E1C32AB20F84001D9AF3 /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				3231257C2AFA603A002B9A25 /* LoginViewController.swift */,
+				32C3DD0E2B20312F008B9EB6 /* EmailLoginViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -557,6 +560,7 @@
 				323125812AFA64CB002B9A25 /* JoinViewController.swift in Sources */,
 				3203519B2B1D8F850055798A /* LocationSettingView.swift in Sources */,
 				32718C432B15D1F400FF3EEF /* GalleryViewController.swift in Sources */,
+				32C3DD0F2B20312F008B9EB6 /* EmailLoginViewController.swift in Sources */,
 				320351922B1869DC0055798A /* ReadViewModel.swift in Sources */,
 				320351992B1D89370055798A /* MyInfoView.swift in Sources */,
 				3283A5B92A95F264001ECC9A /* SceneDelegate.swift in Sources */,
