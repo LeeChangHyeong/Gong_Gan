@@ -254,6 +254,13 @@ class LoginViewController: UIViewController {
                 self?.startSignInWithAppleFlow()
             })
             .disposed(by: disposeBag)
+        
+        emailLoginButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                let vc = EmailLoginViewController()
+                
+                self?.navigationController?.pushViewController(vc, animated: true)
+            })
     }
     
     @objc private func joinButtonTapped() {
