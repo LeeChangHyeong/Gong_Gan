@@ -23,40 +23,14 @@ class LoginViewController: UIViewController {
     let isPwValid = BehaviorSubject(value: false)
     let disposeBag = DisposeBag()
     
-    private let emailTf: UITextField = {
-        let tf = UITextField()
-        tf.placeholder = "이메일을 입력해주세요"
-        tf.borderStyle = .roundedRect
-        
-        return tf
-    }()
-    
-    private let passWordTf: UITextField = {
-        let tf = UITextField()
-        tf.placeholder = "비밀번호를 입력해주세요"
-        tf.borderStyle = .roundedRect
-        
-        return tf
-    }()
-    
-    private let loginButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("로그인", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = 6
-        button.isEnabled = false
-        
-        return button
-    }()
-    
-    
     private let appleLoginButton: UIButton = {
         let button = UIButton()
         button.setTitle("Apple로 로그인", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
         button.layer.cornerRadius = 25
         button.backgroundColor = .black
-
+        
+        // 이미지 설정
         if let appleImage = UIImage(named: "apple") {
             button.setImage(appleImage, for: .normal)
             button.imageView?.contentMode = .scaleAspectFit
@@ -65,6 +39,10 @@ class LoginViewController: UIViewController {
         
         // titleLabel 중앙에 위치시키기
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -button.imageView!.frame.size.width, bottom: 0, right: 0)
+        
+        // 1포인트 흰색 테두리 추가
+        button.layer.borderWidth = 1.0
+        button.layer.borderColor = UIColor.white.cgColor
         
         return button
     }()
@@ -128,13 +106,6 @@ class LoginViewController: UIViewController {
 //        return button
 //    }()
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        emailTf.text = ""
-        passWordTf.text = ""
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .galleryColor
@@ -144,9 +115,6 @@ class LoginViewController: UIViewController {
     }
     
     private func addViews() {
-        view.addSubview(emailTf)
-        view.addSubview(passWordTf)
-        view.addSubview(loginButton)
         view.addSubview(joinButton)
         view.addSubview(appleLoginButton)
         view.addSubview(seeFirstButton)
@@ -155,27 +123,6 @@ class LoginViewController: UIViewController {
     }
     
     private func setConstraints() {
-        emailTf.snp.makeConstraints({
-            $0.top.equalToSuperview().offset(100)
-            $0.leading.equalToSuperview().offset(20)
-            $0.trailing.equalToSuperview().offset(-20)
-            $0.height.equalTo(30)
-        })
-        
-        passWordTf.snp.makeConstraints({
-            $0.top.equalTo(emailTf.snp.bottom).offset(16)
-            $0.leading.equalToSuperview().offset(20)
-            $0.trailing.equalToSuperview().offset(-20)
-            $0.height.equalTo(30)
-        })
-        
-        loginButton.snp.makeConstraints({
-            $0.top.equalTo(passWordTf.snp.bottom).offset(30)
-            $0.centerX.equalToSuperview()
-            $0.width.equalTo(100)
-            $0.height.equalTo(30)
-        })
-        
         seeFirstButton.snp.makeConstraints({
             $0.bottom.equalToSuperview().offset(-71)
             $0.centerX.equalToSuperview()
@@ -210,45 +157,6 @@ class LoginViewController: UIViewController {
     }
     
     private func setupControl() {
-        // 이메일 입력 textField를 viewModel의 emailObserver로 바인딩
-        emailTf.rx.text
-            .orEmpty
-            .bind(to: viewModel.emailObserver)
-            .disposed(by: disposeBag)
-        // 비밀번호 입력 textField를 viewModel의 passwordObserver로 바인딩
-        passWordTf.rx.text
-            .orEmpty
-            .bind(to: viewModel.passwordObserver)
-            .disposed(by: disposeBag)
-        
-        // viewModel에서 입력한 값을 통해 로그인 버튼의 enabled를 정해줌
-        viewModel.isValid.bind(to: loginButton.rx.isEnabled)
-            .disposed(by: disposeBag)
-        
-        // 시각적으로 버튼이 활성화, 비활성화 되었는지 보여주기 위해 alpha값을 줌
-        viewModel.isValid
-            .map{$0 ? 1 : 0.3}
-            .bind(to: loginButton.rx.alpha)
-            .disposed(by: disposeBag)
-        
-        // TODO: FireBase 서버에 등록된 아이디인지 확인하여 로그인 성공 시키고 실패시키는 로직으로 리팩토링 필요
-        loginButton.rx.tap.subscribe (onNext: { [weak self] _ in
-            guard let email = self?.emailTf.text else { return }
-            guard let password = self?.passWordTf.text else { return }
-        
-            Auth.auth().signIn(withEmail: email, password: password) {
-                [self] authResult, error in
-                if authResult == nil {
-                    if let errorCode = error {
-                        print(errorCode)
-                    }
-                } else if authResult != nil {
-                    
-                }
-            }
-        })
-        .disposed(by: disposeBag)
-        
         appleLoginButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.startSignInWithAppleFlow()
