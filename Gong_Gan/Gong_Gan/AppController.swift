@@ -29,6 +29,20 @@ final class AppController {
         window.backgroundColor = .systemBackground
         window.makeKeyAndVisible()
         
+        if Auth.auth().currentUser != nil {
+            if !UserDefaults.standard.bool(forKey: "hasLaunchedBefore") {
+                // 최초 실행일 때 로그아웃
+                do {
+                    try Auth.auth().signOut()
+                } catch let signOutError as NSError {
+                    print("Error signing out: \(signOutError)")
+                }
+                
+                // 최초 실행 여부를 UserDefaults에 기록
+                UserDefaults.standard.set(true, forKey: "hasLaunchedBefore")
+            }
+        }
+        
         // 로그인이 완료된 경우에는 AuthStateDidChange 이벤트를 받아서 NotificationCenter에 의하여 자동 로그인
         if Auth.auth().currentUser == nil {
             // 로그인 완료 되지 않았을때 로그인 뷰로
