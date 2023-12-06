@@ -125,7 +125,7 @@ class MyInfoViewController: UIViewController {
     @objc private func handleLogOutViewTap() {
         let alertController = UIAlertController(title: "로그아웃", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
         
-        let logOutAction = UIAlertAction(title: "로그아웃", style: .default) {_ in
+        let logOutAction = UIAlertAction(title: "로그아웃", style: .destructive) {_ in
             // 카카오톡 로그아웃
             UserApi.shared.logout { error in
                 if let error = error {
@@ -144,7 +144,7 @@ class MyInfoViewController: UIViewController {
                     }
         }
         
-        let cancelAction = UIAlertAction(title: "아니오", style: .destructive, handler: nil)
+        let cancelAction = UIAlertAction(title: "아니오", style: .cancel, handler: nil)
         
         alertController.addAction(cancelAction)
         alertController.addAction(logOutAction)
@@ -155,7 +155,7 @@ class MyInfoViewController: UIViewController {
     @objc private func handleWithdrawalViewTap() {
         let alertController = UIAlertController(title: "회원탈퇴", message: "정말 회원탈퇴하시겠습니까?", preferredStyle: .alert)
         
-        let withdrawalAction = UIAlertAction(title: "회원탈퇴", style: .default) { _ in
+        let withdrawalAction = UIAlertAction(title: "회원탈퇴", style: .destructive) { _ in
             
             let uid = UserData.shared.getUserUid()
             print(uid)
@@ -182,7 +182,7 @@ class MyInfoViewController: UIViewController {
             
         }
         
-        let cancelAction = UIAlertAction(title: "아니오", style: .destructive, handler: nil)
+        let cancelAction = UIAlertAction(title: "아니오", style: .cancel, handler: nil)
         
         alertController.addAction(cancelAction)
         alertController.addAction(withdrawalAction)

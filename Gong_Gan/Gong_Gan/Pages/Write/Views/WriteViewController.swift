@@ -270,12 +270,12 @@ class WriteViewController: UIViewController {
                 return Observable.create { observer in
                     let alertController = UIAlertController(title: "뒤로 가시겠어요?", message: "변경된 내용은 저장되지 않아요. 😢", preferredStyle: .alert)
                     
-                    let yesAction = UIAlertAction(title: "네", style: .default) { _ in
+                    let yesAction = UIAlertAction(title: "네", style: .destructive) { _ in
                         observer.onNext(true)
                         observer.onCompleted()
                     }
                     
-                    let noAction = UIAlertAction(title: "아니오", style: .destructive) { _ in
+                    let noAction = UIAlertAction(title: "아니오", style: .cancel) { _ in
                         observer.onNext(false)
                         observer.onCompleted()
                     }
