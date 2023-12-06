@@ -52,21 +52,32 @@ class LoginViewController: UIViewController {
     
     private let appleLoginButton: UIButton = {
         let button = UIButton()
-        button.setTitle("애플로 로그인", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = 6
+        button.setTitle("Apple로 로그인", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
+        button.layer.cornerRadius = 25
+        button.backgroundColor = .black
+
+        if let appleImage = UIImage(named: "apple") {
+            button.setImage(appleImage, for: .normal)
+            button.imageView?.contentMode = .scaleAspectFit
+            button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -150, bottom: 0, right: 0)
+        }
+        
+        // titleLabel 중앙에 위치시키기
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -button.imageView!.frame.size.width, bottom: 0, right: 0)
         
         return button
     }()
     
-//    private let notMemberLabel: UILabel = {
-//        let label = UILabel()
-//        label.text = "아직 회원이 아니라면? "
-//        label.font = .systemFont(ofSize: 15, weight: .regular)
-//        label.textColor = .galleryLabelColor
-//        
-//        return label
-//    }()
+    private let emailLoginButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("이메일 로그인", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
+        button.backgroundColor = .emailLoginButtonColor
+        button.layer.cornerRadius = 25
+        
+        return button
+    }()
     
     private let joinButton: UIButton = {
         let button = UIButton()
@@ -139,6 +150,7 @@ class LoginViewController: UIViewController {
         view.addSubview(joinButton)
         view.addSubview(appleLoginButton)
         view.addSubview(seeFirstButton)
+        view.addSubview(emailLoginButton)
 //        view.addSubview(kakaoLoginButton)
     }
     
@@ -172,6 +184,20 @@ class LoginViewController: UIViewController {
         joinButton.snp.makeConstraints({
             $0.bottom.equalTo(seeFirstButton.snp.top).offset(-79)
             $0.centerX.equalToSuperview()
+        })
+        
+        emailLoginButton.snp.makeConstraints({
+            $0.bottom.equalTo(joinButton.snp.top).offset(-16)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(56)
+        })
+        
+        appleLoginButton.snp.makeConstraints({
+            $0.bottom.equalTo(emailLoginButton.snp.top).offset(-20)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(56)
         })
         
         
