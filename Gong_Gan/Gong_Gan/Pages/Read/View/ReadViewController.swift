@@ -224,12 +224,12 @@ class ReadViewController: UIViewController {
                     if self?.didEditing ?? false {
                         let alertController = UIAlertController(title: "뒤로 가시겠어요?", message: "변경된 내용은 저장되지 않아요. 😢", preferredStyle: .alert)
                         
-                        let yesAction = UIAlertAction(title: "네", style: .default) { _ in
+                        let yesAction = UIAlertAction(title: "네", style: .destructive) { _ in
                             observer.onNext(true)
                             observer.onCompleted()
                         }
                         
-                        let noAction = UIAlertAction(title: "아니오", style: .destructive) { _ in
+                        let noAction = UIAlertAction(title: "아니오", style: .cancel) { _ in
                             observer.onNext(false)
                             observer.onCompleted()
                         }
@@ -297,14 +297,8 @@ class ReadViewController: UIViewController {
             self?.setNaviBar()
         }
         
-        let deleteAction = UIAction(title: "삭제", image: UIImage(systemName: "trash")) { [weak self] _ in
-            self?.viewModel.deleteMemo { error in
-                if let error = error {
-                    print("일기 삭제 실패: \(error.localizedDescription)")
-                } else {
-                    self?.navigationController?.popViewController(animated: true)
-                }
-            }
+        let deleteAction = UIAction(title: "삭제", image: UIImage(systemName: "trash")) {[weak self] _ in
+            self?.showDeleteConfirmation()
         }
         
         let menu = UIMenu(children: [editAction, deleteAction])
@@ -312,6 +306,35 @@ class ReadViewController: UIViewController {
         optionButton.menu = menu
         // 꾹 안눌러도 메뉴 뜨게 iOS 14이상 지원
         optionButton.showsMenuAsPrimaryAction = true
+    }
+    
+    private func showDeleteConfirmation() {
+        let alertController = UIAlertController(
+            title: "정말 삭제하시나요?",
+            message: "복구되지 않습니다!",
+            preferredStyle: .alert
+        )
+
+        let deleteAction = UIAlertAction(title: "삭제하기", style: .destructive) { [weak self] _ in
+            self?.deleteMemo()
+        }
+
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+
+        alertController.addAction(deleteAction)
+        alertController.addAction(cancelAction)
+
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    private func deleteMemo() {
+        viewModel.deleteMemo { [weak self] error in
+            if let error = error {
+                print("일기 삭제 실패: \(error.localizedDescription)")
+            } else {
+                self?.navigationController?.popViewController(animated: true)
+            }
+        }
     }
 }
 
