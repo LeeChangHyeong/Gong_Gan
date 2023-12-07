@@ -20,6 +20,7 @@ class TopBarView: UIView {
     
     private let disposeBag = DisposeBag()
     private let locationSubject = PublishSubject<CLLocation>()
+    private let viewModel = MainViewModel()
     
     
     private let musicButton: UIButton = {
@@ -136,8 +137,25 @@ class TopBarView: UIView {
                             .font: UIFont.systemFont(ofSize: 15, weight: .bold),
                             .foregroundColor: UIColor.white
                         ]
-                        
+                    
                         attributedString.append(NSAttributedString(string: " \(place.locality ?? "") \(place.subLocality ?? "")", attributes: textAttributes))
+                        
+                        // 위도 경도 들고오기
+                        let latitude = place.location?.coordinate.latitude
+                        let longitude = place.location?.coordinate.longitude
+                        
+                        self?.viewModel.getWeather(lat: latitude!, lon: longitude!)
+                            .subscribe(onNext: { weatherModel in
+                                // 가져온 날씨 정보를 출력
+                                print("Temperature: \(weatherModel.main.temp) ℃")
+                                print("Min Temperature: \(weatherModel.main.tempMin) ℃")
+                                print("Max Temperature: \(weatherModel.main.tempMax) ℃")
+                                print("Weather Description: \(weatherModel.weather.first?.main ?? "N/A")")
+                            }, onError: { error in
+                                // 에러가 발생한 경우 출력
+                                print("Error fetching weather: \(error.localizedDescription)")
+                            })
+                            .disposed(by: self!.disposeBag)
                         
                         self?.locationLabel.attributedText = attributedString
                         

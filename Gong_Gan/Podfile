@@ -15,5 +15,6 @@ target 'Gong_Gan' do
   pod 'FirebaseFirestore'
   pod 'Firebase'
   pod 'KakaoSDK'
+  pod 'RxAlamofire'
 
 end
