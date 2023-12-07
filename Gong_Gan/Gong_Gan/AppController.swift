@@ -29,19 +29,19 @@ final class AppController {
         window.backgroundColor = .systemBackground
         window.makeKeyAndVisible()
         
-        if Auth.auth().currentUser != nil {
-            if !UserDefaults.standard.bool(forKey: "hasLaunchedBefore") {
-                // 최초 실행일 때 로그아웃
-                do {
-                    try Auth.auth().signOut()
-                } catch let signOutError as NSError {
-                    print("Error signing out: \(signOutError)")
-                }
-                
-                // 최초 실행 여부를 UserDefaults에 기록
-                UserDefaults.standard.set(true, forKey: "hasLaunchedBefore")
-            }
-        }
+//        if Auth.auth().currentUser != nil {
+//            if !UserDefaults.standard.bool(forKey: "hasLaunchedBefore") {
+//                // 최초 실행일 때 로그아웃
+//                do {
+//                    try Auth.auth().signOut()
+//                } catch let signOutError as NSError {
+//                    print("Error signing out: \(signOutError)")
+//                }
+//                
+//                // 최초 실행 여부를 UserDefaults에 기록
+//                UserDefaults.standard.set(true, forKey: "hasLaunchedBefore")
+//            }
+//        }
         
         // 로그인이 완료된 경우에는 AuthStateDidChange 이벤트를 받아서 NotificationCenter에 의하여 자동 로그인
         if Auth.auth().currentUser == nil {
@@ -65,11 +65,26 @@ final class AppController {
     }
     
     private func setHome() {
-        rootViewController = UINavigationController(rootViewController: MainViewController())
+        if !UserDefaults.standard.bool(forKey: "hasLaunchedBefore") {
+            rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
+            UserDefaults.standard.set(true, forKey: "hasLaunchedBefore")
+        } else {
+            rootViewController = UINavigationController(rootViewController: MainViewController())
+        }
+       
     }
     
     private func routeToLogin() {
-        rootViewController = UINavigationController(rootViewController: LoginViewController())
+        if !UserDefaults.standard.bool(forKey: "hasLaunchedBefore") {
+            rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
+            UserDefaults.standard.set(true, forKey: "hasLaunchedBefore")
+        } else {
+            rootViewController = UINavigationController(rootViewController: LoginViewController())
+        }
+    }
+    
+    private func routeToOnBoarding() {
+        rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
     }
     
 }

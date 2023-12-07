@@ -38,6 +38,7 @@
 		32B11EC42B1EDBD00022FCC5 /* LogOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B11EC32B1EDBD00022FCC5 /* LogOutView.swift */; };
 		32B11EC62B1EDC0B0022FCC5 /* WithdrawalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B11EC52B1EDC0B0022FCC5 /* WithdrawalView.swift */; };
 		32BDCFAA2B206AA700D155EA /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BDCFA92B206AA700D155EA /* WeatherModel.swift */; };
+		32BDCFAD2B215F2D00D155EA /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BDCFAC2B215F2D00D155EA /* OnBoardingViewController.swift */; };
 		32C35DC42B147ABB00269B65 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C35DC32B147ABB00269B65 /* UserData.swift */; };
 		32C3DD0D2B1F09E9008B9EB6 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C3DD0C2B1F09E9008B9EB6 /* Keys.swift */; };
 		32C3DD0F2B20312F008B9EB6 /* EmailLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C3DD0E2B20312F008B9EB6 /* EmailLoginViewController.swift */; };
@@ -82,6 +83,7 @@
 		32B11EC32B1EDBD00022FCC5 /* LogOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutView.swift; sourceTree = "<group>"; };
 		32B11EC52B1EDC0B0022FCC5 /* WithdrawalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalView.swift; sourceTree = "<group>"; };
 		32BDCFA92B206AA700D155EA /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		32BDCFAC2B215F2D00D155EA /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		32C35DC32B147ABB00269B65 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		32C3DD0C2B1F09E9008B9EB6 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		32C3DD0E2B20312F008B9EB6 /* EmailLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginViewController.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 		323125892AFC6CB6002B9A25 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				32BDCFAB2B215F1600D155EA /* OnBoarding */,
 				3231258E2AFC6D14002B9A25 /* Join */,
 				3231258D2AFC6D0B002B9A25 /* Login */,
 				3231258A2AFC6CBD002B9A25 /* Main */,
@@ -377,6 +380,14 @@
 			path = MyInfo;
 			sourceTree = "<group>";
 		};
+		32BDCFAB2B215F1600D155EA /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				32BDCFAC2B215F2D00D155EA /* OnBoardingViewController.swift */,
+			);
+			path = OnBoarding;
+			sourceTree = "<group>";
+		};
 		32C3DD0B2B1F09D8008B9EB6 /* Keys */ = {
 			isa = PBXGroup;
 			children = (
@@ -549,6 +560,7 @@
 				323125A22B00CC72002B9A25 /* WriteViewModel.swift in Sources */,
 				323125832AFA671F002B9A25 /* AppController.swift in Sources */,
 				3283A5B72A95F264001ECC9A /* AppDelegate.swift in Sources */,
+				32BDCFAD2B215F2D00D155EA /* OnBoardingViewController.swift in Sources */,
 				32B11EBF2B1D952D0022FCC5 /* SettingViewModel.swift in Sources */,
 				320351972B1B728C0055798A /* SettingViewController.swift in Sources */,
 				320657632B1721EF0030D565 /* ReadViewController.swift in Sources */,
