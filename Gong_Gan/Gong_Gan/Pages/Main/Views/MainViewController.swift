@@ -14,6 +14,7 @@ import AVFoundation
 class MainViewController: UIViewController {
     private let viewModel = MainViewModel()
     private let disposeBag = DisposeBag()
+    var seeFirst = false
     
     // 백그라운드 터치 여부 확인
     var backGroundTap = false
@@ -131,22 +132,26 @@ class MainViewController: UIViewController {
     private func bindViewModel() {
         bottomBarView.viewModel = viewModel
         
-        viewModel.addMemoButtonTapped
-            .subscribe(onNext: { [weak self] in
-                self?.addMemoButtonTapped()
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.addGalleryButtonTapped
-            .subscribe(onNext: { [weak self] in
-                self?.addGalleryButtonTapped()
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.addSettingButtonTapped
-            .subscribe(onNext: { [weak self] in
-                self?.addSettingButtonTapped()
-            })
+        if seeFirst {
+            
+        } else {
+            viewModel.addMemoButtonTapped
+                .subscribe(onNext: { [weak self] in
+                    self?.addMemoButtonTapped()
+                })
+                .disposed(by: disposeBag)
+            
+            viewModel.addGalleryButtonTapped
+                .subscribe(onNext: { [weak self] in
+                    self?.addGalleryButtonTapped()
+                })
+                .disposed(by: disposeBag)
+            
+            viewModel.addSettingButtonTapped
+                .subscribe(onNext: { [weak self] in
+                    self?.addSettingButtonTapped()
+                })
+        }
     }
     
     private func addMemoButtonTapped() {

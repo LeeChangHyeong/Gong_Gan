@@ -169,6 +169,14 @@ class LoginViewController: UIViewController {
                 
                 self?.navigationController?.pushViewController(vc, animated: true)
             })
+        
+        seeFirstButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                let vc = MainViewController()
+                vc.seeFirst = true
+                vc.modalPresentationStyle = .formSheet
+                self?.present(vc, animated: true)
+            })
     }
     
     @objc private func joinButtonTapped() {
