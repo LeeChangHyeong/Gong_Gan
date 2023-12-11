@@ -39,7 +39,7 @@ class MainViewController: UIViewController {
         view = mainView
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
     }
     
@@ -146,12 +146,12 @@ class MainViewController: UIViewController {
                     self?.addGalleryButtonTapped()
                 })
                 .disposed(by: disposeBag)
-            
-            viewModel.addSettingButtonTapped
-                .subscribe(onNext: { [weak self] in
-                    self?.addSettingButtonTapped()
-                })
         }
+        
+        viewModel.addSettingButtonTapped
+            .subscribe(onNext: { [weak self] in
+                self?.addSettingButtonTapped()
+            })
     }
     
     private func addMemoButtonTapped() {

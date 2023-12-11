@@ -174,8 +174,9 @@ class LoginViewController: UIViewController {
             .subscribe(onNext: { [weak self] in
                 let vc = MainViewController()
                 vc.seeFirst = true
-                vc.modalPresentationStyle = .formSheet
-                self?.present(vc, animated: true)
+                self?.navigationController?.pushViewController(vc, animated: false)
+//                vc.modalPresentationStyle = .fullScreen
+//                self?.present(vc,animated: true)
             })
     }
     
