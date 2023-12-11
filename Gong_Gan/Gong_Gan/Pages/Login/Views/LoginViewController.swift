@@ -169,15 +169,15 @@ class LoginViewController: UIViewController {
                 
                 self?.navigationController?.pushViewController(vc, animated: true)
             })
+            .disposed(by: disposeBag)
         
         seeFirstButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 let vc = MainViewController()
                 vc.seeFirst = true
                 self?.navigationController?.pushViewController(vc, animated: false)
-//                vc.modalPresentationStyle = .fullScreen
-//                self?.present(vc,animated: true)
             })
+            .disposed(by: disposeBag)
     }
     
     @objc private func joinButtonTapped() {
