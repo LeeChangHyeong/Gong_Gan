@@ -132,21 +132,18 @@ class MainViewController: UIViewController {
     private func bindViewModel() {
         bottomBarView.viewModel = viewModel
         
-        if seeFirst {
-            
-        } else {
-            viewModel.addMemoButtonTapped
-                .subscribe(onNext: { [weak self] in
-                    self?.addMemoButtonTapped()
-                })
-                .disposed(by: disposeBag)
-            
-            viewModel.addGalleryButtonTapped
-                .subscribe(onNext: { [weak self] in
-                    self?.addGalleryButtonTapped()
-                })
-                .disposed(by: disposeBag)
-        }
+        viewModel.addMemoButtonTapped
+            .subscribe(onNext: { [weak self] in
+                self?.addMemoButtonTapped()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.addGalleryButtonTapped
+            .subscribe(onNext: { [weak self] in
+                self?.addGalleryButtonTapped()
+            })
+            .disposed(by: disposeBag)
+        
         
         viewModel.addSettingButtonTapped
             .subscribe(onNext: { [weak self] in
@@ -155,42 +152,51 @@ class MainViewController: UIViewController {
     }
     
     private func addMemoButtonTapped() {
-        let vc = WriteViewController()
-        let writeViewModel = WriteViewModel()
-        
-        // WriteViewController에 WriteViewModel 인스턴스 전달
-        vc.viewModel = writeViewModel
-        
-        // MainViewController의 배경 이미지 이름을 WriteViewModel에 전달
+        if seeFirst {
+            showLoginModal()
+        } else {
+            let vc = WriteViewController()
+            let writeViewModel = WriteViewModel()
+            
+            // WriteViewController에 WriteViewModel 인스턴스 전달
+            vc.viewModel = writeViewModel
+            
+            // MainViewController의 배경 이미지 이름을 WriteViewModel에 전달
             if let selectedImageName = viewModel.selectedBackgroundImage.value {
                 writeViewModel.updateBackgroundImage(selectedImageName)
             } else {
                 writeViewModel.updateBackgroundImage("도시") // 기본 이미지 이름
             }
-        
-        playCameraSound()
-        cameraAnimationView.isHidden = false
-        view.isUserInteractionEnabled = false
-         
-         // 1초 후에 다시 숨김 후에 pushViewController 실행
-         Observable.just(())
-             .delay(.milliseconds(100), scheduler: MainScheduler.instance)
-             .subscribe(onNext: { [weak self] in
-                 self?.cameraAnimationView.isHidden = true
-             }, onCompleted: { [weak self] in
-                 // 0.2초 뒤에 pushViewController 실행
-                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                     self?.view.isUserInteractionEnabled = true
-                     self?.navigationController?.pushViewController(vc, animated: true)
-                 }
-             })
-             .disposed(by: disposeBag)
+            
+            playCameraSound()
+            cameraAnimationView.isHidden = false
+            view.isUserInteractionEnabled = false
+            
+            // 1초 후에 다시 숨김 후에 pushViewController 실행
+            Observable.just(())
+                .delay(.milliseconds(100), scheduler: MainScheduler.instance)
+                .subscribe(onNext: { [weak self] in
+                    self?.cameraAnimationView.isHidden = true
+                }, onCompleted: { [weak self] in
+                    // 0.2초 뒤에 pushViewController 실행
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        self?.view.isUserInteractionEnabled = true
+                        self?.navigationController?.pushViewController(vc, animated: true)
+                    }
+                })
+                .disposed(by: disposeBag)
+        }
     }
     
     private func addGalleryButtonTapped() {
-        let vc = GalleryViewController()
         
-        self.navigationController?.pushViewController(vc, animated: true)
+        if seeFirst {
+            showLoginModal()
+        } else {
+            let vc = GalleryViewController()
+            
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     private func addSettingButtonTapped() {
@@ -205,27 +211,27 @@ class MainViewController: UIViewController {
     }
     
     // 스와이프 제스처를 감지하기 위한 함수
-        private func setupSwipeGestures() {
-            let swipeLeftGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
-            swipeLeftGesture.direction = .left
-            view.addGestureRecognizer(swipeLeftGesture)
-
-            let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
-            swipeRightGesture.direction = .right
-            view.addGestureRecognizer(swipeRightGesture)
+    private func setupSwipeGestures() {
+        let swipeLeftGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+        swipeLeftGesture.direction = .left
+        view.addGestureRecognizer(swipeLeftGesture)
+        
+        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+        swipeRightGesture.direction = .right
+        view.addGestureRecognizer(swipeRightGesture)
+    }
+    
+    // 스와이프 제스처 핸들러
+    @objc private func handleSwipe(_ gesture: UISwipeGestureRecognizer) {
+        if gesture.direction == .left {
+            // 왼쪽으로 스와이프할 때 picker를 이동시키는 동작 수행
+            movePickerLeft()
+        } else if gesture.direction == .right {
+            // 오른쪽으로 스와이프할 때 picker를 이동시키는 동작 수행
+            movePickerRight()
         }
-
-        // 스와이프 제스처 핸들러
-        @objc private func handleSwipe(_ gesture: UISwipeGestureRecognizer) {
-            if gesture.direction == .left {
-                // 왼쪽으로 스와이프할 때 picker를 이동시키는 동작 수행
-                movePickerLeft()
-            } else if gesture.direction == .right {
-                // 오른쪽으로 스와이프할 때 picker를 이동시키는 동작 수행
-                movePickerRight()
-            }
-        }
-
+    }
+    
     // Picker를 왼쪽으로 이동시키는 함수
     private func movePickerLeft() {
         let selectedRow = cameraModePicker.selectedRow(inComponent: 0)
@@ -238,13 +244,13 @@ class MainViewController: UIViewController {
             }
         }
     }
-
+    
     // Picker를 오른쪽으로 이동시키는 함수
     private func movePickerRight() {
         
         let selectedRow = cameraModePicker.selectedRow(inComponent: 0)
         let newSelectedRow = max(selectedRow - 1, 0)
-
+        
         if selectedRow != newSelectedRow {
             UIView.animate(withDuration: 0.3) {
                 self.cameraModePicker.selectRow(newSelectedRow, inComponent: 0, animated: true)
@@ -280,6 +286,13 @@ extension MainViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         return 100
     }
+    
+    func showLoginModal() {
+        let vc = ModalLoginViewController()
+        vc.modalPresentationStyle = .custom
+        vc.transitioningDelegate = self
+        self.present(vc, animated: true)
+    }
 }
 
 extension MainViewController: UIPickerViewDataSource {
@@ -289,4 +302,22 @@ extension MainViewController: UIPickerViewDataSource {
         // MainViewController의 배경 이미지 이름을 viewModel에 전달
         viewModel.updateSelectedImageName(selectedImageName)
     }
+}
+
+class CustomModalPresentationController: UIPresentationController {
+    override var frameOfPresentedViewInContainerView: CGRect {
+        guard let containerView = containerView else {
+            return CGRect.zero
+        }
+        let height: CGFloat = 280
+        let originY = containerView.frame.height - height
+        return CGRect(x: 0, y: originY, width: containerView.frame.width, height: height)
+    }
+}
+
+extension MainViewController: UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        return CustomModalPresentationController(presentedViewController: presented, presenting: presenting)
+    }
+    
 }
