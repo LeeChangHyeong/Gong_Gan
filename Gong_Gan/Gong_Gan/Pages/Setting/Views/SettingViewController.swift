@@ -16,6 +16,7 @@ import CoreLocation
 
 class SettingViewController: UIViewController {
     private let disposeBag = DisposeBag()
+    var seeFirst = false
     
     private let myInfoView = MyInfoView()
     private let locationSettingView = LocationSettingView()
@@ -57,8 +58,8 @@ class SettingViewController: UIViewController {
     deinit {
         // NotificationCenter에서 등록한 옵저버를 해제
         // 메모리 누수 방지
-            removeNotificationObserver()
-        }
+        removeNotificationObserver()
+    }
     
     private func setNaviBar() {
         navigationController?.isNavigationBarHidden = false
@@ -125,19 +126,36 @@ class SettingViewController: UIViewController {
     }
     
     @objc private func handleMyInfoViewTap() {
-            // MyInfoView가 탭되었을 때 수행할 동작을 여기에 추가
+        // MyInfoView가 탭되었을 때 수행할 동작을 여기에 추가
+        if seeFirst {
+            showLoginModal()
+        } else {
             let myInfoVC = MyInfoViewController()
-        
+            
             navigationController?.pushViewController(myInfoVC, animated: true)
         }
+    }
     
     private func setupNotificationObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleMyInfoViewTap), name: Notification.Name("MyInfoViewTapped"), object: nil)
     }
-
+    
     private func removeNotificationObserver() {
         NotificationCenter.default.removeObserver(self)
     }
     
+    func showLoginModal() {
+        let vc = ModalLoginViewController()
+        vc.modalPresentationStyle = .custom
+        vc.transitioningDelegate = self
+        self.present(vc, animated: true)
+    }
 }
 
+
+extension SettingViewController: UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        return CustomModalPresentationController(presentedViewController: presented, presenting: presenting)
+    }
+    
+}

@@ -202,6 +202,8 @@ class MainViewController: UIViewController {
     private func addSettingButtonTapped() {
         let vc = SettingViewController()
         
+        vc.seeFirst = self.seeFirst
+        
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
