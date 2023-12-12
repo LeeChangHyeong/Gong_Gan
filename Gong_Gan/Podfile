@@ -16,5 +16,6 @@ target 'Gong_Gan' do
   pod 'Firebase'
   pod 'KakaoSDK'
   pod 'RxAlamofire'
+  pod 'FLAnimatedImage'
 
 end

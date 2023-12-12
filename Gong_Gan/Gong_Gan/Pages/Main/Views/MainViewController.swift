@@ -32,8 +32,9 @@ class MainViewController: UIViewController {
     }()
     private let bottomBarView = BottomBarView()
     private let topBarView = TopBarView()
-    
-    let captureModesList = ["도시","방","일본","지하철","야경"]
+    // TODO: test중
+//    let captureModesList = ["도시","방","일본","지하철","야경"]
+    let captureModesList = ["1하늘", "2하늘", "3하늘", "4하늘"]
     
     override func loadView() {
         view = mainView
@@ -300,8 +301,12 @@ extension MainViewController: UIPickerViewDelegate {
 extension MainViewController: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let selectedImageName = captureModesList[row]
-        mainView.backGroundView.image = UIImage(named: selectedImageName)
+//        mainView.backGroundView.image = UIImage(named: selectedImageName)
+        mainView.name = selectedImageName
+        mainView.playVideo(with: selectedImageName)
+        mainView.observePlayerDidPlayToEndTime()
         // MainViewController의 배경 이미지 이름을 viewModel에 전달
+//        viewModel.updateSelectedImageName(selectedImageName)
         viewModel.updateSelectedImageName(selectedImageName)
     }
 }
