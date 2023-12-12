@@ -35,12 +35,14 @@ class ReadViewController: UIViewController {
         return button
     }()
     
-    lazy var backGroundView: UIImageView = {
-        let view = UIImageView(frame: UIScreen.main.bounds)
-        view.contentMode = UIView.ContentMode.scaleAspectFill
-        
-        return view
-    }()
+//    lazy var backGroundView: UIImageView = {
+//        let view = UIImageView(frame: UIScreen.main.bounds)
+//        view.contentMode = UIView.ContentMode.scaleAspectFill
+//        
+//        return view
+//    }()
+    
+    private let backGroundView = MainView()
     
     private let memoTextView: UITextView = {
         let view = UITextView()
@@ -199,7 +201,9 @@ class ReadViewController: UIViewController {
     
     private func setupData() {
         memoTextView.text = selectedGalleryData?.memo
-        backGroundView.image = UIImage(named: selectedGalleryData!.imageName)
+//        backGroundView.image = UIImage(named: selectedGalleryData!.imageName)
+        self.backGroundView.playVideo(with: selectedGalleryData!.imageName)
+        self.backGroundView.observePlayerDidPlayToEndTime()
         nowDateLabel.text = selectedGalleryData?.date
         
         // locationLabel의 attributedText 설정

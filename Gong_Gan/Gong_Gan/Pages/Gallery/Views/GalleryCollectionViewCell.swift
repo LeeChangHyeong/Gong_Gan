@@ -11,6 +11,8 @@ import SnapKit
 class GalleryCollectionViewCell: UICollectionViewCell {
     static let identifier = "GalleryCollectionViewCell"
     
+    private let backGroundView = MainView()
+    
      let cellImageView: UIImageView = {
        let imageView = UIImageView()
         imageView.image = UIImage(named: "일본")
