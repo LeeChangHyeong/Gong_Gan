@@ -33,12 +33,14 @@ class WriteViewController: UIViewController {
         return view
     }()
     
-    lazy var backGroundView: UIImageView = {
-        let view = UIImageView(frame: UIScreen.main.bounds)
-        view.contentMode = UIView.ContentMode.scaleAspectFill
-        
-        return view
-    }()
+//    lazy var backGroundView: UIImageView = {
+//        let view = UIImageView(frame: UIScreen.main.bounds)
+//        view.contentMode = UIView.ContentMode.scaleAspectFill
+//        
+//        return view
+//    }()
+    
+    private let backGroundView = MainView()
     
     private let memoTextView: UITextView = {
         let view = UITextView()
@@ -263,7 +265,9 @@ class WriteViewController: UIViewController {
         viewModel?.backgroundImage
             .subscribe(onNext: { [weak self] image in
                 // 값이 업데이트되면 받아온 이미지를 배경으로 설정
-                self?.backGroundView.image = UIImage(named: image!)
+//                self?.backGroundView.image = UIImage(named: image!)
+                self?.backGroundView.playVideo(with: image!)
+                self?.backGroundView.observePlayerDidPlayToEndTime()
             })
             .disposed(by: disposeBag)
         
