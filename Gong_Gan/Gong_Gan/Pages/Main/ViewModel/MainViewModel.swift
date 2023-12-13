@@ -16,6 +16,7 @@ class MainViewModel {
     let addGalleryButtonTapped = PublishRelay<Void>()
     let addSettingButtonTapped = PublishRelay<Void>()
     let selectedBackgroundImage = BehaviorRelay<String?>(value: nil)
+    let currentWeather = BehaviorRelay<WeatherModel?>(value: nil)
     
     func updateSelectedImageName(_ name: String) {
         selectedBackgroundImage.accept(name)
@@ -35,6 +36,8 @@ class MainViewModel {
             .map { data -> WeatherModel in
                     let decoder = JSONDecoder()
                 let weatherModel = try decoder.decode(WeatherModel.self, from: data)
+                print(weatherModel.main)
+                self.currentWeather.accept(weatherModel)
                 return weatherModel
             }
     }

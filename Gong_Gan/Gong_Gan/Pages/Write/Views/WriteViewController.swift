@@ -21,6 +21,8 @@ class WriteViewController: UIViewController {
     
     var viewModel: WriteViewModel?
     var backgroundImage: UIImage?
+    var mainViewModel: MainViewModel?
+    private var rainEffectView = RainEffectView()
     
     private let scrollView = UIScrollView()
     private let contentView = UIView()
@@ -140,6 +142,7 @@ class WriteViewController: UIViewController {
     private func addSubViews() {
         view.addSubview(backGroundView)
         backGroundView.addSubview(textViewColor)
+        view.addSubview(rainEffectView)
         view.addSubview(memoTextView)
         view.addSubview(musicButton)
         view.addSubview(locationButton)
@@ -157,6 +160,10 @@ class WriteViewController: UIViewController {
     private func setConstraints() {
         
         textViewColor.snp.makeConstraints({
+            $0.edges.equalToSuperview()
+        })
+        
+        rainEffectView.snp.makeConstraints({
             $0.edges.equalToSuperview()
         })
         
@@ -362,6 +369,17 @@ class WriteViewController: UIViewController {
                 self?.viewModel?.updateCurrentTime()
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func setEffect() {
+        let weather = mainViewModel?.currentWeather.value?.weather.first?.main
+        
+        if let weather = weather?.contains("cloud") {
+            // "rain"이 포함되어 있는 경우
+            self.rainEffectView.isHidden = false
+        } else {
+            self.rainEffectView.isHidden = true
+        }
     }
 }
 

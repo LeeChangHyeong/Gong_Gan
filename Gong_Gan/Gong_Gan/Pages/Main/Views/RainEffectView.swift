@@ -1,5 +1,5 @@
 //
-//  RainEffetView.swift
+//  RainEffectView.swift
 //  Gong_Gan
 //
 //  Created by 이창형 on 12/13/23.
@@ -9,7 +9,7 @@ import UIKit
 import SpriteKit
 import SnapKit
 
-class RainEffetView: UIView {
+class RainEffectView: UIView {
     lazy var rainView: SKView = {
         let view = SKView()
         view.backgroundColor = .clear

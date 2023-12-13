@@ -22,7 +22,7 @@ class MainViewController: UIViewController {
     var rotationAngle: CGFloat! = -90  * (.pi/180)
     
     private let mainView = MainView()
-    private let rainEffectView = RainEffetView()
+    private let rainEffectView = RainEffectView()
     private let cameraAnimationView: UIView = {
         let view = UIView()
         
@@ -49,7 +49,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backGroundViewTapped)))
         topBarView.rainEffectView = rainEffectView
-        
+        topBarView.viewModel = viewModel
         
         setCameraModePicker()
         addSubView()
@@ -122,6 +122,7 @@ class MainViewController: UIViewController {
     }
     
     
+    
     // 백그라운드 터치시 topBar, bottomBar 사라지면서 backGround가 전체화면으로 보임
     @objc private func backGroundViewTapped(_ recognizer: UITapGestureRecognizer) {
         backGroundTap.toggle()
@@ -167,10 +168,12 @@ class MainViewController: UIViewController {
             showLoginModal()
         } else {
             let vc = WriteViewController()
-            let writeViewModel = WriteViewModel()
+            let mainViewModel = viewModel
+            let writeViewModel = WriteViewModel(mainViewModel: mainViewModel)
             
             // WriteViewController에 WriteViewModel 인스턴스 전달
             vc.viewModel = writeViewModel
+            vc.mainViewModel = mainViewModel
             
             // MainViewController의 배경 이미지 이름을 WriteViewModel에 전달
             if let selectedImageName = viewModel.selectedBackgroundImage.value {

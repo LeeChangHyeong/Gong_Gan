@@ -14,6 +14,7 @@ import FirebaseFirestore
 
 class WriteViewModel {
     let nowDateText = BehaviorRelay<String>(value: "")
+    let mainViewModel: MainViewModel
     
     var backgroundImage = BehaviorRelay<String?>(value: nil)
     var memoText = BehaviorRelay<String?>(value: nil)
@@ -22,7 +23,7 @@ class WriteViewModel {
     // 현재 시간을나타내는 Observable 속성
     let currentTimeText = BehaviorRelay<String>(value: "")
     
-    init() {
+    init(mainViewModel: MainViewModel) {
             Observable
                 .just(Date())
                 .map { date in
@@ -32,6 +33,8 @@ class WriteViewModel {
                 }
                 .bind(to: nowDateText)
                 .disposed(by: DisposeBag())
+        
+            self.mainViewModel = mainViewModel
         }
 
     
@@ -51,7 +54,8 @@ class WriteViewModel {
                 "memo": memoText.value, // 메모 저장
                 "imageName": backgroundImage.value, // 이미지 이름 추가
                 "time": currentTimeText.value, // 시간 저장
-                "location": location // 위치 정보 저장
+                "location": location, // 위치 정보 저장
+                "weather": mainViewModel.currentWeather.value?.weather.first?.main // 날씨 데이터 저장
             ]
 
             let userDocumentRef = Firestore.firestore().collection("users").document(uid)

@@ -15,14 +15,16 @@ import FirebaseCore
 import KakaoSDKUser
 
 class TopBarView: UIView {
+    
+    
     private var locationManager = CLLocationManager()
     private var musicButtonTap = false
-    weak var rainEffectView: RainEffetView?
     
     private let disposeBag = DisposeBag()
     private let locationSubject = PublishSubject<CLLocation>()
-    private let viewModel = MainViewModel()
+    var viewModel: MainViewModel?
     
+    weak var rainEffectView: RainEffectView?
     
     private let musicButton: UIButton = {
         let button = UIButton()
@@ -145,7 +147,7 @@ class TopBarView: UIView {
                         let latitude = place.location?.coordinate.latitude
                         let longitude = place.location?.coordinate.longitude
                         
-                        self?.viewModel.getWeather(lat: latitude!, lon: longitude!)
+                        self?.viewModel?.getWeather(lat: latitude!, lon: longitude!)
                             .subscribe(onNext: { weatherModel in
                                 // 가져온 날씨 정보를 출력
                                 print("Temperature: \(weatherModel.main.temp) ℃")
@@ -153,7 +155,9 @@ class TopBarView: UIView {
                                 print("Max Temperature: \(weatherModel.main.tempMax) ℃")
                                 print("Weather Description: \(weatherModel.weather.first?.main ?? "N/A")")
                                 
-                                if let weatherDescription = weatherModel.weather.first?.main.lowercased(), weatherDescription.contains("rain") {
+                                self?.viewModel?.currentWeather.accept(weatherModel)
+                                
+                                if let weatherDescription = weatherModel.weather.first?.main.lowercased(), weatherDescription.contains("cloud") {
                                     // "rain"이 포함되어 있는 경우
                                     // 처리할 내용을 여기에 작성
                                     self?.rainEffectView?.isHidden = false
