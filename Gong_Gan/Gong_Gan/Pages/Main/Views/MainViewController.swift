@@ -23,6 +23,8 @@ class MainViewController: UIViewController {
     
     private let mainView = MainView()
     private let rainEffectView = RainEffectView()
+    private let snowEffectView = SnowEffectView()
+    
     private let cameraAnimationView: UIView = {
         let view = UIView()
         
@@ -60,6 +62,7 @@ class MainViewController: UIViewController {
     
     private func addSubView() {
         view.addSubview(rainEffectView)
+        view.addSubview(snowEffectView)
         view.addSubview(topBarView)
         view.addSubview(bottomBarView)
         bottomBarView.addSubview(cameraModePicker)
@@ -77,7 +80,7 @@ class MainViewController: UIViewController {
         bottomBarViewConstraints()
         topBarViewConstraints()
         cameraModePickerViewConstraints()
-        rainEffectConstraints()
+        effectConstraints()
         
         cameraAnimationView.snp.makeConstraints({
             $0.leading.trailing.equalToSuperview()
@@ -115,8 +118,12 @@ class MainViewController: UIViewController {
         
     }
     
-    private func rainEffectConstraints() {
+    private func effectConstraints() {
         rainEffectView.snp.makeConstraints({
+            $0.edges.equalToSuperview()
+        })
+        
+        snowEffectView.snp.makeConstraints({
             $0.edges.equalToSuperview()
         })
     }
