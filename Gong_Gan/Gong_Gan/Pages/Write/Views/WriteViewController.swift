@@ -374,7 +374,7 @@ class WriteViewController: UIViewController {
     private func setEffect() {
         let weather = mainViewModel?.currentWeather.value?.weather.first?.main
         
-        if let weather = weather?.contains("cloud") {
+        if let weather = weather?.contains("rain") {
             // "rain"이 포함되어 있는 경우
             self.rainEffectView.isHidden = false
         } else {

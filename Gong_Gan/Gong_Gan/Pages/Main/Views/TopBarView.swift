@@ -157,7 +157,7 @@ class TopBarView: UIView {
                                 
                                 self?.viewModel?.currentWeather.accept(weatherModel)
                                 
-                                if let weatherDescription = weatherModel.weather.first?.main.lowercased(), weatherDescription.contains("cloud") {
+                                if let weatherDescription = weatherModel.weather.first?.main.lowercased(), weatherDescription.contains("rain") {
                                     // "rain"이 포함되어 있는 경우
                                     // 처리할 내용을 여기에 작성
                                     self?.rainEffectView?.isHidden = false

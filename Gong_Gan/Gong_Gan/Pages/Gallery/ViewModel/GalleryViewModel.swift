@@ -34,13 +34,14 @@ class GalleryViewModel {
                             let imageName = memoDict["imageName"] as? String,
                             let location = memoDict["location"] as? String,
                             let memo = memoDict["memo"] as? String,
-                            let time = memoDict["time"] as? String
+                            let time = memoDict["time"] as? String,
+                            let weather = memoDict["weather"] as? String
                         else {
                             continue
                         }
                         
                         // 모든 데이터를 GalleryDataModel로 만들어 배열에 저장
-                        let galleryData = GalleryDataModel(memoID: memoID, date: date, imageName: imageName, location: location, memo: memo, time: time)
+                        let galleryData = GalleryDataModel(memoID: memoID, date: date, imageName: imageName, location: location, memo: memo, time: time, weather: weather)
                         galleryDataArray.append(galleryData)
                     }
                     
