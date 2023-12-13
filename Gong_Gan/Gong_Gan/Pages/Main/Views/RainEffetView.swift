@@ -43,14 +43,18 @@ class RainEffetView: UIView {
 
 class RainFall: SKScene {
     override func sceneDidLoad() {
+        // 화면 크기를 기기 크기로 설정
         size = UIScreen.main.bounds.size
+        // 화면 크기를 모두 채우도록
         scaleMode = .resizeFill
         anchorPoint = CGPoint(x: 0.5, y: 1)
         backgroundColor = .clear
         
+        // Rain.sks 파일을 들고와서 SKEmitterNode 생성
         let node = SKEmitterNode(fileNamed: "Rain.sks")!
+        // 추가
         addChild(node)
-        
+        // 노드 위치 범위를 화면 너비로 설정
         node.particlePositionRange.dx = UIScreen.main.bounds.width
     }
 }

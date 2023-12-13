@@ -17,6 +17,7 @@ import KakaoSDKUser
 class TopBarView: UIView {
     private var locationManager = CLLocationManager()
     private var musicButtonTap = false
+    weak var rainEffectView: RainEffetView?
     
     private let disposeBag = DisposeBag()
     private let locationSubject = PublishSubject<CLLocation>()
@@ -151,6 +152,17 @@ class TopBarView: UIView {
                                 print("Min Temperature: \(weatherModel.main.tempMin) ℃")
                                 print("Max Temperature: \(weatherModel.main.tempMax) ℃")
                                 print("Weather Description: \(weatherModel.weather.first?.main ?? "N/A")")
+                                
+                                if let weatherDescription = weatherModel.weather.first?.main.lowercased(), weatherDescription.contains("rain") {
+                                    // "rain"이 포함되어 있는 경우
+                                    // 처리할 내용을 여기에 작성
+                                    self?.rainEffectView?.isHidden = false
+                                } else {
+                                    // "rain"이 포함되어 있지 않은 경우
+                                    // 처리할 내용을 여기에 작성
+                                    self?.rainEffectView?.isHidden = true
+                                }
+                                
                             }, onError: { error in
                                 // 에러가 발생한 경우 출력
                                 print("Error fetching weather: \(error.localizedDescription)")

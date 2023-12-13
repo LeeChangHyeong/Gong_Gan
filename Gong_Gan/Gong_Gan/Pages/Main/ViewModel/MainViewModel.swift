@@ -17,7 +17,6 @@ class MainViewModel {
     let addSettingButtonTapped = PublishRelay<Void>()
     let selectedBackgroundImage = BehaviorRelay<String?>(value: nil)
     
-    
     func updateSelectedImageName(_ name: String) {
         selectedBackgroundImage.accept(name)
         }
