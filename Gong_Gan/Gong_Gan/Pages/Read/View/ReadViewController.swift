@@ -20,6 +20,8 @@ class ReadViewController: UIViewController {
     var selectedGalleryData: GalleryDataModel?
     private var viewModel: ReadViewModel!
     
+    private let rainEffectView = RainEffectView()
+    
     private let textViewColor: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
@@ -144,6 +146,7 @@ class ReadViewController: UIViewController {
     
     private func addSubViews() {
         view.addSubview(backGroundView)
+        view.addSubview(rainEffectView)
         backGroundView.addSubview(textViewColor)
         view.addSubview(memoTextView)
         view.addSubview(musicButton)
@@ -165,6 +168,10 @@ class ReadViewController: UIViewController {
     
     private func setConstraints() {
         textViewColor.snp.makeConstraints({
+            $0.edges.equalToSuperview()
+        })
+        
+        rainEffectView.snp.makeConstraints({
             $0.edges.equalToSuperview()
         })
         
@@ -220,6 +227,11 @@ class ReadViewController: UIViewController {
             locationLabel.attributedText = finalAttributedString
             timeLabel.text = selectedGalleryData?.time
         
+    }
+    
+    private func setEffect() {
+        // 날씨에 따라 effect 들고오기
+//        selected
     }
     
     private func setupSwipeGesture() {
