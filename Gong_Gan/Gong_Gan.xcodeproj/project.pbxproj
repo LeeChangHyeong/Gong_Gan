@@ -38,6 +38,8 @@
 		3293D7DF2B2812900051A6AC /* 3하늘.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3293D7DB2B28128F0051A6AC /* 3하늘.mp4 */; };
 		3293D7E02B2812900051A6AC /* 1하늘.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3293D7DC2B28128F0051A6AC /* 1하늘.mp4 */; };
 		3293D7E12B2812900051A6AC /* 2하늘.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3293D7DD2B2812900051A6AC /* 2하늘.mp4 */; };
+		3293D7E52B295F280051A6AC /* Rain.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3293D7E32B295F280051A6AC /* Rain.sks */; };
+		3293D7E62B295F280051A6AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3293D7E42B295F280051A6AC /* Assets.xcassets */; };
 		32B11EBF2B1D952D0022FCC5 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B11EBE2B1D952D0022FCC5 /* SettingViewModel.swift */; };
 		32B11EC12B1ECD980022FCC5 /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B11EC02B1ECD980022FCC5 /* MyInfoViewController.swift */; };
 		32B11EC42B1EDBD00022FCC5 /* LogOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B11EC32B1EDBD00022FCC5 /* LogOutView.swift */; };
@@ -88,6 +90,8 @@
 		3293D7DB2B28128F0051A6AC /* 3하늘.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "3하늘.mp4"; sourceTree = "<group>"; };
 		3293D7DC2B28128F0051A6AC /* 1하늘.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "1하늘.mp4"; sourceTree = "<group>"; };
 		3293D7DD2B2812900051A6AC /* 2하늘.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2하늘.mp4"; sourceTree = "<group>"; };
+		3293D7E32B295F280051A6AC /* Rain.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Rain.sks; sourceTree = "<group>"; };
+		3293D7E42B295F280051A6AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		32B11EBE2B1D952D0022FCC5 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		32B11EC02B1ECD980022FCC5 /* MyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
 		32B11EC32B1EDBD00022FCC5 /* LogOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutView.swift; sourceTree = "<group>"; };
@@ -366,6 +370,7 @@
 				323125822AFA671F002B9A25 /* AppController.swift */,
 				3283A5B62A95F264001ECC9A /* AppDelegate.swift */,
 				3283A5B82A95F264001ECC9A /* SceneDelegate.swift */,
+				3293D7E22B295EF50051A6AC /* SpriteFiles */,
 				32D8E1BA2AB1FAFA001D9AF3 /* Helpers */,
 				3283A5CE2A95F279001ECC9A /* Models */,
 				323125892AFC6CB6002B9A25 /* Pages */,
@@ -382,6 +387,15 @@
 				32BDCFA92B206AA700D155EA /* WeatherModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		3293D7E22B295EF50051A6AC /* SpriteFiles */ = {
+			isa = PBXGroup;
+			children = (
+				3293D7E32B295F280051A6AC /* Rain.sks */,
+				3293D7E42B295F280051A6AC /* Assets.xcassets */,
+			);
+			path = SpriteFiles;
 			sourceTree = "<group>";
 		};
 		32B11EC22B1ED59D0022FCC5 /* MyInfo */ = {
@@ -491,9 +505,11 @@
 			files = (
 				3283A5C32A95F265001ECC9A /* Assets.xcassets in Resources */,
 				3231257F2AFA6318002B9A25 /* GoogleService-Info.plist in Resources */,
+				3293D7E52B295F280051A6AC /* Rain.sks in Resources */,
 				3293D7DE2B2812900051A6AC /* 4하늘.mp4 in Resources */,
 				3293D7DF2B2812900051A6AC /* 3하늘.mp4 in Resources */,
 				3293D7E02B2812900051A6AC /* 1하늘.mp4 in Resources */,
+				3293D7E62B295F280051A6AC /* Assets.xcassets in Resources */,
 				3293D7E12B2812900051A6AC /* 2하늘.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
