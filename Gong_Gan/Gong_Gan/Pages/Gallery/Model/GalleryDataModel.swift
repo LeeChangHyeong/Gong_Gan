@@ -14,4 +14,5 @@ struct GalleryDataModel {
     let location: String
     let memo: String
     let time: String
+    let weather: String
 }
