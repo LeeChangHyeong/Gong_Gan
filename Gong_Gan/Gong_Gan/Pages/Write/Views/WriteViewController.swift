@@ -131,6 +131,7 @@ class WriteViewController: UIViewController {
         super.viewDidLoad()
         
         addSubViews()
+        setEffect()
         setNaviBar()
         setConstraints()
         setupControl()
@@ -372,13 +373,13 @@ class WriteViewController: UIViewController {
     }
     
     private func setEffect() {
-        let weather = mainViewModel?.currentWeather.value?.weather.first?.main
-        
-        if let weather = weather?.contains("rain") {
-            // "rain"이 포함되어 있는 경우
-            self.rainEffectView.isHidden = false
-        } else {
-            self.rainEffectView.isHidden = true
+        // mainViewModel이 nil이 아니고, currentWeather 값이 존재하며, "rain"을 포함하는 경우
+        if let weather = mainViewModel?.currentWeather.value?.weather {
+            if weather.description.lowercased().contains("rain") {
+                rainEffectView.isHidden = false
+            } else {
+                rainEffectView.isHidden = true
+            }
         }
     }
 }

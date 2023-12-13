@@ -137,6 +137,7 @@ class ReadViewController: UIViewController {
         viewModel = ReadViewModel(selectedGalleryData: selectedGalleryData)
         
         addSubViews()
+        setEffect()
         setNaviBar()
         setConstraints()
         setupData()
@@ -230,14 +231,12 @@ class ReadViewController: UIViewController {
     }
     
     private func setEffect() {
-        // 날씨에 따라 effect 들고오기
-        let weather = selectedGalleryData?.weather
-        
-        if let weather = weather?.contains("rain") {
-            // "rain"이 포함되어 있는 경우
-            self.rainEffectView.isHidden = false
-        } else {
-            self.rainEffectView.isHidden = true
+        if let weather = selectedGalleryData?.weather {
+            if weather.lowercased().contains("rain") {
+                rainEffectView.isHidden = false
+            } else {
+                rainEffectView.isHidden = true
+            }
         }
     }
     
