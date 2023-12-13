@@ -40,6 +40,7 @@
 		3293D7E12B2812900051A6AC /* 2하늘.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3293D7DD2B2812900051A6AC /* 2하늘.mp4 */; };
 		3293D7E52B295F280051A6AC /* Rain.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3293D7E32B295F280051A6AC /* Rain.sks */; };
 		3293D7E62B295F280051A6AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3293D7E42B295F280051A6AC /* Assets.xcassets */; };
+		32ADE96F2B2961D2009A4C0B /* RainEffetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32ADE96E2B2961D2009A4C0B /* RainEffetView.swift */; };
 		32B11EBF2B1D952D0022FCC5 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B11EBE2B1D952D0022FCC5 /* SettingViewModel.swift */; };
 		32B11EC12B1ECD980022FCC5 /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B11EC02B1ECD980022FCC5 /* MyInfoViewController.swift */; };
 		32B11EC42B1EDBD00022FCC5 /* LogOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B11EC32B1EDBD00022FCC5 /* LogOutView.swift */; };
@@ -92,6 +93,7 @@
 		3293D7DD2B2812900051A6AC /* 2하늘.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2하늘.mp4"; sourceTree = "<group>"; };
 		3293D7E32B295F280051A6AC /* Rain.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Rain.sks; sourceTree = "<group>"; };
 		3293D7E42B295F280051A6AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		32ADE96E2B2961D2009A4C0B /* RainEffetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RainEffetView.swift; sourceTree = "<group>"; };
 		32B11EBE2B1D952D0022FCC5 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		32B11EC02B1ECD980022FCC5 /* MyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
 		32B11EC32B1EDBD00022FCC5 /* LogOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutView.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				32D8E1C12AB20F71001D9AF3 /* TopBarView.swift */,
 				32D8E1C32AB20F84001D9AF3 /* BottomBarView.swift */,
 				3283A5BA2A95F264001ECC9A /* MainViewController.swift */,
+				32ADE96E2B2961D2009A4C0B /* RainEffetView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -587,6 +590,7 @@
 				32C3DD0D2B1F09E9008B9EB6 /* Keys.swift in Sources */,
 				32D8E1C42AB20F84001D9AF3 /* BottomBarView.swift in Sources */,
 				3283A5BB2A95F264001ECC9A /* MainViewController.swift in Sources */,
+				32ADE96F2B2961D2009A4C0B /* RainEffetView.swift in Sources */,
 				323125A02B00B5A2002B9A25 /* WriteViewController.swift in Sources */,
 				32D8E1BC2AB1FB08001D9AF3 /* UIColor.swift in Sources */,
 				32718C482B15F0EF00FF3EEF /* GalleryViewModel.swift in Sources */,

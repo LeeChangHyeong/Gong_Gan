@@ -22,6 +22,7 @@ class MainViewController: UIViewController {
     var rotationAngle: CGFloat! = -90  * (.pi/180)
     
     private let mainView = MainView()
+    private let rainEffetView = RainEffetView()
     private let cameraAnimationView: UIView = {
         let view = UIView()
         
@@ -54,9 +55,11 @@ class MainViewController: UIViewController {
         setConstraints()
         bindViewModel()
         setupSwipeGestures()
+        
     }
     
     private func addSubView() {
+        view.addSubview(rainEffetView)
         view.addSubview(topBarView)
         view.addSubview(bottomBarView)
         bottomBarView.addSubview(cameraModePicker)
@@ -74,6 +77,7 @@ class MainViewController: UIViewController {
         bottomBarViewConstraints()
         topBarViewConstraints()
         cameraModePickerViewConstraints()
+        rainEffectConstraints()
         
         cameraAnimationView.snp.makeConstraints({
             $0.leading.trailing.equalToSuperview()
@@ -109,6 +113,12 @@ class MainViewController: UIViewController {
             $0.centerY.equalTo(bottomBarView.snp.topMargin).offset(16)
         })
         
+    }
+    
+    private func rainEffectConstraints() {
+        rainEffetView.snp.makeConstraints({
+            $0.edges.equalToSuperview()
+        })
     }
     
     
