@@ -51,6 +51,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backGroundViewTapped)))
         topBarView.rainEffectView = rainEffectView
+        topBarView.snowEffectView = snowEffectView
         topBarView.viewModel = viewModel
         
         setCameraModePicker()
@@ -127,8 +128,6 @@ class MainViewController: UIViewController {
             $0.edges.equalToSuperview()
         })
     }
-    
-    
     
     // 백그라운드 터치시 topBar, bottomBar 사라지면서 backGround가 전체화면으로 보임
     @objc private func backGroundViewTapped(_ recognizer: UITapGestureRecognizer) {

@@ -25,6 +25,7 @@ class TopBarView: UIView {
     var viewModel: MainViewModel?
     
     weak var rainEffectView: RainEffectView?
+    weak var snowEffectView: SnowEffectView?
     
     private let musicButton: UIButton = {
         let button = UIButton()
@@ -165,6 +166,19 @@ class TopBarView: UIView {
                                     // "rain"이 포함되어 있지 않은 경우
                                     // 처리할 내용을 여기에 작성
                                     self?.rainEffectView?.isHidden = true
+                                }
+                                
+                                if let weatherDescription = weatherModel.weather.first?.main.lowercased() {
+                                    if weatherDescription.contains("rain") {
+                                        self?.rainEffectView?.isHidden = false
+                                        self?.snowEffectView?.isHidden = true
+                                    } else if weatherDescription.contains("snow") {
+                                        self?.rainEffectView?.isHidden = true
+                                        self?.snowEffectView?.isHidden = false
+                                    } else {
+                                        self?.rainEffectView?.isHidden = true
+                                        self?.snowEffectView?.isHidden = true
+                                    }
                                 }
                                 
                             }, onError: { error in

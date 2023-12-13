@@ -23,6 +23,7 @@ class WriteViewController: UIViewController {
     var backgroundImage: UIImage?
     var mainViewModel: MainViewModel?
     private var rainEffectView = RainEffectView()
+    private var snowEffectView = SnowEffectView()
     
     private let scrollView = UIScrollView()
     private let contentView = UIView()
@@ -34,13 +35,6 @@ class WriteViewController: UIViewController {
         
         return view
     }()
-    
-//    lazy var backGroundView: UIImageView = {
-//        let view = UIImageView(frame: UIScreen.main.bounds)
-//        view.contentMode = UIView.ContentMode.scaleAspectFill
-//        
-//        return view
-//    }()
     
     private let backGroundView = MainView()
     
@@ -144,6 +138,7 @@ class WriteViewController: UIViewController {
         view.addSubview(backGroundView)
         backGroundView.addSubview(textViewColor)
         view.addSubview(rainEffectView)
+        view.addSubview(snowEffectView)
         view.addSubview(memoTextView)
         view.addSubview(musicButton)
         view.addSubview(locationButton)
@@ -165,6 +160,10 @@ class WriteViewController: UIViewController {
         })
         
         rainEffectView.snp.makeConstraints({
+            $0.edges.equalToSuperview()
+        })
+        
+        snowEffectView.snp.makeConstraints({
             $0.edges.equalToSuperview()
         })
         
@@ -377,8 +376,13 @@ class WriteViewController: UIViewController {
         if let weather = mainViewModel?.currentWeather.value?.weather {
             if weather.description.lowercased().contains("rain") {
                 rainEffectView.isHidden = false
+                snowEffectView.isHidden = true
+            } else if weather.description.lowercased().contains("snow") {
+                rainEffectView.isHidden = true
+                snowEffectView.isHidden = false
             } else {
                 rainEffectView.isHidden = true
+                snowEffectView.isHidden = true
             }
         }
     }

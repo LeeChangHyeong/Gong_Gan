@@ -21,6 +21,7 @@ class ReadViewController: UIViewController {
     private var viewModel: ReadViewModel!
     
     private let rainEffectView = RainEffectView()
+    private let snowEffectView = SnowEffectView()
     
     private let textViewColor: UIView = {
         let view = UIView()
@@ -148,6 +149,7 @@ class ReadViewController: UIViewController {
     private func addSubViews() {
         view.addSubview(backGroundView)
         view.addSubview(rainEffectView)
+        view.addSubview(snowEffectView)
         backGroundView.addSubview(textViewColor)
         view.addSubview(memoTextView)
         view.addSubview(musicButton)
@@ -173,6 +175,10 @@ class ReadViewController: UIViewController {
         })
         
         rainEffectView.snp.makeConstraints({
+            $0.edges.equalToSuperview()
+        })
+        
+        snowEffectView.snp.makeConstraints({
             $0.edges.equalToSuperview()
         })
         
@@ -232,10 +238,15 @@ class ReadViewController: UIViewController {
     
     private func setEffect() {
         if let weather = selectedGalleryData?.weather {
-            if weather.lowercased().contains("rain") {
+            if weather.description.lowercased().contains("rain") {
                 rainEffectView.isHidden = false
+                snowEffectView.isHidden = true
+            } else if weather.description.lowercased().contains("snow") {
+                rainEffectView.isHidden = true
+                snowEffectView.isHidden = false
             } else {
                 rainEffectView.isHidden = true
+                snowEffectView.isHidden = true
             }
         }
     }
