@@ -53,6 +53,7 @@
 		32D8E1BC2AB1FB08001D9AF3 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1BB2AB1FB08001D9AF3 /* UIColor.swift */; };
 		32D8E1C22AB20F71001D9AF3 /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1C12AB20F71001D9AF3 /* TopBarView.swift */; };
 		32D8E1C42AB20F84001D9AF3 /* BottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1C32AB20F84001D9AF3 /* BottomBarView.swift */; };
+		32FAFB0C2B299066003EB56C /* Snow.sks in Resources */ = {isa = PBXBuildFile; fileRef = 32FAFB0B2B299066003EB56C /* Snow.sks */; };
 		80E3E673DD6630E670D0103E /* Pods_Gong_Gan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA9945623F24B225C8A57D66 /* Pods_Gong_Gan.framework */; };
 /* End PBXBuildFile section */
 
@@ -106,6 +107,7 @@
 		32D8E1BB2AB1FB08001D9AF3 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		32D8E1C12AB20F71001D9AF3 /* TopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
 		32D8E1C32AB20F84001D9AF3 /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };
+		32FAFB0B2B299066003EB56C /* Snow.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Snow.sks; sourceTree = "<group>"; };
 		78C9A9F8C9F12AD97494627D /* Pods-Gong_Gan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gong_Gan.debug.xcconfig"; path = "Target Support Files/Pods-Gong_Gan/Pods-Gong_Gan.debug.xcconfig"; sourceTree = "<group>"; };
 		90797BE31F0A826F92309CA7 /* Pods-Gong_Gan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gong_Gan.release.xcconfig"; path = "Target Support Files/Pods-Gong_Gan/Pods-Gong_Gan.release.xcconfig"; sourceTree = "<group>"; };
 		CA9945623F24B225C8A57D66 /* Pods_Gong_Gan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gong_Gan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -397,6 +399,7 @@
 			children = (
 				3293D7E32B295F280051A6AC /* Rain.sks */,
 				3293D7E42B295F280051A6AC /* Assets.xcassets */,
+				32FAFB0B2B299066003EB56C /* Snow.sks */,
 			);
 			path = SpriteFiles;
 			sourceTree = "<group>";
@@ -506,6 +509,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32FAFB0C2B299066003EB56C /* Snow.sks in Resources */,
 				3283A5C32A95F265001ECC9A /* Assets.xcassets in Resources */,
 				3231257F2AFA6318002B9A25 /* GoogleService-Info.plist in Resources */,
 				3293D7E52B295F280051A6AC /* Rain.sks in Resources */,
