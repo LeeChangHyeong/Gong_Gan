@@ -53,6 +53,8 @@ class MainViewController: UIViewController {
         topBarView.rainEffectView = rainEffectView
         topBarView.snowEffectView = snowEffectView
         topBarView.viewModel = viewModel
+        rainEffectView.isHidden = true
+        snowEffectView.isHidden = true
         
         setCameraModePicker()
         addSubView()
