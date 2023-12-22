@@ -37,7 +37,9 @@ class MainViewController: UIViewController {
     private let topBarView = TopBarView()
     // TODO: test중
 //    let captureModesList = ["도시","방","일본","지하철","야경"]
-    let captureModesList = ["1하늘", "2하늘", "3하늘", "4하늘"]
+//    let captureModesList = ["1하늘", "2하늘", "3하늘", "4하늘"]
+    let captureModesName = ["한강", "일본", "지하철","dd"]
+//    let hour = Calendar.current.component(.hour, from: Date())
     
     override func loadView() {
         view = mainView
@@ -259,7 +261,7 @@ class MainViewController: UIViewController {
     // Picker를 왼쪽으로 이동시키는 함수
     private func movePickerLeft() {
         let selectedRow = cameraModePicker.selectedRow(inComponent: 0)
-        let newSelectedRow = min(selectedRow + 1, captureModesList.count - 1)
+        let newSelectedRow = min(selectedRow + 1, captureModesName.count - 1)
         
         if selectedRow != newSelectedRow {
             UIView.animate(withDuration: 0.3) {
@@ -290,13 +292,13 @@ extension MainViewController: UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return captureModesList.count
+        return captureModesName.count
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let label = UILabel()
         label.textColor = .white
-        label.text = captureModesList[row]
+        label.text = captureModesName[row]
         label.textAlignment = .center
         label.transform = CGAffineTransform(rotationAngle: 90 * (.pi / 180))
         
@@ -321,8 +323,34 @@ extension MainViewController: UIPickerViewDelegate {
 
 extension MainViewController: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let selectedImageName = captureModesList[row]
-//        mainView.backGroundView.image = UIImage(named: selectedImageName)
+        
+        var selectedImageName = captureModesName[row]
+        
+        let hour = Calendar.current.component(.hour, from: Date())
+        
+                switch hour {
+                case 1...3:
+                    selectedImageName = "1" + selectedImageName
+                case 4...5:
+                    selectedImageName = "2" + selectedImageName
+                case 6...7:
+                    selectedImageName = "3" + selectedImageName
+                case 8...9:
+                    selectedImageName = "4" + selectedImageName
+                case 10...13:
+                    selectedImageName = "5" + selectedImageName
+                case 14...16:
+                    selectedImageName = "6" + selectedImageName
+                case 17...18:
+                    selectedImageName = "7" + selectedImageName
+                case 19...20:
+                    selectedImageName = "8" + selectedImageName
+                case 21...23, 0:
+                    selectedImageName = "9" + selectedImageName
+                default:
+                    selectedImageName = "1" + selectedImageName
+                }
+        
         mainView.name = selectedImageName
         mainView.playVideo(with: selectedImageName)
         mainView.observePlayerDidPlayToEndTime()

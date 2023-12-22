@@ -43,7 +43,8 @@ class MainView: UIView {
     
     var player: AVPlayer?
     var playerLayer: AVPlayerLayer?
-    var name = "1하늘"
+    var name = "1한강"
+    let hour = Calendar.current.component(.hour, from: Date())
     
     lazy var videoView: UIView = {
         let view = UIView(frame: UIScreen.main.bounds)
@@ -52,6 +53,28 @@ class MainView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        switch hour {
+        case 1...3:
+            name = "1한강"
+        case 4...5:
+            name = "2한강"
+        case 6...7:
+            name = "3한강"
+        case 8...9:
+            name = "4한강"
+        case 10...13:
+            name = "5한강"
+        case 14...16:
+            name = "6한강"
+        case 17...18:
+            name = "7한강"
+        case 19...20:
+            name = "8한강"
+        case 21...23, 0:
+            name = "9한강"
+        default:
+            name = "1한강"
+        }
         setupVideoView()
         playVideo(with: name)
         observePlayerDidPlayToEndTime()
