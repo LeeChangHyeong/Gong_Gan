@@ -56,22 +56,18 @@ class MainView: UIView {
         switch hour {
         case 1...3:
             name = "1한강"
-        case 4...5:
+        case 4...6:
             name = "2한강"
-        case 6...7:
+        case 7...11:
             name = "3한강"
-        case 8...9:
+        case 12...16:
             name = "4한강"
-        case 10...13:
-            name = "5한강"
-        case 14...16:
-            name = "6한강"
         case 17...18:
-            name = "7한강"
+            name = "5한강"
         case 19...20:
-            name = "8한강"
-        case 21...23, 0:
-            name = "9한강"
+            name = "6한강"
+        case 21...24, 0:
+            name = "7한강"
         default:
             name = "1한강"
         }

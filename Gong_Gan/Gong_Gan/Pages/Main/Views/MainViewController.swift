@@ -331,22 +331,18 @@ extension MainViewController: UIPickerViewDataSource {
                 switch hour {
                 case 1...3:
                     selectedImageName = "1" + selectedImageName
-                case 4...5:
+                case 4...6:
                     selectedImageName = "2" + selectedImageName
-                case 6...7:
+                case 7...11:
                     selectedImageName = "3" + selectedImageName
-                case 8...9:
+                case 12...16:
                     selectedImageName = "4" + selectedImageName
-                case 10...13:
-                    selectedImageName = "5" + selectedImageName
-                case 14...16:
-                    selectedImageName = "6" + selectedImageName
                 case 17...18:
-                    selectedImageName = "7" + selectedImageName
+                    selectedImageName = "5" + selectedImageName
                 case 19...20:
-                    selectedImageName = "8" + selectedImageName
-                case 21...23, 0:
-                    selectedImageName = "9" + selectedImageName
+                    selectedImageName = "6" + selectedImageName
+                case 21...24, 0:
+                    selectedImageName = "7" + selectedImageName
                 default:
                     selectedImageName = "1" + selectedImageName
                 }
