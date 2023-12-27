@@ -67,7 +67,7 @@ class TopBarView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .black
+        backgroundColor = .clear
         addViews()
         setConstraints()
         setLocationManager()

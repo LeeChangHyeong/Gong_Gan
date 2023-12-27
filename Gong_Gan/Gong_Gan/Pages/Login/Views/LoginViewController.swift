@@ -26,9 +26,10 @@ class LoginViewController: UIViewController {
     private let appleLoginButton: UIButton = {
         let button = UIButton()
         button.setTitle("Apple로 로그인", for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
         button.layer.cornerRadius = 25
-        button.backgroundColor = .black
+        button.backgroundColor = .white
         
         // 이미지 설정
         if let appleImage = UIImage(named: "apple") {
@@ -41,8 +42,8 @@ class LoginViewController: UIViewController {
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -button.imageView!.frame.size.width, bottom: 0, right: 0)
         
         // 1포인트 흰색 테두리 추가
-        button.layer.borderWidth = 1.0
-        button.layer.borderColor = UIColor.white.cgColor
+//        button.layer.borderWidth = 1.0
+//        button.layer.borderColor = UIColor.white.cgColor
         
         return button
     }()
@@ -51,7 +52,7 @@ class LoginViewController: UIViewController {
         let button = UIButton()
         button.setTitle("이메일 로그인", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
-        button.backgroundColor = .emailLoginButtonColor
+        button.backgroundColor = .brandColor
         button.layer.cornerRadius = 25
         
         return button
