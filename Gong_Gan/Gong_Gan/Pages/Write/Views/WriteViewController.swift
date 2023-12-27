@@ -123,9 +123,7 @@ class WriteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        rainEffectView.isHidden = true
-        snowEffectView.isHidden = true
-        
+
         addSubViews()
         setEffect()
         setNaviBar()
