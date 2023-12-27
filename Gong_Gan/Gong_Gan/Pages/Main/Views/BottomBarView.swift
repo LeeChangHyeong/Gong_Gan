@@ -15,10 +15,10 @@ class BottomBarView: UIView {
     
     let galleryButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .buttonColor
-        button.setImage(UIImage(systemName: "book.closed.fill"), for: .normal)
+        button.backgroundColor = .white.withAlphaComponent(0.3)
+        button.setImage(UIImage(named: "gallery"), for: .normal)
         button.tintColor = .white
-        button.layer.cornerRadius = 3
+        button.layer.cornerRadius = 26
         button.addTarget(self, action: #selector(addGalleryButtonTapped), for: .touchUpInside)
         
         return button
@@ -26,10 +26,10 @@ class BottomBarView: UIView {
     
     let addMemoButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .buttonColor
+        button.backgroundColor = .white
         button.tintColor = .white
-        button.setImage(UIImage(systemName: "plus"), for: .normal)
-        button.layer.cornerRadius = 30
+        button.setImage(UIImage(named: "brandIcon"), for: .normal)
+        button.layer.cornerRadius = 29
         button.addTarget(self, action: #selector(addMemoButtonTapped), for: .touchUpInside)
         
         return button
@@ -38,19 +38,19 @@ class BottomBarView: UIView {
     private let containerView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
-        view.layer.borderWidth = 3
-        view.layer.cornerRadius = 35
-        view.layer.borderColor = UIColor.buttonColor.cgColor
+        view.layer.borderWidth = 5
+        view.layer.cornerRadius = 38
+        view.layer.borderColor = UIColor.white.cgColor
         
         return view
     }()
     
     let settingButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .buttonColor
-        button.setImage(UIImage(systemName: "gearshape.fill"), for: .normal)
+        button.backgroundColor = .white.withAlphaComponent(0.3)
+        button.setImage(UIImage(named: "setting"), for: .normal)
         button.tintColor = .white
-        button.layer.cornerRadius = 3
+        button.layer.cornerRadius = 26
         
         return button
     }()
@@ -96,8 +96,8 @@ class BottomBarView: UIView {
         NSLayoutConstraint.activate([
             galleryButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50),
             galleryButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-            galleryButton.widthAnchor.constraint(equalToConstant: 49),
-            galleryButton.heightAnchor.constraint(equalToConstant: 49)
+            galleryButton.widthAnchor.constraint(equalToConstant: 52),
+            galleryButton.heightAnchor.constraint(equalToConstant: 52)
         ])
     }
     
@@ -107,8 +107,8 @@ class BottomBarView: UIView {
         NSLayoutConstraint.activate([
             containerView.centerXAnchor.constraint(equalTo: centerXAnchor),
             containerView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            containerView.widthAnchor.constraint(equalToConstant: 70),
-            containerView.heightAnchor.constraint(equalToConstant: 70)
+            containerView.widthAnchor.constraint(equalToConstant: 76),
+            containerView.heightAnchor.constraint(equalToConstant: 76)
         ])
     }
     
@@ -118,8 +118,8 @@ class BottomBarView: UIView {
         NSLayoutConstraint.activate([
             addMemoButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             addMemoButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
-            addMemoButton.widthAnchor.constraint(equalToConstant: 60),
-            addMemoButton.heightAnchor.constraint(equalToConstant: 60)
+            addMemoButton.widthAnchor.constraint(equalToConstant: 58),
+            addMemoButton.heightAnchor.constraint(equalToConstant: 58)
         ])
     }
     
@@ -129,8 +129,8 @@ class BottomBarView: UIView {
         NSLayoutConstraint.activate([
             settingButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50),
             settingButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-            settingButton.widthAnchor.constraint(equalToConstant: 49),
-            settingButton.heightAnchor.constraint(equalToConstant: 49)
+            settingButton.widthAnchor.constraint(equalToConstant: 52),
+            settingButton.heightAnchor.constraint(equalToConstant: 52)
         ])
     }
     
