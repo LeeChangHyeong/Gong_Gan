@@ -51,18 +51,35 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backGroundViewTapped)))
         topBarView.rainEffectView = rainEffectView
         topBarView.snowEffectView = snowEffectView
         topBarView.viewModel = viewModel
         rainEffectView.isHidden = true
         snowEffectView.isHidden = true
         
+        topBarView.alpha = 0.0
+        bottomBarView.alpha = 0.0
+        
+        topBarView.isUserInteractionEnabled = false
+        bottomBarView.isUserInteractionEnabled = false
+        
+        topBarView.bindToLocationUpdate { [weak self] in
+                // 위치 업데이트 완료 후에 애니메이션 등 추가 작업 수행
+                UIView.animate(withDuration: 2) {
+                    self?.topBarView.alpha = 1.0
+                    self?.bottomBarView.alpha = 1.0
+                    self?.topBarView.isUserInteractionEnabled = true
+                    self?.bottomBarView.isUserInteractionEnabled = true
+                    self?.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self?.backGroundViewTapped)))
+                }
+            }
+        
         setCameraModePicker()
         addSubView()
         setConstraints()
         bindViewModel()
         setupSwipeGestures()
+        
     }
     
     private func addSubView() {

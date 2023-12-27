@@ -66,12 +66,10 @@ class TopBarView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         backgroundColor = .clear
         addViews()
         setConstraints()
         setLocationManager()
-        bindToLocationUpdate()
     }
     
     required init?(coder: NSCoder) {
@@ -124,7 +122,7 @@ class TopBarView: UIView {
         locationManager.startUpdatingLocation()
     }
     
-    private func bindToLocationUpdate() {
+    func bindToLocationUpdate(completion: @escaping () -> Void) {
         locationSubject
             // 한 번만 실행
             .take(1)
@@ -158,17 +156,18 @@ class TopBarView: UIView {
                                 print("Max Temperature: \(weatherModel.main.tempMax) ℃")
                                 print("Weather Description: \(weatherModel.weather.first?.main ?? "N/A")")
                                 
+                                completion()
                                 self?.viewModel?.currentWeather.accept(weatherModel)
                                 
-                                if let weatherDescription = weatherModel.weather.first?.main.lowercased(), weatherDescription.contains("rain") {
-                                    // "rain"이 포함되어 있는 경우
-                                    // 처리할 내용을 여기에 작성
-                                    self?.rainEffectView?.isHidden = false
-                                } else {
-                                    // "rain"이 포함되어 있지 않은 경우
-                                    // 처리할 내용을 여기에 작성
-                                    self?.rainEffectView?.isHidden = true
-                                }
+//                                if let weatherDescription = weatherModel.weather.first?.main.lowercased(), weatherDescription.contains("rain") {
+//                                    // "rain"이 포함되어 있는 경우
+//                                    // 처리할 내용을 여기에 작성
+//                                    self?.rainEffectView?.isHidden = false
+//                                } else {
+//                                    // "rain"이 포함되어 있지 않은 경우
+//                                    // 처리할 내용을 여기에 작성
+//                                    self?.rainEffectView?.isHidden = true
+//                                }
                                 
                                 if let weatherDescription = weatherModel.weather.first?.main.lowercased() {
                                     if weatherDescription.contains("rain") {
