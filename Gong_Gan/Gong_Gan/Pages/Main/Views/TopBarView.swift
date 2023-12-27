@@ -29,9 +29,9 @@ class TopBarView: UIView {
     
     private let musicButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .buttonColor
+        button.backgroundColor = .black.withAlphaComponent(0.2)
         button.tintColor = .white
-        button.setImage(UIImage(systemName: "music.note"), for: .normal)
+        button.setImage(UIImage(named: "musicOn"), for: .normal)
         button.layer.cornerRadius = 18
         button.addTarget(self, action: #selector(musicButtonTapped), for: .touchUpInside)
         button.invalidateIntrinsicContentSize()
@@ -58,7 +58,7 @@ class TopBarView: UIView {
     
     private let locationButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .locationColor
+        button.backgroundColor = .black.withAlphaComponent(0.2)
         button.layer.cornerRadius = 6
         return button
     }()
@@ -90,15 +90,6 @@ class TopBarView: UIView {
         locationLabelConstraints()
     }
     
-    private func musicButtonConstraints() {
-        musicButton.snp.makeConstraints({
-            $0.height.equalTo(36)
-            $0.width.equalTo(36)
-            $0.bottom.equalToSuperview().offset(-20)
-            $0.trailing.equalToSuperview().offset(-28)
-        })
-    }
-    
     private func locationButtonConstraints() {
         locationButton.snp.makeConstraints({
             $0.top.equalToSuperview().offset(60)
@@ -108,6 +99,17 @@ class TopBarView: UIView {
             $0.leading.equalToSuperview().offset(24)
         })
     }
+    
+    private func musicButtonConstraints() {
+        musicButton.snp.makeConstraints({
+            $0.height.equalTo(36)
+            $0.width.equalTo(36)
+//            $0.bottom.equalToSuperview().offset(-20)
+            $0.trailing.equalToSuperview().offset(-28)
+            $0.centerY.equalTo(locationButton)
+        })
+    }
+    
     
     private func locationLabelConstraints() {
         locationLabel.snp.makeConstraints({
@@ -138,7 +140,7 @@ class TopBarView: UIView {
                         attributedString.append(NSAttributedString(attachment: imageAttachment))
                         
                         let textAttributes: [NSAttributedString.Key: Any] = [
-                            .font: UIFont.systemFont(ofSize: 15, weight: .bold),
+                            .font: UIFont.systemFont(ofSize: 15, weight: .regular),
                             .foregroundColor: UIColor.white
                         ]
                     
@@ -200,7 +202,7 @@ class TopBarView: UIView {
     @objc func musicButtonTapped() {
         musicButtonTap.toggle()
         
-        musicButton.setImage(UIImage(systemName: musicButtonTap ? "speaker.slash.fill" : "music.note"), for: .normal)
+        musicButton.setImage(UIImage(named: musicButtonTap ? "musicOff" : "musicOn"), for: .normal)
     }
 }
 
