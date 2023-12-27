@@ -782,6 +782,7 @@
 				DEVELOPMENT_TEAM = FRZRS5Y9L6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Gong_Gan/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "모밍";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "\"현재 위치사용을 허용하시겠습니까\"";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -816,6 +817,7 @@
 				DEVELOPMENT_TEAM = FRZRS5Y9L6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Gong_Gan/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "모밍";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "\"현재 위치사용을 허용하시겠습니까\"";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

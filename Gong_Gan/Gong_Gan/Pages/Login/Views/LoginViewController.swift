@@ -23,6 +23,16 @@ class LoginViewController: UIViewController {
     let isPwValid = BehaviorSubject(value: false)
     let disposeBag = DisposeBag()
     
+    private let brandImage: UIImageView = {
+        let imageView = UIImageView()
+        
+        if let image = UIImage(named: "brand") {
+            imageView.image = image
+        }
+        
+        return imageView
+    }()
+    
     private let appleLoginButton: UIButton = {
         let button = UIButton()
         button.setTitle("Apple로 로그인", for: .normal)
@@ -35,15 +45,11 @@ class LoginViewController: UIViewController {
         if let appleImage = UIImage(named: "apple") {
             button.setImage(appleImage, for: .normal)
             button.imageView?.contentMode = .scaleAspectFit
-            button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -150, bottom: 0, right: 0)
+            button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -100, bottom: 0, right: 0)
         }
         
         // titleLabel 중앙에 위치시키기
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -button.imageView!.frame.size.width, bottom: 0, right: 0)
-        
-        // 1포인트 흰색 테두리 추가
-//        button.layer.borderWidth = 1.0
-//        button.layer.borderColor = UIColor.white.cgColor
         
         return button
     }()
@@ -52,8 +58,17 @@ class LoginViewController: UIViewController {
         let button = UIButton()
         button.setTitle("이메일 로그인", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
+        button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .brandColor
         button.layer.cornerRadius = 25
+        
+        if let mailImage = UIImage(named: "mail") {
+            button.setImage(mailImage, for: .normal)
+            button.imageView?.contentMode = .scaleToFill
+            button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -100, bottom: 0, right: 0)
+        }
+        
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -button.imageView!.frame.size.width, bottom: 0, right: 0)
         
         return button
     }()
@@ -73,7 +88,12 @@ class LoginViewController: UIViewController {
         
         // "회원가입" 부분에만 밑줄 추가
         let range = (fullText as NSString).range(of: "회원가입")
-        attributedString.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range)
+        attributedString.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue,range: range)
+        
+        let textColor = UIColor.brandColor
+        // "회원가입" 부분만 색 변경
+        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: textColor, range: range)
+        
         
         button.setAttributedTitle(attributedString, for: .normal)
         
@@ -116,6 +136,7 @@ class LoginViewController: UIViewController {
     }
     
     private func addViews() {
+        view.addSubview(brandImage)
         view.addSubview(joinButton)
         view.addSubview(appleLoginButton)
         view.addSubview(seeFirstButton)
@@ -124,13 +145,14 @@ class LoginViewController: UIViewController {
     }
     
     private func setConstraints() {
+        
         seeFirstButton.snp.makeConstraints({
-            $0.bottom.equalToSuperview().offset(-71)
+            $0.bottom.equalToSuperview().offset(-51)
             $0.centerX.equalToSuperview()
         })
         
         joinButton.snp.makeConstraints({
-            $0.bottom.equalTo(seeFirstButton.snp.top).offset(-79)
+            $0.bottom.equalTo(seeFirstButton.snp.top).offset(-49)
             $0.centerX.equalToSuperview()
         })
         
@@ -146,6 +168,12 @@ class LoginViewController: UIViewController {
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(56)
+        })
+        
+        brandImage.snp.makeConstraints({
+            $0.centerX.equalToSuperview()
+//            $0.bottom.equalTo(appleLoginButton.snp.top).offset(-125)
+            $0.centerY.equalToSuperview().offset(-view.bounds.height / 6)
         })
         
         
