@@ -19,12 +19,23 @@ class ModalLoginViewController: UIViewController {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "로그인 / 회원가입"
-        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.text = "로그인이 필요한 서비스예요."
+        label.font = .systemFont(ofSize: 17, weight: .medium)
         label.textColor = .white
         
         return label
     }()
+    
+    private let secondTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "글 작성과 저장을 위해 로그인/회원가입을 해주세요."
+        label.font = .systemFont(ofSize: 15, weight: .regular)
+        label.textColor = .white
+        
+        return label
+    }()
+    
+    
     
     private let closeButton: UIButton = {
         let button = UIButton()
@@ -39,30 +50,46 @@ class ModalLoginViewController: UIViewController {
     private let appleLoginButton: UIButton = {
         let button = UIButton()
         button.setTitle("Apple로 로그인", for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
         button.layer.cornerRadius = 25
-        button.backgroundColor = .black
+        button.backgroundColor = .white
         
         // 이미지 설정
         if let appleImage = UIImage(named: "apple") {
             button.setImage(appleImage, for: .normal)
             button.imageView?.contentMode = .scaleAspectFit
-            button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -150, bottom: 0, right: 0)
+            button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -100, bottom: 0, right: 0)
         }
         
         // titleLabel 중앙에 위치시키기
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -button.imageView!.frame.size.width, bottom: 0, right: 0)
-        
-        // 1포인트 흰색 테두리 추가
-        button.layer.borderWidth = 1.0
-        button.layer.borderColor = UIColor.white.cgColor
         
         return button
     }()
     
     private let emailLoginButton: UIButton = {
         let button = UIButton()
-        button.setTitle("이메일로 회원가입하기", for: .normal)
+        button.setTitle("이메일 로그인", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .brandColor
+        button.layer.cornerRadius = 25
+        
+        if let mailImage = UIImage(named: "mail") {
+            button.setImage(mailImage, for: .normal)
+            button.imageView?.contentMode = .scaleToFill
+            button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -100, bottom: 0, right: 0)
+        }
+        
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -button.imageView!.frame.size.width, bottom: 0, right: 0)
+        
+        return button
+    }()
+    
+    private let joinButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("회원가입하기", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
         button.backgroundColor = .emailLoginButtonColor
         button.layer.cornerRadius = 25
@@ -83,14 +110,21 @@ class ModalLoginViewController: UIViewController {
     
     private func addViews() {
         view.addSubview(titleLabel)
+        view.addSubview(secondTitleLabel)
         view.addSubview(closeButton)
         view.addSubview(appleLoginButton)
         view.addSubview(emailLoginButton)
+        view.addSubview(joinButton)
     }
     
     private func setConstraints() {
         titleLabel.snp.makeConstraints({
-            $0.top.equalToSuperview().offset(35)
+            $0.top.equalToSuperview().offset(29)
+            $0.leading.equalToSuperview().offset(20)
+        })
+        
+        secondTitleLabel.snp.makeConstraints({
+            $0.top.equalTo(titleLabel.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(20)
         })
         
@@ -100,7 +134,7 @@ class ModalLoginViewController: UIViewController {
         })
         
         appleLoginButton.snp.makeConstraints({
-            $0.top.equalTo(titleLabel.snp.bottom).offset(30)
+            $0.top.equalTo(secondTitleLabel.snp.bottom).offset(30)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(56)
@@ -108,6 +142,13 @@ class ModalLoginViewController: UIViewController {
         
         emailLoginButton.snp.makeConstraints({
             $0.top.equalTo(appleLoginButton.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(56)
+        })
+        
+        joinButton.snp.makeConstraints({
+            $0.top.equalTo(emailLoginButton.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(56)
@@ -128,7 +169,7 @@ class ModalLoginViewController: UIViewController {
         
         emailLoginButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                let vc = JoinViewController()
+                let vc = EmailLoginViewController()
                 
                 vc.modalPresentationStyle = .fullScreen
                 self?.present(vc, animated: true)

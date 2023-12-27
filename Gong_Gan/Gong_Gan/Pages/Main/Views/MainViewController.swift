@@ -361,7 +361,7 @@ class CustomModalPresentationController: UIPresentationController {
         guard let containerView = containerView else {
             return CGRect.zero
         }
-        let height: CGFloat = 280
+        let height: CGFloat = 362
         let originY = containerView.frame.height - height
         return CGRect(x: 0, y: originY, width: containerView.frame.width, height: height)
     }
