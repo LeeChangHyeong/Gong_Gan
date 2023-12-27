@@ -72,7 +72,7 @@ class ModalLoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .galleryColor
+        view.backgroundColor = .mainBackGroundColor
         view.layer.cornerRadius = 20
         addViews()
         setConstraints()

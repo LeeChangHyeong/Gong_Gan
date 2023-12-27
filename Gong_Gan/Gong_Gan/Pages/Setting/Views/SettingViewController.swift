@@ -46,7 +46,7 @@ class SettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .galleryColor
+        view.backgroundColor = .mainBackGroundColor
         setNaviBar()
         addSubView()
         setConstraints()

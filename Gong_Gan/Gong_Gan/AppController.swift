@@ -26,7 +26,7 @@ final class AppController {
     
     func show(in window: UIWindow) {
         self.window = window
-        window.backgroundColor = .galleryColor
+        window.backgroundColor = .mainBackGroundColor
         window.makeKeyAndVisible()
     
         if Auth.auth().currentUser == nil {

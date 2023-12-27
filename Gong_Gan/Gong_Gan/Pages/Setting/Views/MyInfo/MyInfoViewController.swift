@@ -58,7 +58,7 @@ class MyInfoViewController: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .galleryColor
+        view.backgroundColor = .mainBackGroundColor
         setNaviBar()
         addSubViews()
         setConstraints()

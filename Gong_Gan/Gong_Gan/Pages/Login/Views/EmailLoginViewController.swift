@@ -49,7 +49,7 @@ class EmailLoginViewController: UIViewController {
         let button = UIButton()
         button.setTitle("로그인", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 17, weight: .bold)
-        button.backgroundColor = .galleryLabelColor
+        button.backgroundColor = .brandColor
         button.layer.cornerRadius = 6
         button.isEnabled = false
         
@@ -117,14 +117,14 @@ class EmailLoginViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
+        view.backgroundColor = .mainBackGroundColor
         emailTf.text = ""
         passWordTf.text = ""
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .galleryColor
+        view.backgroundColor = .mainBackGroundColor
         setNaviBar()
         addViews()
         setConstraints()

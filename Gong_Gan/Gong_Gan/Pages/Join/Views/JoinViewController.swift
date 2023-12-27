@@ -123,7 +123,7 @@ class JoinViewController: UIViewController {
         let button = UIButton()
         button.setTitle("가입완료", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 17, weight: .bold)
-        button.backgroundColor = .joinButtonColor
+        button.backgroundColor = .brandColor
         button.layer.cornerRadius = 14
         button.isEnabled = false
         
@@ -133,7 +133,7 @@ class JoinViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .galleryColor
+        view.backgroundColor = .mainBackGroundColor
         addViews()
         setConstraints()
         setupControl()

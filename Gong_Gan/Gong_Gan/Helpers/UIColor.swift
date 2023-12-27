@@ -37,5 +37,6 @@ extension UIColor {
     static let emailLoginButtonColor = UIColor(hexCode: "3E3E3E")
     static let placeHolderColor = UIColor(hexCode: "656565")
     static let brandColor = UIColor(hexCode: "9BE5AD")
+    static let mainBackGroundColor = UIColor(hexCode: "191919")
 }
 

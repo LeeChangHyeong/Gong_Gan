@@ -150,7 +150,7 @@ class ReadViewController: UIViewController {
         view.addSubview(backGroundView)
         view.addSubview(rainEffectView)
         view.addSubview(snowEffectView)
-        backGroundView.addSubview(textViewColor)
+        view.addSubview(textViewColor)
         view.addSubview(memoTextView)
         view.addSubview(musicButton)
         view.addSubview(locationButton)

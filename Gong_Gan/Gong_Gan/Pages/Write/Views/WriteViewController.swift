@@ -136,7 +136,7 @@ class WriteViewController: UIViewController {
     
     private func addSubViews() {
         view.addSubview(backGroundView)
-        backGroundView.addSubview(textViewColor)
+        view.addSubview(textViewColor)
         view.addSubview(rainEffectView)
         view.addSubview(snowEffectView)
         view.addSubview(memoTextView)

@@ -60,7 +60,7 @@ class GalleryViewController: UIViewController {
         layout.minimumInteritemSpacing = cellSpacing
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .galleryColor
+        collectionView.backgroundColor = .mainBackGroundColor
         collectionView.register(GalleryCollectionViewCell.self, forCellWithReuseIdentifier: GalleryCollectionViewCell.identifier)
         collectionView.isHidden = true
         
@@ -73,7 +73,7 @@ class GalleryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .galleryColor
+        view.backgroundColor = .mainBackGroundColor
         addSubViews()
         setNaviBar()
         setConstraints()
