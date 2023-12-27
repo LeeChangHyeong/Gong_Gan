@@ -88,9 +88,7 @@ class MainViewController: UIViewController {
         effectConstraints()
         
         cameraAnimationView.snp.makeConstraints({
-            $0.leading.trailing.equalToSuperview()
-            $0.top.equalTo(topBarView.snp.bottom)
-            $0.bottom.equalTo(bottomBarView.snp.top)
+            $0.edges.equalToSuperview()
         })
     }
     
