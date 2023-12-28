@@ -205,38 +205,20 @@ class WriteViewController: UIViewController {
     }
     
     private func bindToLocationUpdate() {
-        locationSubject
-        // 한 번만 실행
-            .take(1)
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [weak self ] location in
-                CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
-                    if let place = placemarks?.first {
-                        let attributedString = NSMutableAttributedString(string: "")
-                        let imageAttachment = NSTextAttachment()
-                        
-                        let locationImage = UIImage(named: "location")?.withTintColor(.white.withAlphaComponent(0.75))
-                        imageAttachment.image = locationImage
-                        attributedString.append(NSAttributedString(attachment: imageAttachment))
-                        
-                        let textAttributes: [NSAttributedString.Key: Any] = [
-                            .font: UIFont.systemFont(ofSize: 15, weight: .bold),
-                            .foregroundColor: UIColor.white.withAlphaComponent(0.75)
-                        ]
-                        
-                        attributedString.append(NSAttributedString(string: " \(place.locality ?? "") \(place.subLocality ?? "")", attributes: textAttributes))
-                        
-                        self?.locationLabel.attributedText = attributedString
-                        
-                        self?.viewModel?.location = " \(place.locality ?? "") \(place.subLocality ?? "")"
-                        
-                        // 위치를 가지고 왔으면 업데이트 중지
-                        self?.locationManager.stopUpdatingLocation()
-                        
-                    }
-                }
-            })
-            .disposed(by: disposeBag)
+        let attributedString = NSMutableAttributedString(string: "")
+        let imageAttachment = NSTextAttachment()
+        
+        let locationImage = UIImage(named: "location")?.withTintColor(.white.withAlphaComponent(0.75))
+        imageAttachment.image = locationImage
+        attributedString.append(NSAttributedString(attachment: imageAttachment))
+        
+        let textAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 15, weight: .bold),
+            .foregroundColor: UIColor.white.withAlphaComponent(0.75)
+        ]
+        attributedString.append(NSAttributedString(string:  self.mainViewModel?.currentLocation.value ?? "", attributes: textAttributes))
+        
+        locationLabel.attributedText = attributedString
     }
     
     private func setupSwipeGesture() {

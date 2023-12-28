@@ -144,6 +144,8 @@ class TopBarView: UIView {
                     
                         attributedString.append(NSAttributedString(string: " \(place.locality ?? "") \(place.subLocality ?? "")", attributes: textAttributes))
                         
+                        self?.viewModel?.currentLocation.accept(" \(place.locality ?? "") \(place.subLocality ?? "")")
+                        
                         // 위도 경도 들고오기
                         let latitude = place.location?.coordinate.latitude
                         let longitude = place.location?.coordinate.longitude
