@@ -38,5 +38,6 @@ extension UIColor {
     static let placeHolderColor = UIColor(hexCode: "656565")
     static let brandColor = UIColor(hexCode: "9BE5AD")
     static let mainBackGroundColor = UIColor(hexCode: "191919")
+    static let captionColor = UIColor(hexCode: "9E9E9E")
 }
 

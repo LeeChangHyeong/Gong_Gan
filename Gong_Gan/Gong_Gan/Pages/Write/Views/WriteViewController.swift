@@ -18,6 +18,7 @@ import CoreLocation
 class WriteViewController: UIViewController {
     private let disposeBag = DisposeBag()
     private var locationManager = CLLocationManager()
+    private var musicButtonTap = false
     
     var viewModel: WriteViewModel?
     var backgroundImage: UIImage?
@@ -44,6 +45,13 @@ class WriteViewController: UIViewController {
         view.textColor = .white
         view.text = "터치하여 오늘의 일기를 작성하세요"
         view.font = UIFont(name: "ArialHebrew", size: 15)
+        
+        return view
+    }()
+    
+    private let brandImage: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "brandIcon")
         
         return view
     }()
@@ -78,39 +86,23 @@ class WriteViewController: UIViewController {
         let button = UIButton()
         button.backgroundColor = .buttonColor
         button.tintColor = .white
-        button.setImage(UIImage(systemName: "music.note"), for: .normal)
-        button.layer.cornerRadius = 18
-        //        button.addTarget(self, action: #selector(musicButtonTapped), for: .touchUpInside)
+        button.setImage(UIImage(named: "musicOn"), for: .normal)
+        button.layer.cornerRadius = 16
+        button.addTarget(self, action: #selector(musicButtonTapped), for: .touchUpInside)
         button.invalidateIntrinsicContentSize()
         
         return button
     }()
     
     private let locationLabel: UILabel = {
-        let label = UILabel()
-        let attributedString = NSMutableAttributedString(string: "")
-        let imageAttachment = NSTextAttachment()
-        
-        let locationImage = UIImage(named: "location")?.withTintColor(.white)
-        imageAttachment.image = locationImage
-        attributedString.append(NSAttributedString(attachment: imageAttachment))
-        attributedString.append(NSAttributedString(string: " 서울시 강남구"))
-        
-        label.attributedText = attributedString
-        label.textColor = .white
-        label.sizeToFit()
+       let label = UILabel()
+        label.text = "위치를 불러올 수 없습니다."
+        label.font = .systemFont(ofSize: 13, weight: .regular)
+        label.textColor = .captionColor
         
         return label
     }()
-    
-    private let locationButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .locationColor
-        button.layer.cornerRadius = 6
-        
-        return button
-    }()
-    
+
     private let timeLabel: UILabel = {
         let label = UILabel()
         
@@ -129,9 +121,8 @@ class WriteViewController: UIViewController {
         setNaviBar()
         setConstraints()
         setupControl()
-        setLocationManager()
-        bindToLocationUpdate()
         setupSwipeGesture()
+        setLabel()
     }
     
     private func addSubViews() {
@@ -141,9 +132,26 @@ class WriteViewController: UIViewController {
         view.addSubview(snowEffectView)
         view.addSubview(memoTextView)
         view.addSubview(musicButton)
-        view.addSubview(locationButton)
-        locationButton.addSubview(locationLabel)
-        view.addSubview(timeLabel)
+        view.addSubview(locationLabel)
+        view.addSubview(brandImage)
+    }
+    
+    private func setLabel() {
+        let location = mainViewModel!.currentLocation.value
+            let time = timeLabel.text!
+
+            let attributedString = NSMutableAttributedString(string: "\(location) 에서 \(time) 에 작성한 기록")
+
+            // 색상을 변경하려는 부분에 대한 범위를 설정
+            let locationRange = (attributedString.string as NSString).range(of: location)
+            let timeRange = (attributedString.string as NSString).range(of: time)
+
+            // NSAttributedString에 속성 추가
+        attributedString.addAttribute(.foregroundColor, value: UIColor.brandColor, range: locationRange)
+            attributedString.addAttribute(.foregroundColor, value: UIColor.brandColor, range: timeRange)
+
+            // 최종적으로 설정된 NSAttributedString을 레이블에 할당
+            locationLabel.attributedText = attributedString
     }
     
     private func setNaviBar() {
@@ -167,59 +175,32 @@ class WriteViewController: UIViewController {
             $0.edges.equalToSuperview()
         })
         
-        musicButton.snp.makeConstraints({
-            $0.trailing.equalToSuperview().offset(-20)
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(5)
-            $0.width.equalTo(36)
-            $0.height.equalTo(36)
+        brandImage.snp.makeConstraints({
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
+            $0.leading.equalToSuperview().offset(20)
+            $0.width.equalTo(12)
+            $0.height.equalTo(12)
         })
         
-        locationButton.snp.makeConstraints({
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
-            $0.leading.equalToSuperview().offset(22)
-            $0.height.equalTo(31)
-            $0.width.equalTo(locationLabel.snp.width).offset(24)
+        locationLabel.snp.makeConstraints({
+            $0.centerY.equalTo(brandImage)
+            $0.leading.equalTo(brandImage.snp.trailing).offset(4)
+        })
+        
+        musicButton.snp.makeConstraints({
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.centerY.equalTo(brandImage)
+            $0.width.equalTo(32)
+            $0.height.equalTo(32)
         })
         
         memoTextView.snp.makeConstraints({
             $0.leading.equalToSuperview().offset(31)
             $0.trailing.bottom.equalToSuperview().offset(-31)
-            $0.top.equalTo(locationButton.snp.bottom).offset(24)
-        })
-        
-        timeLabel.snp.makeConstraints({
-            $0.centerY.equalTo(locationButton)
-            $0.leading.equalTo(locationButton.snp.trailing).offset(12)
-        })
-        
-        locationLabel.snp.makeConstraints({
-            $0.leading.equalTo(locationButton.snp.leading).offset(12)
-            $0.centerY.equalTo(locationButton.snp.centerY)
+            $0.top.equalTo(brandImage.snp.bottom).offset(24)
         })
     }
     
-    private func setLocationManager() {
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-    }
-    
-    private func bindToLocationUpdate() {
-        let attributedString = NSMutableAttributedString(string: "")
-        let imageAttachment = NSTextAttachment()
-        
-        let locationImage = UIImage(named: "location")?.withTintColor(.white.withAlphaComponent(0.75))
-        imageAttachment.image = locationImage
-        attributedString.append(NSAttributedString(attachment: imageAttachment))
-        
-        let textAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 15, weight: .bold),
-            .foregroundColor: UIColor.white.withAlphaComponent(0.75)
-        ]
-        attributedString.append(NSAttributedString(string:  self.mainViewModel?.currentLocation.value ?? "", attributes: textAttributes))
-        
-        locationLabel.attributedText = attributedString
-    }
     
     private func setupSwipeGesture() {
         let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
@@ -273,16 +254,16 @@ class WriteViewController: UIViewController {
         
         memoTextView.rx.didBeginEditing
             .subscribe(onNext: { [weak self] in
-                self?.locationButton.isHidden = true
-                self?.timeLabel.isHidden = true
+                self?.brandImage.isHidden = true
+                self?.locationLabel.isHidden = true
                 self?.musicButton.isHidden = true
             })
             .disposed(by: disposeBag)
         
         memoTextView.rx.didEndEditing
             .subscribe(onNext: { [weak self] in
-                self?.locationButton.isHidden = false
-                self?.timeLabel.isHidden = false
+                self?.brandImage.isHidden = false
+                self?.locationLabel.isHidden = false
                 self?.musicButton.isHidden = false
             })
             .disposed(by: disposeBag)
@@ -349,8 +330,15 @@ class WriteViewController: UIViewController {
         Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 self?.viewModel?.updateCurrentTime()
+                self?.setLabel()
             })
             .disposed(by: disposeBag)
+    }
+    
+    @objc func musicButtonTapped() {
+        musicButtonTap.toggle()
+        
+        musicButton.setImage(UIImage(named: musicButtonTap ? "musicOff" : "musicOn"), for: .normal)
     }
     
     private func setEffect() {
@@ -366,15 +354,6 @@ class WriteViewController: UIViewController {
                 rainEffectView.isHidden = true
                 snowEffectView.isHidden = true
             }
-        }
-    }
-}
-
-
-extension WriteViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last {
-            locationSubject.onNext(location)
         }
     }
 }
