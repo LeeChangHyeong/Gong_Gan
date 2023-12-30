@@ -82,18 +82,6 @@ class WriteViewController: UIViewController {
         return button
     }()
     
-    private let musicButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .buttonColor
-        button.tintColor = .white
-        button.setImage(UIImage(named: "musicOn"), for: .normal)
-        button.layer.cornerRadius = 16
-        button.addTarget(self, action: #selector(musicButtonTapped), for: .touchUpInside)
-        button.invalidateIntrinsicContentSize()
-        
-        return button
-    }()
-    
     private let locationLabel: UILabel = {
        let label = UILabel()
         label.text = "위치를 불러올 수 없습니다."
@@ -131,7 +119,6 @@ class WriteViewController: UIViewController {
         view.addSubview(rainEffectView)
         view.addSubview(snowEffectView)
         view.addSubview(memoTextView)
-        view.addSubview(musicButton)
         view.addSubview(locationLabel)
         view.addSubview(brandImage)
     }
@@ -185,13 +172,6 @@ class WriteViewController: UIViewController {
         locationLabel.snp.makeConstraints({
             $0.centerY.equalTo(brandImage)
             $0.leading.equalTo(brandImage.snp.trailing).offset(4)
-        })
-        
-        musicButton.snp.makeConstraints({
-            $0.trailing.equalToSuperview().offset(-20)
-            $0.centerY.equalTo(brandImage)
-            $0.width.equalTo(32)
-            $0.height.equalTo(32)
         })
         
         memoTextView.snp.makeConstraints({
@@ -256,7 +236,6 @@ class WriteViewController: UIViewController {
             .subscribe(onNext: { [weak self] in
                 self?.brandImage.isHidden = true
                 self?.locationLabel.isHidden = true
-                self?.musicButton.isHidden = true
             })
             .disposed(by: disposeBag)
         
@@ -264,7 +243,6 @@ class WriteViewController: UIViewController {
             .subscribe(onNext: { [weak self] in
                 self?.brandImage.isHidden = false
                 self?.locationLabel.isHidden = false
-                self?.musicButton.isHidden = false
             })
             .disposed(by: disposeBag)
         
@@ -333,12 +311,6 @@ class WriteViewController: UIViewController {
                 self?.setLabel()
             })
             .disposed(by: disposeBag)
-    }
-    
-    @objc func musicButtonTapped() {
-        musicButtonTap.toggle()
-        
-        musicButton.setImage(UIImage(named: musicButtonTap ? "musicOff" : "musicOn"), for: .normal)
     }
     
     private func setEffect() {
