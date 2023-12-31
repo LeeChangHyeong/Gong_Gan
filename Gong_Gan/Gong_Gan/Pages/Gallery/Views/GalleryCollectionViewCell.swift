@@ -15,8 +15,7 @@ class GalleryCollectionViewCell: UICollectionViewCell {
     
      let cellImageView: UIImageView = {
        let imageView = UIImageView()
-        imageView.image = UIImage(named: "일본")
-        
+         
         return imageView
     }()
     
@@ -24,6 +23,7 @@ class GalleryCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         addSubViews()
         setConstraints()
+        // downsampled 이미지를 사용하십시오.
     }
     
     required init?(coder: NSCoder) {
@@ -41,4 +41,29 @@ class GalleryCollectionViewCell: UICollectionViewCell {
         })
     }
     
+}
+
+
+func downsampleImage(_ image: UIImage, to pointSize: CGSize, scale: CGFloat) -> UIImage {
+    // 이미지 소스 생성
+    guard let imageSource = CGImageSourceCreateWithData(image.pngData() as! CFData, nil) else {
+        return image
+    }
+    
+    // 다운샘플 옵션 설정
+    let maxDimensionInPixels = max(pointSize.width, pointSize.height) * scale
+    let downsampleOptions: [CFString: Any] = [
+        kCGImageSourceCreateThumbnailFromImageAlways: true,
+        kCGImageSourceShouldCacheImmediately: true,
+        kCGImageSourceCreateThumbnailWithTransform: true,
+        kCGImageSourceThumbnailMaxPixelSize: maxDimensionInPixels
+    ]
+    
+    // 다운샘플된 이미지 생성
+    guard let downsampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, downsampleOptions as CFDictionary) else {
+        return image
+    }
+    
+    // UIImage로 변환 후 반환
+    return UIImage(cgImage: downsampledImage)
 }

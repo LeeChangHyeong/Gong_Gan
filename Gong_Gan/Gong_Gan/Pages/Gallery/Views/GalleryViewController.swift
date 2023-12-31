@@ -15,7 +15,7 @@ import RxSwift
 import RxCocoa
 
 class GalleryViewController: UIViewController {
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     private let viewModel = GalleryViewModel()
     
     private let backButton: UIButton = {
@@ -46,28 +46,31 @@ class GalleryViewController: UIViewController {
     }()
     
     private let galleryCollectionView: UICollectionView = {
+        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        
-        // 한 줄에 3개의 셀이 표시되도록 설정
         let cellSpacing: CGFloat = 3
         let numberOfItemsPerRow: CGFloat = 3
         let screenWidth = UIScreen.main.bounds.width
         let cellWidth = (screenWidth - (cellSpacing * (numberOfItemsPerRow - 1) + cellSpacing * 2)) / numberOfItemsPerRow
+        
         layout.itemSize = CGSize(width: cellWidth, height: cellWidth)
         layout.sectionInset = UIEdgeInsets(top: 0, left: cellSpacing, bottom: 0, right: cellSpacing)
         layout.minimumLineSpacing = cellSpacing
         layout.minimumInteritemSpacing = cellSpacing
-        
+        //
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .mainBackGroundColor
         collectionView.register(GalleryCollectionViewCell.self, forCellWithReuseIdentifier: GalleryCollectionViewCell.identifier)
+        //
         collectionView.isHidden = true
+        // 이미 설정된 delegate와 dataSource를 제거
+        
         
         return collectionView
     }()
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         viewModel.fetchGalleryData()
     }
     
@@ -78,7 +81,15 @@ class GalleryViewController: UIViewController {
         setNaviBar()
         setConstraints()
         setupControl()
+        galleryCollectionView.delegate = nil
+        galleryCollectionView.dataSource = nil
         setCollectionView()
+    }
+    
+    deinit {
+        // ViewController가 메모리에서 해제될 때 호출되는 부분
+        // 여기서 disposeBag을 초기화합니다.
+        disposeBag = DisposeBag()
     }
     
     private func addSubViews() {
@@ -113,17 +124,33 @@ class GalleryViewController: UIViewController {
     }
     
     private func setCollectionView() {
-        viewModel.fetchGalleryData()
+        //        viewModel.fetchGalleryData()
         
         viewModel.galleryData
-            .bind(to: galleryCollectionView.rx.items(cellIdentifier: GalleryCollectionViewCell.identifier, cellType: GalleryCollectionViewCell.self)) { index, element, cell in
+            .bind(to: galleryCollectionView.rx.items(cellIdentifier: GalleryCollectionViewCell.identifier, cellType: GalleryCollectionViewCell.self)) { [weak self] index, element, cell in
+                guard let self = self else {
+                    return
+                }
+                let cellSpacing: CGFloat = 3
+                let numberOfItemsPerRow: CGFloat = 3
+                let screenWidth = UIScreen.main.bounds.width
+                let cellWidth = (screenWidth - (cellSpacing * (numberOfItemsPerRow - 1) + cellSpacing * 2)) / numberOfItemsPerRow
                 self.galleryCollectionView.isHidden = false
-                cell.cellImageView.image = UIImage(named: element.imageName)
+                
+//                if let galleryCell = cell as? GalleryCollectionViewCell {
+//                    let imageName = UIImage(named: "지하철")?.preparingThumbnail(of: CGSize(width: cellWidth, height: cellWidth))?.jpegData(compressionQuality: 1)
+//                    
+//                    galleryCell.cellImageView.image = UIImage(data: imageName!)
+//                }
+                cell.cellImageView.image = UIImage(systemName: "pencil")
             }
             .disposed(by: disposeBag)
         
         galleryCollectionView.rx.modelSelected(GalleryDataModel.self)
-            .subscribe(onNext: { selectedGalleryData in
+            .subscribe(onNext: { [weak self] selectedGalleryData in
+                guard let self else {
+                    return
+                }
                 let readViewController = ReadViewController()
                 readViewController.selectedGalleryData = selectedGalleryData
                 

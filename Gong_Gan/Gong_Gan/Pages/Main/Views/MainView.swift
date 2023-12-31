@@ -49,6 +49,10 @@ class MainView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        player?.pause()
+    }
+    
     private func setupVideoView() {
         addSubview(videoView)
     }

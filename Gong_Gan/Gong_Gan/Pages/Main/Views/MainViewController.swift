@@ -13,7 +13,7 @@ import AVFoundation
 
 class MainViewController: UIViewController {
     private let viewModel = MainViewModel()
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     var seeFirst = false
     
     // 백그라운드 터치 여부 확인
@@ -48,6 +48,12 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
     }
+    
+    deinit {
+            // ViewController가 메모리에서 해제될 때 호출되는 부분
+            // 여기서 disposeBag을 초기화합니다.
+            disposeBag = DisposeBag()
+        }
     
     override func viewDidLoad() {
         super.viewDidLoad()
