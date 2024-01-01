@@ -66,7 +66,6 @@ class GalleryViewController: UIViewController {
         collectionView.isHidden = true
         // 이미 설정된 delegate와 dataSource를 제거
         
-        
         return collectionView
     }()
     
@@ -84,12 +83,6 @@ class GalleryViewController: UIViewController {
         galleryCollectionView.delegate = nil
         galleryCollectionView.dataSource = nil
         setCollectionView()
-    }
-    
-    deinit {
-        // ViewController가 메모리에서 해제될 때 호출되는 부분
-        // 여기서 disposeBag을 초기화합니다.
-        disposeBag = DisposeBag()
     }
     
     private func addSubViews() {
@@ -121,14 +114,16 @@ class GalleryViewController: UIViewController {
                 self?.navigationController?.popViewController(animated: true)
             })
             .disposed(by: disposeBag)
+        
     }
     
     private func setCollectionView() {
         //        viewModel.fetchGalleryData()
         
         viewModel.galleryData
+            .observe(on: MainScheduler.instance)
             .bind(to: galleryCollectionView.rx.items(cellIdentifier: GalleryCollectionViewCell.identifier, cellType: GalleryCollectionViewCell.self)) { [weak self] index, element, cell in
-                guard let self = self else {
+                guard let self else {
                     return
                 }
                 let cellSpacing: CGFloat = 3
@@ -142,7 +137,11 @@ class GalleryViewController: UIViewController {
 //                    
 //                    galleryCell.cellImageView.image = UIImage(data: imageName!)
 //                }
+                
                 cell.cellImageView.image = UIImage(systemName: "pencil")
+//
+//                cell.cellImageView.image = downsampleImage(UIImage(named: "지하철")!, to: CGSize(width: cellWidth, height: cellWidth), scale: UIScreen.main.scale)
+//                
             }
             .disposed(by: disposeBag)
         

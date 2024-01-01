@@ -123,12 +123,6 @@ class WriteViewController: UIViewController {
         view.addSubview(brandImage)
     }
     
-    deinit {
-            // ViewController가 메모리에서 해제될 때 호출되는 부분
-            // 여기서 disposeBag을 초기화합니다.
-            disposeBag = DisposeBag()
-        }
-    
     private func setLabel() {
         let location = mainViewModel!.currentLocation.value
             let time = timeLabel.text!

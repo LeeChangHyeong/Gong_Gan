@@ -17,6 +17,7 @@ class GalleryViewModel {
         let userDocumentRef = Firestore.firestore().collection("users").document(uid)
         
         userDocumentRef.getDocument { [weak self] document, error in
+            guard let self else {return}
             if let document = document, document.exists {
                 if let memosArray = document["memos"] as? [[String: Any]] {
                     
@@ -40,13 +41,16 @@ class GalleryViewModel {
                         
                         // 모든 데이터를 GalleryDataModel로 만들어 배열에 저장
                         let galleryData = GalleryDataModel(memoID: memoID, date: date, imageName: imageName, location: location, memo: memo, time: time, weather: weather)
+            
                         galleryDataArray.append(galleryData)
                     }
                     
-                    // galleryData에 데이터 저장
-                    self?.galleryData.accept(galleryDataArray)
                     
-//                    print("Gallery data array: \(galleryDataArray)")
+                    
+                    // galleryData에 데이터 저장
+                    self.galleryData.accept(galleryDataArray)
+                    
+                    print("Gallery data array: \(galleryDataArray)")
                 }
             } else {
                 print("Document does not exist")
