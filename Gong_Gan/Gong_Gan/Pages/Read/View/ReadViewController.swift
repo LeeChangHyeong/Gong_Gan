@@ -92,54 +92,6 @@ class ReadViewController: UIViewController {
         return button
     }()
     
-    private let musicButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .buttonColor
-        button.tintColor = .white
-        button.setImage(UIImage(systemName: "music.note"), for: .normal)
-        button.layer.cornerRadius = 18
-//        button.addTarget(self, action: #selector(musicButtonTapped), for: .touchUpInside)
-        button.invalidateIntrinsicContentSize()
-        
-        return button
-    }()
-    
-//    private let locationLabel: UILabel = {
-//        let label = UILabel()
-//        let attributedString = NSMutableAttributedString(string: "")
-//        let imageAttachment = NSTextAttachment()
-//        
-//        let locationImage = UIImage(named: "location")?.withTintColor(.white)
-//        imageAttachment.image = locationImage
-//        attributedString.append(NSAttributedString(attachment: imageAttachment))
-//        attributedString.append(NSAttributedString(string: " 서울시 강남구"))
-//        
-//        label.attributedText = attributedString
-//        label.textColor = .white
-//        label.sizeToFit()
-//        
-//        return label
-//    }()
-    
-    
-//    private let locationButton: UIButton = {
-//        let button = UIButton()
-//        button.backgroundColor = .locationColor
-//        button.layer.cornerRadius = 6
-//        
-//        return button
-//    }()
-    
-//    private let timeLabel: UILabel = {
-//        let label = UILabel()
-//        
-//        label.textColor = .white
-//        label.font = .systemFont(ofSize: 12, weight: .regular)
-//        label.text = "오전 10:03"
-//        
-//        return label
-//    }()
-    
     private let locationLabel: UILabel = {
        let label = UILabel()
         label.text = "위치를 불러올 수 없습니다."
@@ -179,7 +131,6 @@ class ReadViewController: UIViewController {
         view.addSubview(snowEffectView)
         view.addSubview(textViewColor)
         view.addSubview(memoTextView)
-//        view.addSubview(locationButton)
         view.addSubview(brandImage)
         view.addSubview(locationLabel)
         view.addSubview(timeLabel)
