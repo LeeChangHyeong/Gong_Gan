@@ -288,6 +288,8 @@ class WriteViewController: UIViewController {
         
         saveMemoButton.rx.tap
             .subscribe(onNext:{ [weak self] in
+                self?.viewModel?.location = (self?.mainViewModel?.currentLocation.value)!
+                
                 self?.viewModel?.saveMemo { error in
                     if let error = error {
                         print("WriteViewController saveMemo Error: \(error.localizedDescription)")

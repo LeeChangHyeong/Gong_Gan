@@ -216,6 +216,7 @@ class ReadViewController: UIViewController {
     private func setupData() {
         memoTextView.text = selectedGalleryData?.memo
 //        backGroundView.image = UIImage(named: selectedGalleryData!.imageName)
+        
         self.backGroundView.playVideo(with: selectedGalleryData!.imageName)
         self.backGroundView.observePlayerDidPlayToEndTime()
         nowDateLabel.text = selectedGalleryData?.date
