@@ -212,14 +212,15 @@ class WriteViewController: UIViewController {
     
     private func setupControl() {
         // WriteViewModel의 backgroundImage를 구독하여 값이 업데이트될 때마다 실행되는 클로저 정의
-        viewModel?.backgroundImage
-            .subscribe(onNext: { [weak self] image in
-                // 값이 업데이트되면 받아온 이미지를 배경으로 설정
-//                self?.backGroundView.image = UIImage(named: image!)
-                self?.backGroundView.playVideo(with: image!)
-                self?.backGroundView.observePlayerDidPlayToEndTime()
-            })
-            .disposed(by: disposeBag)
+//        viewModel?.backgroundImage
+//            .subscribe(onNext: { [weak self] image in
+//                // 값이 업데이트되면 받아온 이미지를 배경으로 설정
+////                self?.backGroundView.image = UIImage(named: image!)
+//                print(image)
+//                self?.backGroundView.playVideo(with: image!)
+//                self?.backGroundView.observePlayerDidPlayToEndTime()
+//            })
+//            .disposed(by: disposeBag)
         
         memoTextView.rx.text
             .bind(to: viewModel!.memoText)

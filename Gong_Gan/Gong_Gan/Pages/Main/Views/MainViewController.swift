@@ -201,11 +201,9 @@ class MainViewController: UIViewController {
             vc.mainViewModel = mainViewModel
             
             // MainViewController의 배경 이미지 이름을 WriteViewModel에 전달
-            if let selectedImageName = viewModel.selectedBackgroundImage.value {
-                writeViewModel.updateBackgroundImage(selectedImageName)
-            } else {
-                writeViewModel.updateBackgroundImage("도시") // 기본 이미지 이름
-            }
+            
+            writeViewModel.updateBackgroundImage(mainView.name)
+            
             
             playCameraSound()
             cameraAnimationView.isHidden = false
