@@ -204,7 +204,6 @@ class MainViewController: UIViewController {
             
             writeViewModel.updateBackgroundImage(mainView.name)
             
-            
             playCameraSound()
             cameraAnimationView.isHidden = false
             view.isUserInteractionEnabled = false

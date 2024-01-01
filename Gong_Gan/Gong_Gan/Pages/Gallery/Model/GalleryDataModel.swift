@@ -15,4 +15,5 @@ struct GalleryDataModel {
     let memo: String
     let time: String
     let weather: String
+    let thumnailImage: String
 }

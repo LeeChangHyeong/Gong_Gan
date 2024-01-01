@@ -47,6 +47,18 @@ class WriteViewModel {
             let uid = UserData.shared.getUserUid()
             // 새로운 UUID 생성
            let memoID = UUID().uuidString
+        
+        var thumnailImage = backgroundImage.value
+        // 여기서 날씨 값이 rain 또는 snow인지 확인하고 thumnailImage를 변경
+        if let weather = mainViewModel.currentWeather.value?.weather.first?.main.lowercased() {
+              if weather == "rain" {
+                  // 날씨가 rain인 경우 thumnailImage 변경
+                  thumnailImage! += "_rain"// 적절한 이미지 이름으로 변경
+              } else if weather == "snow" {
+                  // 날씨가 snow인 경우 thumnailImage 변경
+                  thumnailImage! += "_snow" // 적절한 이미지 이름으로 변경
+              }
+          }
 
             let data = [
                 "memoID": memoID,
@@ -55,7 +67,8 @@ class WriteViewModel {
                 "imageName": backgroundImage.value, // 이미지 이름 추가
                 "time": currentTimeText.value, // 시간 저장
                 "location": location, // 위치 정보 저장
-                "weather": mainViewModel.currentWeather.value?.weather.first?.main // 날씨 데이터 저장
+                "weather": mainViewModel.currentWeather.value?.weather.first?.main, // 날씨 데이터 저장
+                "thumnailImage": thumnailImage
             ]
 
             let userDocumentRef = Firestore.firestore().collection("users").document(uid)
