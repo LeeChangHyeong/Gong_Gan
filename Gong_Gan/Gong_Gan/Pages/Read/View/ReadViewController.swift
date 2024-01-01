@@ -68,6 +68,13 @@ class ReadViewController: UIViewController {
             return button
     }()
     
+    private let brandImage: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "brandIcon")
+        
+        return view
+    }()
+    
     private let nowDateLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
@@ -97,31 +104,51 @@ class ReadViewController: UIViewController {
         return button
     }()
     
+//    private let locationLabel: UILabel = {
+//        let label = UILabel()
+//        let attributedString = NSMutableAttributedString(string: "")
+//        let imageAttachment = NSTextAttachment()
+//        
+//        let locationImage = UIImage(named: "location")?.withTintColor(.white)
+//        imageAttachment.image = locationImage
+//        attributedString.append(NSAttributedString(attachment: imageAttachment))
+//        attributedString.append(NSAttributedString(string: " 서울시 강남구"))
+//        
+//        label.attributedText = attributedString
+//        label.textColor = .white
+//        label.sizeToFit()
+//        
+//        return label
+//    }()
+    
+    
+//    private let locationButton: UIButton = {
+//        let button = UIButton()
+//        button.backgroundColor = .locationColor
+//        button.layer.cornerRadius = 6
+//        
+//        return button
+//    }()
+    
+//    private let timeLabel: UILabel = {
+//        let label = UILabel()
+//        
+//        label.textColor = .white
+//        label.font = .systemFont(ofSize: 12, weight: .regular)
+//        label.text = "오전 10:03"
+//        
+//        return label
+//    }()
+    
     private let locationLabel: UILabel = {
-        let label = UILabel()
-        let attributedString = NSMutableAttributedString(string: "")
-        let imageAttachment = NSTextAttachment()
-        
-        let locationImage = UIImage(named: "location")?.withTintColor(.white)
-        imageAttachment.image = locationImage
-        attributedString.append(NSAttributedString(attachment: imageAttachment))
-        attributedString.append(NSAttributedString(string: " 서울시 강남구"))
-        
-        label.attributedText = attributedString
-        label.textColor = .white
-        label.sizeToFit()
+       let label = UILabel()
+        label.text = "위치를 불러올 수 없습니다."
+        label.font = .systemFont(ofSize: 13, weight: .regular)
+        label.textColor = .captionColor
         
         return label
     }()
-    
-    private let locationButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .locationColor
-        button.layer.cornerRadius = 6
-        
-        return button
-    }()
-    
+
     private let timeLabel: UILabel = {
         let label = UILabel()
         
@@ -152,9 +179,9 @@ class ReadViewController: UIViewController {
         view.addSubview(snowEffectView)
         view.addSubview(textViewColor)
         view.addSubview(memoTextView)
-        view.addSubview(musicButton)
-        view.addSubview(locationButton)
-        locationButton.addSubview(locationLabel)
+//        view.addSubview(locationButton)
+        view.addSubview(brandImage)
+        view.addSubview(locationLabel)
         view.addSubview(timeLabel)
     }
     
@@ -182,35 +209,40 @@ class ReadViewController: UIViewController {
             $0.edges.equalToSuperview()
         })
         
-        musicButton.snp.makeConstraints({
-            $0.trailing.equalToSuperview().offset(-20)
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(5)
-            $0.width.equalTo(36)
-            $0.height.equalTo(36)
+        brandImage.snp.makeConstraints({
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
+            $0.leading.equalToSuperview().offset(20)
+            $0.width.equalTo(12)
+            $0.height.equalTo(12)
         })
         
-        locationButton.snp.makeConstraints({
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
-            $0.leading.equalToSuperview().offset(22)
-            $0.height.equalTo(31)
-            $0.width.equalTo(locationLabel.snp.width).offset(24)
+        locationLabel.snp.makeConstraints({
+            $0.centerY.equalTo(brandImage)
+            $0.leading.equalTo(brandImage.snp.trailing).offset(4)
         })
         
         memoTextView.snp.makeConstraints({
             $0.leading.equalToSuperview().offset(31)
             $0.trailing.bottom.equalToSuperview().offset(-31)
-            $0.top.equalTo(locationButton.snp.bottom).offset(24)
+            $0.top.equalTo(brandImage.snp.bottom).offset(24)
         })
         
-        timeLabel.snp.makeConstraints({
-            $0.centerY.equalTo(locationButton)
-            $0.leading.equalTo(locationButton.snp.trailing).offset(12)
-        })
+//        locationButton.snp.makeConstraints({
+//            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
+//            $0.leading.equalToSuperview().offset(22)
+//            $0.height.equalTo(31)
+//            $0.width.equalTo(locationLabel.snp.width).offset(24)
+//        })
         
-        locationLabel.snp.makeConstraints({
-            $0.leading.equalTo(locationButton.snp.leading).offset(12)
-            $0.centerY.equalTo(locationButton.snp.centerY)
-        })
+//        timeLabel.snp.makeConstraints({
+//            $0.centerY.equalTo(locationButton)
+//            $0.leading.equalTo(locationButton.snp.trailing).offset(12)
+//        })
+//        
+//        locationLabel.snp.makeConstraints({
+//            $0.leading.equalTo(locationButton.snp.leading).offset(12)
+//            $0.centerY.equalTo(locationButton.snp.centerY)
+//        })
 }
     
     private func setupData() {
@@ -222,18 +254,22 @@ class ReadViewController: UIViewController {
         nowDateLabel.text = selectedGalleryData?.date
         
         // locationLabel의 attributedText 설정
-        let newLocationText = (selectedGalleryData?.location)!
-            let newLocationAttributedString = NSAttributedString(string: newLocationText, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        
+        let location = selectedGalleryData!.location
+        let time = selectedGalleryData!.time
 
-            let imageAttachment = NSTextAttachment()
-            let locationImage = UIImage(named: "location")?.withTintColor(.white)
-            imageAttachment.image = locationImage
+            let attributedString = NSMutableAttributedString(string: "\(location) 에서 \(time) 에 작성한 기록")
 
-            let finalAttributedString = NSMutableAttributedString(attachment: imageAttachment)
-            finalAttributedString.append(newLocationAttributedString)
+            // 색상을 변경하려는 부분에 대한 범위를 설정
+        let locationRange = (attributedString.string as NSString).range(of: location)
+        let timeRange = (attributedString.string as NSString).range(of: time)
 
-            locationLabel.attributedText = finalAttributedString
-            timeLabel.text = selectedGalleryData?.time
+            // NSAttributedString에 속성 추가
+        attributedString.addAttribute(.foregroundColor, value: UIColor.brandColor, range: locationRange)
+            attributedString.addAttribute(.foregroundColor, value: UIColor.brandColor, range: timeRange)
+
+            // 최종적으로 설정된 NSAttributedString을 레이블에 할당
+            locationLabel.attributedText = attributedString
         
     }
     
@@ -328,17 +364,16 @@ class ReadViewController: UIViewController {
         
         memoTextView.rx.didBeginEditing
             .subscribe(onNext: { [weak self] in
-                self?.locationButton.isHidden = true
-                self?.timeLabel.isHidden = true
-                self?.musicButton.isHidden = true
+            
+                self?.brandImage.isHidden = true
+                self?.locationLabel.isHidden = true
             })
             .disposed(by: disposeBag)
         
         memoTextView.rx.didEndEditing
             .subscribe(onNext: { [weak self] in
-                self?.locationButton.isHidden = false
-                self?.timeLabel.isHidden = false
-                self?.musicButton.isHidden = false
+                self?.brandImage.isHidden = false
+                self?.locationLabel.isHidden = false
             })
             .disposed(by: disposeBag)
         
