@@ -135,6 +135,7 @@ class GalleryViewController: UIViewController {
 
                     galleryCell.cellImageView.image = UIImage(data: imageName!)
                 }
+
             }
             .disposed(by: disposeBag)
 

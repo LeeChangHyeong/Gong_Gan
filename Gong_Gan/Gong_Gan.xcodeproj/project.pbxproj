@@ -56,6 +56,7 @@
 		32D8E1BC2AB1FB08001D9AF3 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1BB2AB1FB08001D9AF3 /* UIColor.swift */; };
 		32D8E1C22AB20F71001D9AF3 /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1C12AB20F71001D9AF3 /* TopBarView.swift */; };
 		32D8E1C42AB20F84001D9AF3 /* BottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8E1C32AB20F84001D9AF3 /* BottomBarView.swift */; };
+		32EB8BD42B43CD5A00556511 /* OnBoardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EB8BD32B43CD5A00556511 /* OnBoardingPageViewController.swift */; };
 		32FAFB0C2B299066003EB56C /* Snow.sks in Resources */ = {isa = PBXBuildFile; fileRef = 32FAFB0B2B299066003EB56C /* Snow.sks */; };
 		32FAFB0E2B2990F5003EB56C /* SnowEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FAFB0D2B2990F5003EB56C /* SnowEffectView.swift */; };
 		80E3E673DD6630E670D0103E /* Pods_Gong_Gan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA9945623F24B225C8A57D66 /* Pods_Gong_Gan.framework */; };
@@ -114,6 +115,7 @@
 		32D8E1BB2AB1FB08001D9AF3 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		32D8E1C12AB20F71001D9AF3 /* TopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
 		32D8E1C32AB20F84001D9AF3 /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };
+		32EB8BD32B43CD5A00556511 /* OnBoardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingPageViewController.swift; sourceTree = "<group>"; };
 		32FAFB0B2B299066003EB56C /* Snow.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Snow.sks; sourceTree = "<group>"; };
 		32FAFB0D2B2990F5003EB56C /* SnowEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowEffectView.swift; sourceTree = "<group>"; };
 		78C9A9F8C9F12AD97494627D /* Pods-Gong_Gan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gong_Gan.debug.xcconfig"; path = "Target Support Files/Pods-Gong_Gan/Pods-Gong_Gan.debug.xcconfig"; sourceTree = "<group>"; };
@@ -440,6 +442,7 @@
 			isa = PBXGroup;
 			children = (
 				32BDCFAC2B215F2D00D155EA /* OnBoardingViewController.swift */,
+				32EB8BD32B43CD5A00556511 /* OnBoardingPageViewController.swift */,
 			);
 			path = OnBoarding;
 			sourceTree = "<group>";
@@ -623,6 +626,7 @@
 				32D8E1BC2AB1FB08001D9AF3 /* UIColor.swift in Sources */,
 				32718C482B15F0EF00FF3EEF /* GalleryViewModel.swift in Sources */,
 				3203519D2B1D8FAF0055798A /* VersionView.swift in Sources */,
+				32EB8BD42B43CD5A00556511 /* OnBoardingPageViewController.swift in Sources */,
 				3283A5C12A95F264001ECC9A /* Gong_Gan.xcdatamodeld in Sources */,
 				323125A22B00CC72002B9A25 /* WriteViewModel.swift in Sources */,
 				323125832AFA671F002B9A25 /* AppController.swift in Sources */,

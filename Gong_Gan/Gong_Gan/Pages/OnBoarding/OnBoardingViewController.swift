@@ -12,23 +12,36 @@ import RxCocoa
 
 class OnBoardingViewController: UIViewController {
     
+    private var pages = [UIViewController]()
+    
     private let button: UIButton = {
         let button = UIButton()
-        button.setTitle("홈으로", for: .normal)
-        button.backgroundColor = .green
+        button.setTitle("시작하기", for: .normal)
+        button.backgroundColor = .brandColor
+        button.layer.cornerRadius = 8
         
         return button
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .gray
+        view.backgroundColor = .mainBackGroundColor
         view.addSubview(button)
+        setConstraints()
+        setButton()
+    }
+    
+    private func setConstraints() {
         button.snp.makeConstraints({
-            $0.centerY.centerX.equalToSuperview()
+            $0.centerX.equalToSuperview()
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
+            $0.bottom.equalToSuperview().offset(-60)
+            $0.height.equalTo(55)
         })
+    }
+    
+    private func setButton() {
         
         button.rx.tap
             .subscribe(onNext: {
