@@ -58,18 +58,18 @@ import RxCocoa
 //        layout.sectionInset = UIEdgeInsets(top: 0, left: cellSpacing, bottom: 0, right: cellSpacing)
 //        layout.minimumLineSpacing = cellSpacing
 //        layout.minimumInteritemSpacing = cellSpacing
-//        //
+//
 //        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 //        collectionView.backgroundColor = .mainBackGroundColor
 //        collectionView.register(GalleryCollectionViewCell.self, forCellWithReuseIdentifier: GalleryCollectionViewCell.identifier)
-//        //
+//
 //        collectionView.isHidden = true
-//        // 이미 설정된 delegate와 dataSource를 제거
 //
 //        return collectionView
 //    }()
 //
 //    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
 //        viewModel.fetchGalleryData()
 //    }
 //
@@ -159,8 +159,7 @@ import RxCocoa
 
 
 class GalleryViewController: UIViewController {
-    private var disposeBag = DisposeBag()
-    private let viewModel = GalleryViewModel()
+    var disposeBag = DisposeBag()
     
     private let backButton: UIButton = {
         let button = UIButton()
@@ -170,6 +169,7 @@ class GalleryViewController: UIViewController {
         
         return button
     }()
+    private var galleryData: [GalleryDataModel] = []
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -184,24 +184,24 @@ class GalleryViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .mainBackGroundColor
+        collectionView.backgroundColor = .black
         collectionView.register(GalleryCollectionViewCell.self, forCellWithReuseIdentifier: GalleryCollectionViewCell.identifier)
         return collectionView
     }()
     
-    private var galleryData: [GalleryDataModel] = []
     
     private let galleryIsEmptyLabel: UILabel = {
         let label = UILabel()
         label.text = "작성된 일기가 없습니다."
         label.font = .systemFont(ofSize: 16, weight: .regular)
-        label.textColor = .galleryLabelColor
+        label.textColor = .black
         
         return label
     }()
     
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         fetchGalleryData()
     }
     
@@ -209,7 +209,7 @@ class GalleryViewController: UIViewController {
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
-        view.backgroundColor = .mainBackGroundColor
+        view.backgroundColor = .black
         addSubViews()
         setNaviBar()
         setConstraints()
@@ -240,60 +240,63 @@ class GalleryViewController: UIViewController {
         })
     }
     
-    private func setupControl() {
-        backButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.navigationController?.popViewController(animated: true)
-            })
-            .disposed(by: disposeBag)
-    }
+        private func setupControl() {
+            backButton.rx.tap
+                .subscribe(onNext: { [weak self] in
+                    self?.navigationController?.popViewController(animated: true)
+                })
+                .disposed(by: disposeBag)
+    
+        }
+    
     
     private func fetchGalleryData() {
-        // 여기에 Firestore 등을 이용하여 데이터를 가져오는 로직을 구현
-        // 패치데이터로 받은 정보를 galleryData에 저장
-        let uid = UserData.shared.getUserUid()
-        let userDocumentRef = Firestore.firestore().collection("users").document(uid)
-        
-        userDocumentRef.getDocument { [weak self] document, error in
-            guard let self else {return}
-            if let document = document, document.exists {
-                if let memosArray = document["memos"] as? [[String: Any]] {
-                    
-                    let reversedMemosArray = memosArray.reversed()
-                    // 모든 데이터를 저장할 배열 초기화
-                    var galleryDataArray: [GalleryDataModel] = []
-                    
-                    for memoDict in reversedMemosArray {
-                        guard
-                            let memoID = memoDict["memoID"] as?
-                                String,
-                            let date = memoDict["date"] as? String,
-                            let imageName = memoDict["imageName"] as? String,
-                            let location = memoDict["location"] as? String,
-                            let memo = memoDict["memo"] as? String,
-                            let time = memoDict["time"] as? String,
-                            let weather = memoDict["weather"] as? String,
-                            let thumnailImage = memoDict["thumnailImage"] as? String
-                        else {
-                            continue
+            // 여기에 Firestore 등을 이용하여 데이터를 가져오는 로직을 구현
+            // 패치데이터로 받은 정보를 galleryData에 저장
+            let uid = UserData.shared.getUserUid()
+            let userDocumentRef = Firestore.firestore().collection("users").document(uid)
+            
+            userDocumentRef.getDocument { [weak self] document, error in
+                guard let self else {return}
+                if let document = document, document.exists {
+                    if let memosArray = document["memos"] as? [[String: Any]] {
+                        
+                        let reversedMemosArray = memosArray.reversed()
+                        // 모든 데이터를 저장할 배열 초기화
+                        var galleryDataArray: [GalleryDataModel] = []
+                        
+                        for memoDict in reversedMemosArray {
+                            guard
+                                let memoID = memoDict["memoID"] as?
+                                    String,
+                                let date = memoDict["date"] as? String,
+                                let imageName = memoDict["imageName"] as? String,
+                                let location = memoDict["location"] as? String,
+                                let memo = memoDict["memo"] as? String,
+                                let time = memoDict["time"] as? String,
+                                let weather = memoDict["weather"] as? String,
+                                let thumnailImage = memoDict["thumnailImage"] as? String
+                            else {
+                                continue
+                            }
+                            
+                            // 모든 데이터를 GalleryDataModel로 만들어 배열에 저장
+                            let galleryData = GalleryDataModel(memoID: memoID, date: date, imageName: imageName, location: location, memo: memo, time: time, weather: weather, thumnailImage: thumnailImage)
+                            
+                            galleryDataArray.append(galleryData)
                         }
+                        self.galleryData = galleryDataArray
                         
-                        // 모든 데이터를 GalleryDataModel로 만들어 배열에 저장
-                        let galleryData = GalleryDataModel(memoID: memoID, date: date, imageName: imageName, location: location, memo: memo, time: time, weather: weather, thumnailImage: thumnailImage)
+                        print("Gallery data array: \(galleryData)")
                         
-                        galleryDataArray.append(galleryData)
+                        self.updateCollectionView()
                     }
-                    self.galleryData = galleryDataArray
-                    
-                    print("Gallery data array: \(galleryData)")
-                    
-                    self.updateCollectionView()
+                } else {
+                    print("Document does not exist")
                 }
-            } else {
-                print("Document does not exist")
             }
         }
-    }
+        
     
     private func updateCollectionView() {
         collectionView.reloadData()
@@ -301,16 +304,15 @@ class GalleryViewController: UIViewController {
     
 }
 
-extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension GalleryViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return galleryData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GalleryCollectionViewCell.identifier, for: indexPath) as? GalleryCollectionViewCell else {
-            return UICollectionViewCell()
-        }
-        let data = galleryData[indexPath.item]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GalleryCollectionViewCell.identifier, for: indexPath) as! GalleryCollectionViewCell
+
+        
         cell.cellImageView.image = UIImage(systemName: "pencil")
         return cell
     }
@@ -331,6 +333,6 @@ extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataS
         readViewController.selectedGalleryData = selectedData
         navigationController?.pushViewController(readViewController, animated: true)
     }
-    
+
     
 }
