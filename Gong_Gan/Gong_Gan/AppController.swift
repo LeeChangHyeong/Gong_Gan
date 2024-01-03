@@ -59,7 +59,7 @@ final class AppController {
        
     }
     
-    private func routeToLogin() {
+    func routeToLogin() {
         if !UserDefaults.standard.bool(forKey: "hasLaunchedBefore") {
             rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
             UserDefaults.standard.set(true, forKey: "hasLaunchedBefore")

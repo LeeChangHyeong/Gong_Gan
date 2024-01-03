@@ -25,6 +25,7 @@ class OnBoardingPageViewController: UIViewController {
             super.init(nibName: nil, bundle: nil)
             imageView.image = UIImage(named: imageName)
             titleLabel.text = title
+            titleLabel.textColor = .white
             subTitleLabel.text = subTitle
         }
         
@@ -39,16 +40,19 @@ class OnBoardingPageViewController: UIViewController {
         }
         
         private func setupLayout() {
+            view.addSubview(titleLabel)
             titleLabel.snp.makeConstraints({
-                $0.top.equalToSuperview()
+                $0.top.equalToSuperview().offset(160)
                 $0.centerX.equalToSuperview()
             })
             
+            view.addSubview(subTitleLabel)
             subTitleLabel.snp.makeConstraints({
                 $0.top.equalTo(titleLabel.snp.bottom).offset(20)
                 $0.centerX.equalTo(titleLabel)
             })
             
+            view.addSubview(imageView)
             imageView.snp.makeConstraints({
                 $0.top.equalTo(subTitleLabel.snp.bottom).offset(50)
                 $0.centerX.equalTo(titleLabel)

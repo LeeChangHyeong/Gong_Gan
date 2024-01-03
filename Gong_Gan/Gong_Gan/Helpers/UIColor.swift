@@ -39,5 +39,7 @@ extension UIColor {
     static let brandColor = UIColor(hexCode: "9BE5AD")
     static let mainBackGroundColor = UIColor(hexCode: "191919")
     static let captionColor = UIColor(hexCode: "9E9E9E")
+    static let inactiveFalseColor = UIColor(hexCode: "494E58")
+    static let inactiveFalseTextColor = UIColor(hexCode: "67696F")
 }
 
