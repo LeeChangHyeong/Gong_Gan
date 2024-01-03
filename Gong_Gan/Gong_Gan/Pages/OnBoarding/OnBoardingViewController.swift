@@ -79,13 +79,13 @@ class OnBoardingViewController: UIPageViewController {
             $0.centerX.equalToSuperview()
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
-            $0.bottom.equalToSuperview().offset(-60)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
             $0.height.equalTo(55)
             
             view.addSubview(pageControl)
             pageControl.snp.makeConstraints({
                 $0.centerX.equalToSuperview()
-                $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
+                $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             })
         })
     }
@@ -94,10 +94,6 @@ class OnBoardingViewController: UIPageViewController {
         
         button.rx.tap
             .subscribe(onNext: {
-//                let vc = LoginViewController()
-//                vc.modalPresentationStyle = .fullScreen
-//                self.navigationController?.pushViewController(vc, animated: true)
-//                self.present(vc, animated: true)
                 AppController.shared.routeToLogin()
             })
             .disposed(by: disposeBag)
