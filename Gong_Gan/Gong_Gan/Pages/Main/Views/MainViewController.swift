@@ -308,17 +308,30 @@ extension MainViewController: UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        let label = UILabel()
-        label.textColor = .white
-        label.text = captureModesName[row]
-        label.textAlignment = .center
-        label.transform = CGAffineTransform(rotationAngle: 90 * (.pi / 180))
+//        let label = UILabel()
+//        label.textColor = .white
+//        label.text = captureModesName[row]
+//        label.textAlignment = .center
+//        label.transform = CGAffineTransform(rotationAngle: 90 * (.pi / 180))
+//        
+//        pickerView.subviews.forEach {
+//            $0.backgroundColor = UIColor.clear
+//        }
+//        
+//        return label
         
-        pickerView.subviews.forEach {
-            $0.backgroundColor = UIColor.clear
-        }
+        var customView = view as? OvalBackgroundView
+            if customView == nil {
+                customView = OvalBackgroundView()
+            }
+            
+            // Set text and transform for the label in the custom view
+            customView?.label.text = captureModesName[row]
+        customView?.label.textColor = .white
         
-        return label
+            customView?.label.transform = CGAffineTransform(rotationAngle: 90 * (.pi / 180))
+            
+            return customView!
     }
     
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
@@ -365,6 +378,7 @@ extension MainViewController: UIPickerViewDataSource {
         // MainViewController의 배경 이미지 이름을 viewModel에 전달
 //        viewModel.updateSelectedImageName(selectedImageName)
         viewModel.updateSelectedImageName(selectedImageName)
+       
     }
 }
 
@@ -384,4 +398,40 @@ extension MainViewController: UIViewControllerTransitioningDelegate {
         return CustomModalPresentationController(presentedViewController: presented, presenting: presenting)
     }
     
+}
+
+// Custom UIView with oval background
+class OvalBackgroundView: UIView {
+    var label = UILabel()
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupView()
+    }
+
+    private func setupView() {
+        backgroundColor = .clear
+
+        let ovalBackground = UIView()
+        ovalBackground.backgroundColor = .black.withAlphaComponent(0.2)
+        ovalBackground.layer.cornerRadius = 8
+
+        addSubview(ovalBackground)
+        ovalBackground.addSubview(label)
+
+        ovalBackground.snp.makeConstraints({
+            $0.trailing.leading.equalToSuperview()
+            $0.top.equalToSuperview().offset(20)
+            $0.bottom.equalToSuperview().offset(-20)
+        })
+
+        label.snp.makeConstraints({
+            $0.centerX.centerY.equalTo(ovalBackground)
+        })
+    }
 }
