@@ -383,9 +383,6 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                                                       rawNonce: nonce)
             Auth.auth().signIn(with: credential) { (authResult, error) in
                 if (error != nil) {
-                    // Error. If error.code == .MissingOrInvalidNonce, make sure
-                    // you're sending the SHA256-hashed nonce as a hex string with
-                    // your request to Apple.
                     print(error?.localizedDescription ?? "")
                     return
                 }
@@ -394,14 +391,26 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                 let loginName = "Apple"
                 guard let uid = Auth.auth().currentUser?.uid else { return }
                 let db = Firestore.firestore()
-                db.collection("users").document(uid).setData([
-                    "email": email,
-                    "platform": loginName
-                ]) { err in
-                    if let err = err {
-                        print("Error writing document: \(err)")
+                let userDocRef = db.collection("users").document(uid)
+
+                // 해당 문서가 이미 존재하는지 확인
+                userDocRef.getDocument { (document, error) in
+                    if let document = document, document.exists {
+                        // 문서가 이미 존재하는 경우
+                        print("Document already exists, no need to setData.")
                     } else {
-                        print("the user has sign up or is logged in")
+                        // 문서가 존재하지 않는 경우
+                        // 데이터 추가
+                        db.collection("users").document(uid).setData([
+                            "email": email,
+                            "platform": loginName
+                        ]) { err in
+                            if let err = err {
+                                print("Error writing document: \(err)")
+                            } else {
+                                print("The user has signed up or is logged in.")
+                            }
+                        }
                     }
                 }
             }
