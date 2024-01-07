@@ -122,6 +122,7 @@ class JoinViewController: UIViewController {
     private let joinButton: UIButton = {
         let button = UIButton()
         button.setTitle("가입완료", for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 17, weight: .bold)
         button.backgroundColor = .brandColor
         button.layer.cornerRadius = 14
