@@ -13,9 +13,12 @@ import RxCocoa
 import FirebaseAuth
 import FirebaseCore
 import KakaoSDKUser
+import AVFoundation
 
 class TopBarView: UIView {
     
+    var bgmPlayer: AVAudioPlayer?
+    var rainPlayer: AVAudioPlayer?
     
     private var locationManager = CLLocationManager()
     private var musicButtonTap = false
@@ -67,6 +70,7 @@ class TopBarView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .clear
+        playMusic()
         addViews()
         setConstraints()
         setLocationManager()
@@ -161,18 +165,9 @@ class TopBarView: UIView {
                                 completion()
                                 self?.viewModel?.currentWeather.accept(weatherModel)
                                 
-//                                if let weatherDescription = weatherModel.weather.first?.main.lowercased(), weatherDescription.contains("rain") {
-//                                    // "rain"이 포함되어 있는 경우
-//                                    // 처리할 내용을 여기에 작성
-//                                    self?.rainEffectView?.isHidden = false
-//                                } else {
-//                                    // "rain"이 포함되어 있지 않은 경우
-//                                    // 처리할 내용을 여기에 작성
-//                                    self?.rainEffectView?.isHidden = true
-//                                }
-                                
                                 if let weatherDescription = weatherModel.weather.first?.main.lowercased() {
-                                    if weatherDescription.contains("rain") {
+                                    if weatherDescription.contains("clear") {
+                                        self?.playRain()
                                         self?.rainEffectView?.isHidden = false
                                         self?.snowEffectView?.isHidden = true
                                     } else if weatherDescription.contains("snow") {
@@ -199,11 +194,56 @@ class TopBarView: UIView {
             })
             .disposed(by: disposeBag)
     }
+    
+    @objc private func playMusic() {
+        let url = Bundle.main.url(forResource: "main", withExtension: "mp3")
+        if let url = url {
+            do {
+                bgmPlayer = try AVAudioPlayer(contentsOf: url)
+                bgmPlayer?.volume = 0.3
+                bgmPlayer?.prepareToPlay()
+                bgmPlayer?.play()
+                bgmPlayer?.numberOfLoops = -1
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    @objc private func playRain() {
+        let url = Bundle.main.url(forResource: "rain", withExtension: "mp3")
+        if let url = url {
+            do {
+                rainPlayer = try AVAudioPlayer(contentsOf: url)
+                rainPlayer?.prepareToPlay()
+                rainPlayer?.play()
+                rainPlayer?.numberOfLoops = -1
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    @objc private func stopMusic() {
+        bgmPlayer?.stop()
+        rainPlayer?.stop()
+    }
+
   
     @objc func musicButtonTapped() {
         musicButtonTap.toggle()
         
         musicButton.setImage(UIImage(named: musicButtonTap ? "musicOff" : "musicOn"), for: .normal)
+        
+        // musicButtonTap이 false일 때만 playMusic 함수 실행
+            if !musicButtonTap {
+                if ((rainEffectView?.isHidden) != nil) {
+                    playRain()
+                }
+                playMusic()
+            } else {
+                stopMusic()
+            }
     }
 }
 

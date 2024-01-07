@@ -43,6 +43,8 @@
 		329F9A3A2B3542D3009CC285 /* 3한강.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 329F9A312B3542D2009CC285 /* 3한강.mp4 */; };
 		329F9A3B2B3542D3009CC285 /* 4한강.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 329F9A322B3542D3009CC285 /* 4한강.mp4 */; };
 		329F9A3D2B3542D3009CC285 /* 5한강.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 329F9A342B3542D3009CC285 /* 5한강.mp4 */; };
+		32A12C092B4A6B73008FA52C /* main.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 32A12C072B4A6B73008FA52C /* main.mp3 */; };
+		32A12C0C2B4A779B008FA52C /* rain.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 32A12C0B2B4A779B008FA52C /* rain.mp3 */; };
 		32ADE96F2B2961D2009A4C0B /* RainEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32ADE96E2B2961D2009A4C0B /* RainEffectView.swift */; };
 		32B11EBF2B1D952D0022FCC5 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B11EBE2B1D952D0022FCC5 /* SettingViewModel.swift */; };
 		32B11EC12B1ECD980022FCC5 /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B11EC02B1ECD980022FCC5 /* MyInfoViewController.swift */; };
@@ -102,6 +104,8 @@
 		329F9A312B3542D2009CC285 /* 3한강.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "3한강.mp4"; sourceTree = "<group>"; };
 		329F9A322B3542D3009CC285 /* 4한강.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "4한강.mp4"; sourceTree = "<group>"; };
 		329F9A342B3542D3009CC285 /* 5한강.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "5한강.mp4"; sourceTree = "<group>"; };
+		32A12C072B4A6B73008FA52C /* main.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = main.mp3; sourceTree = "<group>"; };
+		32A12C0B2B4A779B008FA52C /* rain.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = rain.mp3; sourceTree = "<group>"; };
 		32ADE96E2B2961D2009A4C0B /* RainEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RainEffectView.swift; sourceTree = "<group>"; };
 		32B11EBE2B1D952D0022FCC5 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		32B11EC02B1ECD980022FCC5 /* MyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
@@ -358,6 +362,7 @@
 		3283A5AA2A95F264001ECC9A = {
 			isa = PBXGroup;
 			children = (
+				32A12C062B4A6B61008FA52C /* BGM */,
 				329F9A3E2B354335009CC285 /* 한강 */,
 				3283A5B52A95F264001ECC9A /* Gong_Gan */,
 				3283A5B42A95F264001ECC9A /* Products */,
@@ -425,6 +430,15 @@
 			);
 			name = "한강";
 			path = "한강";
+			sourceTree = "<group>";
+		};
+		32A12C062B4A6B61008FA52C /* BGM */ = {
+			isa = PBXGroup;
+			children = (
+				32A12C072B4A6B73008FA52C /* main.mp3 */,
+				32A12C0B2B4A779B008FA52C /* rain.mp3 */,
+			);
+			path = BGM;
 			sourceTree = "<group>";
 		};
 		32B11EC22B1ED59D0022FCC5 /* MyInfo */ = {
@@ -539,11 +553,13 @@
 				329F9A392B3542D3009CC285 /* 1한강.mp4 in Resources */,
 				329F9A3A2B3542D3009CC285 /* 3한강.mp4 in Resources */,
 				329F9A3B2B3542D3009CC285 /* 4한강.mp4 in Resources */,
+				32A12C092B4A6B73008FA52C /* main.mp3 in Resources */,
 				329F9A3D2B3542D3009CC285 /* 5한강.mp4 in Resources */,
 				32FAFB0C2B299066003EB56C /* Snow.sks in Resources */,
 				3283A5C32A95F265001ECC9A /* Assets.xcassets in Resources */,
 				3231257F2AFA6318002B9A25 /* GoogleService-Info.plist in Resources */,
 				3293D7E52B295F280051A6AC /* Rain.sks in Resources */,
+				32A12C0C2B4A779B008FA52C /* rain.mp3 in Resources */,
 				3293D7E62B295F280051A6AC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

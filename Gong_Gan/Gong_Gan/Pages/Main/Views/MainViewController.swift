@@ -15,7 +15,7 @@ class MainViewController: UIViewController {
     private let viewModel = MainViewModel()
     private var disposeBag = DisposeBag()
     var seeFirst = false
-    
+
     // 백그라운드 터치 여부 확인
     var backGroundTap = false
     var cameraModePicker: UIPickerView!
@@ -38,7 +38,7 @@ class MainViewController: UIViewController {
     // TODO: test중
 //    let captureModesList = ["도시","방","일본","지하철","야경"]
 //    let captureModesList = ["1하늘", "2하늘", "3하늘", "4하늘"]
-    let captureModesName = ["한강", "일본", "지하철","dd"]
+    let captureModesName = ["한강", "바다"]
 //    let hour = Calendar.current.component(.hour, from: Date())
     
     override func loadView() {
@@ -48,6 +48,7 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
     }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -378,7 +379,6 @@ extension MainViewController: UIPickerViewDataSource {
         // MainViewController의 배경 이미지 이름을 viewModel에 전달
 //        viewModel.updateSelectedImageName(selectedImageName)
         viewModel.updateSelectedImageName(selectedImageName)
-       
     }
 }
 
