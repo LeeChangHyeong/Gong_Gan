@@ -131,7 +131,7 @@ class GalleryViewController: UIViewController {
                 self.galleryCollectionView.isHidden = false
 
                 if let galleryCell = cell as? GalleryCollectionViewCell {
-                    let imageName = UIImage(named: "지하철")?.preparingThumbnail(of: CGSize(width: cellWidth, height: cellWidth))?.jpegData(compressionQuality: 0)
+                    let imageName = UIImage(named: element.thumnailImage)?.preparingThumbnail(of: CGSize(width: cellWidth, height: cellWidth))?.jpegData(compressionQuality: 0.5)
 
                     galleryCell.cellImageView.image = UIImage(data: imageName!)
                 }

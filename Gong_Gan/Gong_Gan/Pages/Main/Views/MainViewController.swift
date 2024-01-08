@@ -38,7 +38,7 @@ class MainViewController: UIViewController {
     // TODO: test중
 //    let captureModesList = ["도시","방","일본","지하철","야경"]
 //    let captureModesList = ["1하늘", "2하늘", "3하늘", "4하늘"]
-    let captureModesName = ["한강", "바다"]
+    let captureModesName = ["도시", "바다"]
 //    let hour = Calendar.current.component(.hour, from: Date())
     
     override func loadView() {

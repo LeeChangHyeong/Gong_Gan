@@ -166,7 +166,7 @@ class TopBarView: UIView {
                                 self?.viewModel?.currentWeather.accept(weatherModel)
                                 
                                 if let weatherDescription = weatherModel.weather.first?.main.lowercased() {
-                                    if weatherDescription.contains("clear") {
+                                    if weatherDescription.contains("rain") {
                                         self?.playRain()
                                         self?.rainEffectView?.isHidden = false
                                         self?.snowEffectView?.isHidden = true
