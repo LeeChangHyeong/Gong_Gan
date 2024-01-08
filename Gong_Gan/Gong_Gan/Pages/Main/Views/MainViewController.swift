@@ -83,6 +83,7 @@ class MainViewController: UIViewController {
         
     }
     
+    
     private func addSubView() {
         view.addSubview(rainEffectView)
         view.addSubview(snowEffectView)

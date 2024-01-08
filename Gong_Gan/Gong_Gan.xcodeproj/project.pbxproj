@@ -843,7 +843,7 @@
 				INFOPLIST_FILE = Gong_Gan/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "모밍";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "\"현재 위치사용을 허용하시겠습니까\"";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "\"위치 사용을 허용해야 사용자 위치의 기상 상황을 확인하여 화면에 나타낼 수 있습니다. 허용하지 않으면 데이터를 들고 올 수 없어 앱이 구동되지 않습니다😥\"";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -879,7 +879,7 @@
 				INFOPLIST_FILE = Gong_Gan/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "모밍";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "\"현재 위치사용을 허용하시겠습니까\"";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "\"위치 사용을 허용해야 사용자 위치의 기상 상황을 확인하여 화면에 나타낼 수 있습니다. 허용하지 않으면 데이터를 들고 올 수 없어 앱이 구동되지 않습니다😥\"";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

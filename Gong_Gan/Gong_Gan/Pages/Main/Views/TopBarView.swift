@@ -80,6 +80,7 @@ class TopBarView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     private func addViews() {
         addSubview(musicButton)
         addSubview(locationButton)
