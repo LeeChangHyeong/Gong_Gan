@@ -237,7 +237,7 @@ class TopBarView: UIView {
         
         // musicButtonTap이 false일 때만 playMusic 함수 실행
             if !musicButtonTap {
-                if ((rainEffectView?.isHidden) != nil) {
+                if (rainEffectView?.isHidden == false) {
                     playRain()
                 }
                 playMusic()

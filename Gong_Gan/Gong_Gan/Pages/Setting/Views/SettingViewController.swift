@@ -13,6 +13,7 @@ import FirebaseFirestore
 import FirebaseCore
 import FirebaseAuth
 import CoreLocation
+import MessageUI
 
 class SettingViewController: UIViewController {
     private let disposeBag = DisposeBag()
@@ -123,6 +124,16 @@ class SettingViewController: UIViewController {
             .map { _ in }
             .bind(to: viewModel.viewWillAppear)
             .disposed(by: disposeBag)
+        
+        let tapGesture = UITapGestureRecognizer()
+        inquriyView.addGestureRecognizer(tapGesture)
+        
+        tapGesture.rx.event
+            .subscribe(onNext: { [weak self] _ in
+                self?.sendEmail()
+                print("gkdl")
+            })
+            .disposed(by: disposeBag)
     }
     
     @objc private func handleMyInfoViewTap() {
@@ -158,4 +169,30 @@ extension SettingViewController: UIViewControllerTransitioningDelegate {
         return CustomModalPresentationController(presentedViewController: presented, presenting: presenting)
     }
     
+}
+
+// MFMailComposeViewControllerDelegate를 준수하기 위한 extension 추가
+extension SettingViewController: MFMailComposeViewControllerDelegate {
+    func sendEmail() {
+        guard MFMailComposeViewController.canSendMail() else {
+            // mail 이 계정과 연동되지 않은 경우.
+            let mailErrorAlert = UIAlertController(title: "메일 전송 실패", message: "메일 앱 설정을 확인하고 다시 시도해주세요.", preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in }
+            mailErrorAlert.addAction(confirmAction)
+            present(mailErrorAlert, animated: true, completion: nil)
+            return
+        }
+        
+        let mailComposer = MFMailComposeViewController()
+        mailComposer.mailComposeDelegate = self
+        mailComposer.setToRecipients(["app.moming@gmail.com"])
+        
+        present(mailComposer, animated: true, completion: nil)
+    }
+    
+    // MARK: - MFMailComposeViewControllerDelegate
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
 }
