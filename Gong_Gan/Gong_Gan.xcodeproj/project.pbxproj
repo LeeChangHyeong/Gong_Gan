@@ -47,6 +47,7 @@
 		32921BD12B4B8AB4006B81FA /* 4바다.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 32921BC32B4B8AB4006B81FA /* 4바다.mp4 */; };
 		32921BD22B4B8AB4006B81FA /* 6바다.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 32921BC42B4B8AB4006B81FA /* 6바다.mp4 */; };
 		32921BD32B4B8AB4006B81FA /* 7바다.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 32921BC52B4B8AB4006B81FA /* 7바다.mp4 */; };
+		32921BD92B4BB1A0006B81FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32921BD82B4BB1A0006B81FA /* LaunchScreen.storyboard */; };
 		3293D7D92B26B9D90051A6AC /* ModalLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3293D7D82B26B9D90051A6AC /* ModalLoginViewController.swift */; };
 		3293D7E52B295F280051A6AC /* Rain.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3293D7E32B295F280051A6AC /* Rain.sks */; };
 		3293D7E62B295F280051A6AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3293D7E42B295F280051A6AC /* Assets.xcassets */; };
@@ -115,6 +116,7 @@
 		32921BC32B4B8AB4006B81FA /* 4바다.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "4바다.mp4"; sourceTree = "<group>"; };
 		32921BC42B4B8AB4006B81FA /* 6바다.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "6바다.mp4"; sourceTree = "<group>"; };
 		32921BC52B4B8AB4006B81FA /* 7바다.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "7바다.mp4"; sourceTree = "<group>"; };
+		32921BD82B4BB1A0006B81FA /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3293D7D82B26B9D90051A6AC /* ModalLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalLoginViewController.swift; sourceTree = "<group>"; };
 		3293D7E32B295F280051A6AC /* Rain.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Rain.sks; sourceTree = "<group>"; };
 		3293D7E42B295F280051A6AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -376,9 +378,6 @@
 		3283A5AA2A95F264001ECC9A = {
 			isa = PBXGroup;
 			children = (
-				32921BB62B4B8AB3006B81FA /* 도시 */,
-				32921BBE2B4B8AB4006B81FA /* 바다 */,
-				32A12C062B4A6B61008FA52C /* BGM */,
 				3283A5B52A95F264001ECC9A /* Gong_Gan */,
 				3283A5B42A95F264001ECC9A /* Products */,
 				1543E5AFEF2F9018A071EEFD /* Pods */,
@@ -397,6 +396,10 @@
 		3283A5B52A95F264001ECC9A /* Gong_Gan */ = {
 			isa = PBXGroup;
 			children = (
+				32921BB62B4B8AB3006B81FA /* 도시 */,
+				32921BBE2B4B8AB4006B81FA /* 바다 */,
+				32A12C062B4A6B61008FA52C /* BGM */,
+				32921BD82B4BB1A0006B81FA /* LaunchScreen.storyboard */,
 				32C3DD0B2B1F09D8008B9EB6 /* Keys */,
 				323125972AFDD883002B9A25 /* Gong_Gan.entitlements */,
 				3231257E2AFA6318002B9A25 /* GoogleService-Info.plist */,
@@ -581,6 +584,7 @@
 				32921BC82B4B8AB4006B81FA /* 4도시.mp4 in Resources */,
 				32921BC72B4B8AB4006B81FA /* 6도시.mp4 in Resources */,
 				32FAFB0C2B299066003EB56C /* Snow.sks in Resources */,
+				32921BD92B4BB1A0006B81FA /* LaunchScreen.storyboard in Resources */,
 				32921BD32B4B8AB4006B81FA /* 7바다.mp4 in Resources */,
 				32921BD22B4B8AB4006B81FA /* 6바다.mp4 in Resources */,
 				32921BD12B4B8AB4006B81FA /* 4바다.mp4 in Resources */,
