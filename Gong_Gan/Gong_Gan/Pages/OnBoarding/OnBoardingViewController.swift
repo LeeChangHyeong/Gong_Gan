@@ -54,7 +54,7 @@ class OnBoardingViewController: UIPageViewController {
                                                   title: "오늘은 어떤 순간을\n찍어볼까요?",
                                                   subTitle: "셔터를 눌러 사진을 찍고, 자유롭게 기록해보세요.")
         let page2 = OnBoardingPageViewController(imageName: "온보딩2",
-                                                 title: "밖에 비가오면\n나만의 공간",
+                                                 title: "기상 상황에 따라 변하는\n나만의 공간",
                                                  subTitle: "날씨와 시간에 따라 달라지는 풍경을 만나보세요.")
         let page3 = OnBoardingPageViewController(imageName: "온보딩3",
                                                  title: "변하지 않는\n그날의 기록들",
