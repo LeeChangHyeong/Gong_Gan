@@ -1,7 +1,6 @@
 # :iphone: 모밍 (Moment + ing)
 모밍은 사용자 위치의 기상 상황에 따라 배경이 변하고 순간의 감정을 기록할 수 있는 앱 입니다.<br/>
-<img src="https://github.com/LeeChangHyeong/Moming/assets/71262367/4a31ecb0-4f9b-4ca5-b7f8-b1fac06b2127" width="240" height="500"/>
-<img src="https://github.com/LeeChangHyeong/Moming/assets/71262367/67b9d5c4-e500-4720-ad7b-eae406c0ce21" width="240" height="500"/>
+![image](https://github.com/LeeChangHyeong/Moming/assets/71262367/40026fd1-2139-42c5-983e-dc37d8c024fe)
 
 
 ## 👨🏻‍💻 Tech Stack
