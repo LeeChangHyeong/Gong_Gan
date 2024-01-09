@@ -1,5 +1,8 @@
 # :iphone: 모밍 (Moment + ing)
-모밍은 사용자 위치의 기상 상황에 따라 배경이 변하고 순간의 감정을 기록할 수 있는 앱 입니다.
+모밍은 사용자 위치의 기상 상황에 따라 배경이 변하고 순간의 감정을 기록할 수 있는 앱 입니다.<br/>
+<img src="https://github.com/LeeChangHyeong/Moming/assets/71262367/4a31ecb0-4f9b-4ca5-b7f8-b1fac06b2127" width="240" height="500"/>
+<img src="https://github.com/LeeChangHyeong/Moming/assets/71262367/67b9d5c4-e500-4720-ad7b-eae406c0ce21" width="240" height="500"/>
+
 
 ## 👨🏻‍💻 Tech Stack
 -   **언어**  : Swift
@@ -25,11 +28,9 @@ Design
 - 기윤수
 
 ## :fireworks: Screenshots
-<img src="https://github.com/LeeChangHyeong/Moming/assets/71262367/4a31ecb0-4f9b-4ca5-b7f8-b1fac06b2127" width="190" height="400"/>
-<img src="https://github.com/LeeChangHyeong/Moming/assets/71262367/67b9d5c4-e500-4720-ad7b-eae406c0ce21" width="190" height="400"/>
-<img src="https://github.com/LeeChangHyeong/Moming/assets/71262367/44ea6181-d141-4976-8649-6324b77d3a3c" width="190" height="400"/>
-<img src="https://github.com/LeeChangHyeong/Moming/assets/71262367/05fa4461-5651-4133-95e1-63768798277a" width="190" height="400"/>
-<img src="https://github.com/LeeChangHyeong/Moming/assets/71262367/f7b7a51d-0c7c-469c-89ff-04d9aaeb5777" width="190" height="400"/>
+<img src="https://github.com/LeeChangHyeong/Moming/assets/71262367/44ea6181-d141-4976-8649-6324b77d3a3c" width="240" height="500"/>
+<img src="https://github.com/LeeChangHyeong/Moming/assets/71262367/05fa4461-5651-4133-95e1-63768798277a" width="240" height="500"/>
+<img src="https://github.com/LeeChangHyeong/Moming/assets/71262367/f7b7a51d-0c7c-469c-89ff-04d9aaeb5777" width="240" height="500"/>
 
 
 ## 💻 Development Environment
